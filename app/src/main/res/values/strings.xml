@@ -1,0 +1,87 @@
+<resources>
+
+    <!-- Main -->
+
+    <string name="app_name">Feria Virtual Movil</string>
+    <string name="nav_header_title">Main menu</string>
+    <string name="nav_header_subtitle">emailusuario@feria.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <!-- Menus -->
+
+    <string name="menu_home">Home</string>
+    <string name="menu_sales">Current Sales</string>
+    <string name="menu_process">My Processes</string>
+    <string name="menu_profile">My Profile</string>
+    <string name="menu_logout">Logout</string>
+
+    <!-- Login Activity -->
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >8 characters, and contain al least a number and a symbol</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="close_app">Quit</string>
+    <string name="launch_user_registry_web">Haven\'t an account? Register here!</string>
+
+    <!-- Actions -->
+
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_undo">Undo</string>
+    <string name="action_change">Change</string>
+    <string name="action_yes">Yes</string>
+    <string name="action_no">No</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Profile fragment -->
+
+    <string name="mpf_setting_pid">Personal ID</string>
+    <string name="mpf_setting_email">Email</string>
+    <string name="mpf_setting_name">Names</string>
+    <string name="mpf_setting_lname">Last names</string>
+    <string name="mpf_setting_phone">Phone</string>
+    <string name="mpf_setting_direction">Direction</string>
+    <string name="mpf_setting_country">Country</string>
+    <string name="mpf_setting_usertype">User Type</string>
+    <string name="mpf_setting_passwd">Password</string>
+    <string name="mpf_setting_change_passwd">Change Password</string>
+    <string name="mpf_setting_passwd_cur">Type current password</string>
+    <string name="mpf_setting_passwd_new">New password</string>
+    <string name="mpf_setting_passwd_done">Password changed</string>
+
+    <!-- Sale Detail Activity -->
+
+    <string name="sale_detail_act_title">Sale Detail</string>
+    <string name="sale_detail_act_sale_date">Date Process</string>
+    <string name="sale_detail_act_product_list">Product list</string>
+    <string name="sale_detail_act_join">Join</string>
+    <string name="sale_detail_act_request_author">Request origin</string>
+
+    <!-- Settings Activity -->
+
+    <string name="sact_title">Settings</string>
+    <string name="sact_messages_header">Messages</string>
+    <string name="sact_sync_header">Sync</string>
+    <string name="sact_signature_title">Your signature</string>
+    <string name="sact_reply_title">Default reply action</string>
+    <string name="sact_sync_title">Sync email periodically</string>
+    <string name="sact_attachment_title">Download incoming attachments</string>
+    <string name="sact_attachment_summary_on">Automatically download attachments for incoming emails</string>
+    <string name="sact_attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- Other -->
+    <string name="other_stub">stub</string>
+
+    <!-- Error/Info messages -->
+
+    <string name="err_msg_generic">An sudden error has occurred. Please try again later</string>
+    <string name="err_mes_question">Question</string>
+    <string name="err_mes_message">Message</string>
+    <string name="err_msg_logout_prompt">You really want to logout? You have to login with your credentials when you come back</string>
+
+</resources>
