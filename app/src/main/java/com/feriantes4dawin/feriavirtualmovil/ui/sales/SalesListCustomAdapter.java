@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.feriantes4dawin.feriavirtual.R;
+import com.feriantes4dawin.feriavirtualmovil.R;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class SalesListCustomAdapter extends RecyclerView.Adapter<SalesListCustom
 
     private ArrayList<String> listaElementos;
 
-    SalesListCustomAdapter(){
+    public SalesListCustomAdapter(){
 
         super();
 

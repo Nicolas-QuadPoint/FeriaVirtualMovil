@@ -1,6 +1,6 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.widgets;
 
-import com.feriantes4dawin.feriavirtual.R;
+import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 
@@ -27,6 +27,12 @@ public class ChangePasswordDialog {
 
     private MutableLiveData<ChangePasswordFormState> _passwdForm;
     private LiveData<ChangePasswordFormState> passwdFormLiveState;
+
+    public ChangePasswordDialog(AppCompatActivity act, SimpleAction positiveResponseFunc, SimpleAction negativeResponseFunc) {
+        this.act = act;
+        this.positiveResponseFunc = positiveResponseFunc;
+        this.negativeResponseFunc = negativeResponseFunc;
+    }
 
     public AlertDialog generate(){
 

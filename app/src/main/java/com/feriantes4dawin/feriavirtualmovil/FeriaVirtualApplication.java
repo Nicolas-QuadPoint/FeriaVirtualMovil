@@ -22,7 +22,7 @@ import org.kodein.di.DITrigger;
  */
 public final class FeriaVirtualApplication extends Application implements  DIAware {
 
-    FeriaVirtualApplication(){
+    public FeriaVirtualApplication(){
         super();
     }
 

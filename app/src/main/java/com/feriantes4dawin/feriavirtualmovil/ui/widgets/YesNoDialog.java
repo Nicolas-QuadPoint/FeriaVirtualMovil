@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.feriantes4dawin.feriavirtual.R;
+import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 

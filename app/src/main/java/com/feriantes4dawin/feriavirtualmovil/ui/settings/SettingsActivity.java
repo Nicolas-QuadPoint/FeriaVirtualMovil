@@ -4,7 +4,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceFragmentCompat;
-import com.feriantes4dawin.feriavirtual.R;
+import com.feriantes4dawin.feriavirtualmovil.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -14,6 +14,7 @@ public class SettingsActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.settings_activity);
 
         if (savedInstanceState == null) {
@@ -29,12 +30,4 @@ public class SettingsActivity extends AppCompatActivity {
         this.viewmodel = new ViewModelProvider(this).get(SettingsViewModel.class);
     }
 
-    public class SettingsFragment extends PreferenceFragmentCompat {
-
-        @Override
-        public void onCreatePreferences(Bundle savedInstanceState,String rootKey) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey);
-        }
-
-    }
 }

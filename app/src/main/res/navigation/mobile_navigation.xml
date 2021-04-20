@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.feriantes4dawin.feriavirtual.ui.home.HomeFragment"
+        android:name="com.feriantes4dawin.feriavirtualmovil.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/nav_sales"
-        android:name="com.feriantes4dawin.feriavirtual.ui.sales.CurrentSalesFragment"
+        android:name="com.feriantes4dawin.feriavirtualmovil.ui.sales.CurrentSalesFragment"
         android:label="@string/menu_sales"
         tools:layout="@layout/fragment_current_sales">
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/nav_processes"
-        android:name="com.feriantes4dawin.feriavirtual.ui.proccesses.MyProcessesFragment"
+        android:name="com.feriantes4dawin.feriavirtualmovil.ui.proccesses.MyProcessesFragment"
         android:label="@string/menu_process"
         tools:layout="@layout/fragment_my_processes">
         <action
@@ -37,7 +37,11 @@
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.feriantes4dawin.feriavirtual.ui.profile.MyProfileFragment"
+        android:name="com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileFragment"
         android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_my_profile" />
+        tools:layout="@layout/fragment_my_profile" >
+        <action
+            android:id="@+id/action_nav_profile_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 </navigation>

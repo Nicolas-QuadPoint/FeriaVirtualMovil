@@ -83,5 +83,10 @@
     <string name="err_mes_question">Question</string>
     <string name="err_mes_message">Message</string>
     <string name="err_msg_logout_prompt">You really want to logout? You have to login with your credentials when you come back</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 
 </resources>

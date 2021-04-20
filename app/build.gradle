@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    //id 'kotlin-kapt'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -10,7 +11,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.feriantes4dawin.feriavirtual"
+        applicationId 'com.feriantes4dawin.feriavirtualmovil'
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -64,9 +65,11 @@ dependencies {
 
     implementation 'androidx.room:room-runtime:2.2.6'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.3.5'
+    implementation 'androidx.navigation:navigation-ui:2.3.5'
     annotationProcessor 'androidx.room:room-compiler:2.2.6'
     implementation 'androidx.room:room-ktx:2.2.6'
-    //kapt "android.arch.persistence.room:compiler:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
 
 
     implementation 'org.kodein.di:kodein-di-framework-android-x:7.5.0'
@@ -78,8 +81,8 @@ dependencies {
 
 }
 
-/*
+
 kapt {
     correctErrorTypes true
 }
-*/
+

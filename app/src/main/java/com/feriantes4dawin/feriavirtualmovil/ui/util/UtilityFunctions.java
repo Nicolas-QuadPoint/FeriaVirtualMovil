@@ -19,7 +19,7 @@ public class UtilityFunctions {
      *
      * @param act Un objeto AppCompatActivity, no nulo.
      */
-    static void getImageFromGallery(AppCompatActivity act){
+    public static void getImageFromGallery(AppCompatActivity act){
 
         if(act == null) throw new NullPointerException("No puedes usar esto con una actividad nula!");
 
