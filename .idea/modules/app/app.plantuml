@@ -1,0 +1,622 @@
+@startuml
+
+title __FERIA_VIRTUAL_MOVIL.APP's Class Diagram__\n
+
+  namespace androidx.databinding {
+    class androidx.databinding.DataBinderMapperImpl {
+    }
+  }
+  
+
+  namespace androidx.databinding {
+    interface androidx.databinding.DataBindingComponent {
+    }
+  }
+  
+
+  namespace androidx.databinding {
+    namespace library.baseAdapters {
+      class androidx.databinding.library.baseAdapters.BR {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    class com.feriantes4dawin.feriavirtualmovil.BR {
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    class com.feriantes4dawin.feriavirtualmovil.BuildConfig {
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    class com.feriantes4dawin.feriavirtualmovil.DataBinderMapperImpl {
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    class com.feriantes4dawin.feriavirtualmovil.FeriaVirtualApplication {
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      class com.feriantes4dawin.feriavirtualmovil.data.LoginDataSource {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      class com.feriantes4dawin.feriavirtualmovil.data.Result {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace db {
+        abstract class com.feriantes4dawin.feriavirtualmovil.data.db.FeriaVirtualDatabase {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace db {
+        class com.feriantes4dawin.feriavirtualmovil.data.db.FeriaVirtualDatabase_Impl {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace db {
+        interface com.feriantes4dawin.feriavirtualmovil.data.db.UsuarioDAO {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace db {
+        class com.feriantes4dawin.feriavirtualmovil.data.db.UsuarioDAO_Impl {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace db {
+        interface com.feriantes4dawin.feriavirtualmovil.data.db.VentaDAO {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace model {
+        class com.feriantes4dawin.feriavirtualmovil.data.model.LoggedInUser {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace model {
+        class com.feriantes4dawin.feriavirtualmovil.data.model.Usuario {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace model {
+        class com.feriantes4dawin.feriavirtualmovil.data.model.Venta {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace network {
+        interface com.feriantes4dawin.feriavirtualmovil.data.network.ConnectivityInterceptor {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace network {
+        class com.feriantes4dawin.feriavirtualmovil.data.network.ConnectivityInterceptorImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace network {
+        interface com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSource {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace network {
+        class com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSourceImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace network {
+        namespace responses {
+          class com.feriantes4dawin.feriavirtualmovil.data.network.responses.UsuarioResponse {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace network {
+        namespace responses {
+          class com.feriantes4dawin.feriavirtualmovil.data.network.responses.VentasDisponibleResponse {
+          }
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace repos {
+        class com.feriantes4dawin.feriavirtualmovil.data.repos.LoginRepository {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace repos {
+        interface com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepository {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace repos {
+        class com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace services {
+        interface com.feriantes4dawin.feriavirtualmovil.data.services.UsuarioAPIService {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace data {
+      namespace services {
+        interface com.feriantes4dawin.feriavirtualmovil.data.services.VentasAPIService {
+        }
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace dependencies {
+      class com.feriantes4dawin.feriavirtualmovil.dependencies.FeriaVirtualAPIProvider {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace dependencies {
+      class com.feriantes4dawin.feriavirtualmovil.dependencies.FeriaVirtualDBProvider {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace dependencies {
+      class com.feriantes4dawin.feriavirtualmovil.dependencies.LoginRespositoryProvider {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace misc.exceptions {
+      class com.feriantes4dawin.feriavirtualmovil.misc.exceptions.NoConnectionException {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.home {
+      class com.feriantes4dawin.feriavirtualmovil.ui.home.HomeFragment {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.home {
+      class com.feriantes4dawin.feriavirtualmovil.ui.home.HomeFragmentDirections {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.home {
+      class com.feriantes4dawin.feriavirtualmovil.ui.home.HomeViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.login {
+      class com.feriantes4dawin.feriavirtualmovil.ui.login.LoggedInUserView {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.login {
+      class com.feriantes4dawin.feriavirtualmovil.ui.login.LoginActivity {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.login {
+      class com.feriantes4dawin.feriavirtualmovil.ui.login.LoginFormState {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.login {
+      class com.feriantes4dawin.feriavirtualmovil.ui.login.LoginResult {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.login {
+      class com.feriantes4dawin.feriavirtualmovil.ui.login.LoginViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.login {
+      class com.feriantes4dawin.feriavirtualmovil.ui.login.LoginViewModelFactory {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.main {
+      class com.feriantes4dawin.feriavirtualmovil.ui.main.MainActivity {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.main {
+      class com.feriantes4dawin.feriavirtualmovil.ui.main.MainViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.proccesses {
+      class com.feriantes4dawin.feriavirtualmovil.ui.proccesses.MyProcessesFragment {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.proccesses {
+      class com.feriantes4dawin.feriavirtualmovil.ui.proccesses.MyProcessesFragmentDirections {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.proccesses {
+      class com.feriantes4dawin.feriavirtualmovil.ui.proccesses.MyProcessesViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.profile {
+      class com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileFragment {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.profile {
+      class com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileFragmentDirections {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.profile {
+      class com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.profile {
+      class com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileViewModelFactory {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.sales {
+      class com.feriantes4dawin.feriavirtualmovil.ui.sales.CurrentSalesFragment {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.sales {
+      class com.feriantes4dawin.feriavirtualmovil.ui.sales.CurrentSalesFragmentDirections {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.sales {
+      class com.feriantes4dawin.feriavirtualmovil.ui.sales.CurrentSalesViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.sales {
+      class com.feriantes4dawin.feriavirtualmovil.ui.sales.SaleDetailActivity {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.sales {
+      class com.feriantes4dawin.feriavirtualmovil.ui.sales.SaleDetailViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.sales {
+      class com.feriantes4dawin.feriavirtualmovil.ui.sales.SalesListCustomAdapter {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.settings {
+      class com.feriantes4dawin.feriavirtualmovil.ui.settings.SettingsActivity {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.settings {
+      class com.feriantes4dawin.feriavirtualmovil.ui.settings.SettingsFragment {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.settings {
+      class com.feriantes4dawin.feriavirtualmovil.ui.settings.SettingsViewModel {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.util {
+      class com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.util {
+      interface com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.util {
+      class com.feriantes4dawin.feriavirtualmovil.ui.util.UtilityFunctions {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.util {
+      interface com.feriantes4dawin.feriavirtualmovil.ui.util.ViewmodelFactory {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.widgets {
+      class com.feriantes4dawin.feriavirtualmovil.ui.widgets.ChangePasswordDialog {
+      }
+    }
+  }
+  
+
+  namespace com.feriantes4dawin.feriavirtualmovil {
+    namespace ui.widgets {
+      class com.feriantes4dawin.feriavirtualmovil.ui.widgets.YesNoDialog {
+      }
+    }
+  }
+  
+
+  androidx.databinding.DataBinderMapperImpl -up-|> androidx.databinding.MergedDataBinderMapper
+  com.feriantes4dawin.feriavirtualmovil.DataBinderMapperImpl -up-|> androidx.databinding.DataBinderMapper
+  com.feriantes4dawin.feriavirtualmovil.FeriaVirtualApplication .up.|> org.kodein.di.DIAware
+  com.feriantes4dawin.feriavirtualmovil.FeriaVirtualApplication -up-|> android.app.Application
+  com.feriantes4dawin.feriavirtualmovil.data.db.FeriaVirtualDatabase -up-|> androidx.room.RoomDatabase
+  com.feriantes4dawin.feriavirtualmovil.data.db.FeriaVirtualDatabase_Impl -up-|> com.feriantes4dawin.feriavirtualmovil.data.db.FeriaVirtualDatabase
+  com.feriantes4dawin.feriavirtualmovil.data.db.FeriaVirtualDatabase_Impl o-- com.feriantes4dawin.feriavirtualmovil.data.db.UsuarioDAO : _usuarioDAO
+  com.feriantes4dawin.feriavirtualmovil.data.db.UsuarioDAO_Impl .up.|> com.feriantes4dawin.feriavirtualmovil.data.db.UsuarioDAO
+  com.feriantes4dawin.feriavirtualmovil.data.network.ConnectivityInterceptorImpl .up.|> com.feriantes4dawin.feriavirtualmovil.data.network.ConnectivityInterceptor
+  com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSourceImpl .up.|> com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSource
+  com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSourceImpl o-- com.feriantes4dawin.feriavirtualmovil.data.services.UsuarioAPIService : usuService
+  com.feriantes4dawin.feriavirtualmovil.data.network.responses.UsuarioResponse o-- com.feriantes4dawin.feriavirtualmovil.data.model.Usuario : usuario
+  com.feriantes4dawin.feriavirtualmovil.data.network.responses.VentasDisponibleResponse o-- com.feriantes4dawin.feriavirtualmovil.data.model.Venta : venta
+  com.feriantes4dawin.feriavirtualmovil.data.repos.LoginRepository o-- com.feriantes4dawin.feriavirtualmovil.data.LoginDataSource : dataSource
+  com.feriantes4dawin.feriavirtualmovil.data.repos.LoginRepository o-- com.feriantes4dawin.feriavirtualmovil.data.model.LoggedInUser : usuarioActivo
+  com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl .up.|> com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepository
+  com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl o-- com.feriantes4dawin.feriavirtualmovil.data.db.UsuarioDAO : usuarioDAO
+  com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl o-- com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSource : usuarioDataSource
+  com.feriantes4dawin.feriavirtualmovil.misc.exceptions.NoConnectionException -up-|> java.io.IOException
+  com.feriantes4dawin.feriavirtualmovil.ui.home.HomeFragment -up-|> androidx.fragment.app.Fragment
+  com.feriantes4dawin.feriavirtualmovil.ui.home.HomeFragment o-- com.feriantes4dawin.feriavirtualmovil.ui.home.HomeViewModel : homeViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.home.HomeViewModel -up-|> androidx.lifecycle.ViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.login.LoginActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.feriantes4dawin.feriavirtualmovil.ui.login.LoginActivity o-- com.feriantes4dawin.feriavirtualmovil.ui.login.LoginViewModel : loginViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.login.LoginActivity o-- com.feriantes4dawin.feriavirtualmovil.ui.login.LoginViewModelFactory : loginViewModelFactory
+  com.feriantes4dawin.feriavirtualmovil.ui.login.LoginResult o-- com.feriantes4dawin.feriavirtualmovil.ui.login.LoggedInUserView : success
+  com.feriantes4dawin.feriavirtualmovil.ui.login.LoginViewModel -up-|> androidx.lifecycle.ViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.login.LoginViewModel o-- com.feriantes4dawin.feriavirtualmovil.data.repos.LoginRepository : loginRepository
+  com.feriantes4dawin.feriavirtualmovil.ui.login.LoginViewModelFactory .up.|> androidx.lifecycle.ViewModelProvider.Factory
+  com.feriantes4dawin.feriavirtualmovil.ui.main.MainActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.feriantes4dawin.feriavirtualmovil.ui.main.MainActivity o-- com.feriantes4dawin.feriavirtualmovil.ui.main.MainViewModel : mainViewmodel
+  com.feriantes4dawin.feriavirtualmovil.ui.main.MainViewModel -up-|> androidx.lifecycle.ViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.proccesses.MyProcessesFragment .up.|> org.kodein.di.DIAware
+  com.feriantes4dawin.feriavirtualmovil.ui.proccesses.MyProcessesFragment -up-|> androidx.fragment.app.Fragment
+  com.feriantes4dawin.feriavirtualmovil.ui.proccesses.MyProcessesFragment o-- com.feriantes4dawin.feriavirtualmovil.ui.proccesses.MyProcessesViewModel : myProcessesViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.proccesses.MyProcessesViewModel -up-|> androidx.lifecycle.ViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileFragment -up-|> androidx.fragment.app.Fragment
+  com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileFragment o-- com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileViewModel : myProfileViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileFragment o-- com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileViewModelFactory : myProfileViewModelFactory
+  com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileViewModel -up-|> androidx.lifecycle.ViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileViewModel o-- com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepository : usuarioRepo
+  com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileViewModelFactory .up.|> androidx.lifecycle.ViewModelProvider.Factory
+  com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileViewModelFactory o-- com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepository : usuarioRepo
+  com.feriantes4dawin.feriavirtualmovil.ui.sales.CurrentSalesFragment -up-|> androidx.fragment.app.Fragment
+  com.feriantes4dawin.feriavirtualmovil.ui.sales.CurrentSalesFragment o-- com.feriantes4dawin.feriavirtualmovil.ui.sales.CurrentSalesViewModel : currentSalesViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.sales.CurrentSalesViewModel -up-|> androidx.lifecycle.ViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.sales.SaleDetailActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.feriantes4dawin.feriavirtualmovil.ui.sales.SaleDetailActivity o-- com.feriantes4dawin.feriavirtualmovil.ui.sales.SaleDetailViewModel : viewmodel
+  com.feriantes4dawin.feriavirtualmovil.ui.sales.SaleDetailViewModel -up-|> androidx.lifecycle.ViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.sales.SalesListCustomAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.feriantes4dawin.feriavirtualmovil.ui.settings.SettingsActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.feriantes4dawin.feriavirtualmovil.ui.settings.SettingsActivity o-- com.feriantes4dawin.feriavirtualmovil.ui.settings.SettingsViewModel : viewmodel
+  com.feriantes4dawin.feriavirtualmovil.ui.settings.SettingsFragment -up-|> androidx.preference.PreferenceFragmentCompat
+  com.feriantes4dawin.feriavirtualmovil.ui.settings.SettingsViewModel -up-|> androidx.lifecycle.ViewModel
+  com.feriantes4dawin.feriavirtualmovil.ui.widgets.ChangePasswordDialog o-- com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction : negativeResponseFunc
+  com.feriantes4dawin.feriavirtualmovil.ui.widgets.ChangePasswordDialog o-- com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction : positiveResponseFunc
+  com.feriantes4dawin.feriavirtualmovil.ui.widgets.YesNoDialog o-- com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction : negativeResponseFunc
+  com.feriantes4dawin.feriavirtualmovil.ui.widgets.YesNoDialog o-- com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction : positiveResponseFunc
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

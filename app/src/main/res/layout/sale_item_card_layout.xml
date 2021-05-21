@@ -16,159 +16,84 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/liss_lblNacionalidad"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Externo"
-                app:layout_constraintEnd_toStartOf="@+id/space12"
-                app:layout_constraintStart_toEndOf="@+id/space11"
-                app:layout_constraintTop_toBottomOf="@+id/sicl_lblHoraVenta" />
+                android:text="@string/mpf_setting_country"
+                app:layout_constraintEnd_toStartOf="@+id/liss_lblEstadoVenta"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/liss_imgClienteExterno"
+                app:layout_constraintStart_toStartOf="@+id/liss_lblFechaVenta"
+                app:layout_constraintTop_toBottomOf="@+id/liss_lblFechaVenta" />
 
             <TextView
-                android:id="@+id/sicl_lblNombreNegocio"
+                android:id="@+id/liss_lblNombreNegocio"
                 style="@style/Widget.AppCompat.TextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Nombre negocio"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/li_sale_simple_author"
                 android:textAlignment="textStart"
                 android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/space11"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Space
-                android:id="@+id/space11"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView22"
-                app:layout_constraintStart_toEndOf="@+id/imageButton"
+                app:layout_constraintStart_toEndOf="@+id/liss_imgClienteExterno"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/sicl_lblHoraVenta"
+                android:id="@+id/liss_lblFechaVenta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="El 12 de Enero, 16:40"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/space11"
-                app:layout_constraintTop_toBottomOf="@+id/sicl_lblNombreNegocio" />
+                android:text="@string/li_sale_simple_date"
+                app:layout_constraintStart_toStartOf="@+id/liss_lblNombreNegocio"
+                app:layout_constraintTop_toBottomOf="@+id/liss_lblNombreNegocio" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/liss_lblComentariosVenta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Resumen de productos"
+                android:text="@string/li_sale_simple_comments"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
-
-            <Space
-                android:id="@+id/space12"
-                android:layout_width="32dp"
-                android:layout_height="7dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.671"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sicl_lblHoraVenta" />
+                app:layout_constraintTop_toBottomOf="@+id/liss_lblNacionalidad" />
 
             <TextView
-                android:id="@+id/sicl_lblEstadoVenta"
+                android:id="@+id/liss_lblEstadoVenta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Finalizado"
+                android:text="@string/li_sale_simple_status"
                 android:textAlignment="textEnd"
                 android:textColor="#009688"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/space12"
-                app:layout_constraintTop_toBottomOf="@+id/sicl_lblHoraVenta" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical"
-                android:scrollbarStyle="outsideOverlay"
-                android:scrollbars="vertical"
-                android:showDividers="none"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22">>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fadingEdge="none"
-                    android:orientation="horizontal"
-                    android:showDividers="none">
-
-                    <TextView
-                        android:id="@+id/textView32"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Manzanas" />
-
-                    <TextView
-                        android:id="@+id/textView31"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="200"
-                        android:textAlignment="textEnd" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fadingEdge="none"
-                    android:orientation="horizontal"
-                    android:showDividers="none">
-
-                    <TextView
-                        android:id="@+id/textView29"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Peras" />
-
-                    <TextView
-                        android:id="@+id/textView30"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="4000"
-                        android:textAlignment="textEnd" />
-
-                </LinearLayout>
-            </LinearLayout>
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/liss_lblNacionalidad"
+                app:layout_constraintTop_toTopOf="@+id/liss_lblNacionalidad" />
 
             <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
+                android:id="@+id/liss_imgClienteExterno"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
+                android:adjustViewBounds="true"
                 android:background="@drawable/boton_redondo"
                 android:contentDescription="@string/mpf_setting_usertype"
-                app:layout_constraintBottom_toTopOf="@+id/textView22"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@+id/liss_lblComentariosVenta"
+                app:layout_constraintEnd_toStartOf="@+id/liss_lblNombreNegocio"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/baseline_person_black_48" />
+                app:layout_constraintVertical_bias="0.307"
+                app:srcCompat="@drawable/logo_feriavirtual_compacto" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

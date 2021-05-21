@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#68667e</color>
-    <color name="purple_700">#3e425b</color>
-    <color name="teal_200">#f7c9cb</color>
-    <color name="teal_700">#AB5F63</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#F1F1F1</color>
+    <!-- Definiendo colores de la aplicación! -->
+    <color name="fondo_defecto">#F1F1F1</color>
+    <color name="boton_ok">#AB5F63</color>
+    <color name="boton_ok_press">#7A4447</color>
+    <color name="enfasis_claro">#515C9F</color>
+    <color name="enfasis_claro_2">#3C4AA3</color>
+    <color name="enfasis_oscuro">#3e425b</color>
+    <color name="enfasis_oscuro_2">#292F5A</color>
+    <color name="fondo_claro">#F1F1F1</color>
+    <color name="fondo_oscuro">#9C9C9C</color>
+    <color name="negro">#000000</color>
+    <color name="blanco">#FFFFFF</color>
 </resources>

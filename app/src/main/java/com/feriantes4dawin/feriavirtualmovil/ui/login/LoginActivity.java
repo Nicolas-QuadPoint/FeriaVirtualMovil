@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                         "<a href='https://www.google.com/?hl=es'>",
                         getResources().getString(R.string.launch_user_registry_web),
                         "</a>"),
-                HtmlCompat.FROM_HTML_OPTION_USE_CSS_COLORS);
+                HtmlCompat.FROM_HTML_MODE_COMPACT);
 
         //Le da el aspecto y acciones de un enlace
         linkRegistro.setText(textolink);
@@ -195,7 +195,7 @@ public class LoginActivity extends AppCompatActivity {
         // TODO : initiate successful logged in experience
         Toast.makeText(
             getApplicationContext(),
-            "$welcome $displayName",
+            String.format("%s, %s",welcome,model.displayName),
             Toast.LENGTH_LONG
         ).show();
     }

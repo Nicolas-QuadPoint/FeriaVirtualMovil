@@ -1,9 +1,12 @@
 package com.feriantes4dawin.feriavirtualmovil.data.repos;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+
 import com.feriantes4dawin.feriavirtualmovil.data.db.UsuarioDAO;
 import com.feriantes4dawin.feriavirtualmovil.data.model.Usuario;
 import com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSource;
+import com.feriantes4dawin.feriavirtualmovil.data.network.responses.UsuarioResponse;
 
 public class UsuarioRepositoryImpl implements UsuarioRepository {
 
@@ -15,59 +18,40 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
         usuarioDAO = usudao;
         usuarioDataSource = uds;
 
-        /*
-        usuarioDataSource.apply {
-            usuarioDescargado.observeForever{ nuevoUsuarioResponse ->
+        if(uds != null){
 
-                saveUsuarioToDatabase(nuevoUsuarioResponse.usuario)
-
-            }
+            uds.usuarioDescargado.observeForever(new Observer<UsuarioResponse>() {
+                @Override
+                public void onChanged(UsuarioResponse usuarioResponse) {
+                    //saveUsuarioToDatabase(nuevoUsuarioResponse.usuario);
+                }
+            });
 
         }
-         */
-
     }
 
     @Override
     public boolean loginUsuario(String email, String contrasena) {
 
-        /*
-            LiveData<Usuario> u = usuarioDAO.find();
-            return@withContext ((u.value != null) and (u.value!!.email == email) and (u.value!!.contrasena == contrasena))
-
-        }
-
-         */
-        return false;
+        LiveData<Usuario> u = usuarioDAO.find();
+        return ((u.getValue() != null) && (u.getValue().email.equals(email)) && (u.getValue().contrasena.equals(contrasena)));
 
     }
 
     @Override
     public LiveData<Usuario> getInfoUsuario(Usuario u){
 
-        /*
-        return withContext(Dispatchers.IO){
+        return usuarioDAO.find();
 
-            return@withContext usuarioDAO.find()
-
-        }
-
-         */
-        return null;
     }
 
     private void saveUsuarioToDatabase(Usuario u){
 
-        /*
-        GlobalScope.launch(Dispatchers.IO){
 
-            //Insertamos el usuario recuperado de login o getInfoUsuario
-            //a la base de datos!
-            usuarioDAO.upsert(usuario)
+        //Insertamos el usuario recuperado de login o getInfoUsuario
+        //a la base de datos!
+        usuarioDAO.upsert(u);
 
-        }
-
-         */
 
     }
 }

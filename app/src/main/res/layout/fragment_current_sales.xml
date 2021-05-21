@@ -4,7 +4,7 @@
     android:id="@+id/swipeCurrentSales"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_500"
+    android:background="@color/fondo_oscuro"
     android:fillViewport="true"
     android:isScrollContainer="true"
     android:scrollbars="vertical"

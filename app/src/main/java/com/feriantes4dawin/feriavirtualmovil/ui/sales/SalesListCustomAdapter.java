@@ -55,10 +55,10 @@ public class SalesListCustomAdapter extends RecyclerView.Adapter<SalesListCustom
 
             super(v);
 
-            this.lblNombreComprador = v.findViewById(R.id.sicl_lblNombreNegocio);
-            this.lblNombreEmpresa = v.findViewById(R.id.sicl_lblNombreNegocio);
-            this.lblHoraVenta = v.findViewById(R.id.sicl_lblHoraVenta);
-            this.lblEstadoVenta = v.findViewById(R.id.sicl_lblEstadoVenta);
+            this.lblNombreComprador = v.findViewById(R.id.liss_imgClienteExterno);
+            this.lblNombreEmpresa = v.findViewById(R.id.liss_lblNombreNegocio);
+            this.lblHoraVenta = v.findViewById(R.id.liss_lblFechaVenta);
+            this.lblEstadoVenta = v.findViewById(R.id.liss_lblEstadoVenta);
 
         }
 

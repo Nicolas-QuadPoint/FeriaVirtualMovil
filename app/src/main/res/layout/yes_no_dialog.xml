@@ -8,12 +8,14 @@
 
     <TextView
         android:id="@+id/txtDlgTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/err_mes_question"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,50 +23,31 @@
         android:id="@+id/txtDlgMsg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/txtDlgTitle"
+        app:layout_constraintStart_toStartOf="@+id/txtDlgTitle"
         app:layout_constraintTop_toBottomOf="@+id/txtDlgTitle"
         tools:text="@string/err_mes_message" />
 
     <Button
         android:id="@+id/btnDlgYes"
-        style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:text="@string/action_yes"
-        app:layout_constraintEnd_toStartOf="@+id/space4"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnDlgNo"
+        app:layout_constraintStart_toStartOf="@+id/txtDlgMsg"
         app:layout_constraintTop_toBottomOf="@+id/txtDlgMsg" />
 
     <Button
         android:id="@+id/btnDlgNo"
-        style="@style/Widget.AppCompat.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/action_no"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/space4"
-        app:layout_constraintTop_toBottomOf="@+id/txtDlgMsg" />
+        app:layout_constraintEnd_toEndOf="@+id/txtDlgMsg"
+        app:layout_constraintStart_toEndOf="@+id/btnDlgYes"
+        app:layout_constraintTop_toTopOf="@+id/btnDlgYes" />
 
-    <Space
-        android:id="@+id/space4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDlgMsg" />
 </androidx.constraintlayout.widget.ConstraintLayout>

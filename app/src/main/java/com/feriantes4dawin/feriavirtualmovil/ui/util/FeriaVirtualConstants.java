@@ -3,7 +3,7 @@ package com.feriantes4dawin.feriavirtualmovil.ui.util;
 public class FeriaVirtualConstants {
 
     public static final int ESCOGER_IMAGEN_REQUEST = 100;
-    public static final String URL_BASE_API_WEB_FERIAVIRTUAL = "http://192.168.100.7:3000/api/v1/";
+    public static final String URL_BASE_API_WEB_FERIAVIRTUAL = "http://192.168.100.8:3000/api/v1/";
     public static final String NOMBRE_BASE_DATOS = "feriavirtual.db";
 
 

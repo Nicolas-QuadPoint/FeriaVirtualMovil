@@ -1,6 +1,7 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.profile;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,13 +22,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.data.db.FeriaVirtualDatabase;
+import com.feriantes4dawin.feriavirtualmovil.data.model.Usuario;
 import com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSourceImpl;
+import com.feriantes4dawin.feriavirtualmovil.data.network.responses.UsuarioResponse;
 import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl;
+import com.feriantes4dawin.feriavirtualmovil.data.services.UsuarioAPIService;
 import com.feriantes4dawin.feriavirtualmovil.dependencies.FeriaVirtualAPIProvider;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.UtilityFunctions;
 import com.feriantes4dawin.feriavirtualmovil.ui.widgets.ChangePasswordDialog;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.concurrent.FutureTask;
 
 public class MyProfileFragment extends Fragment {
 
@@ -134,7 +141,7 @@ public class MyProfileFragment extends Fragment {
                         public void doAction(Object o) {
                             Snackbar.make(
                                 requireView(),
-                                getString(R.string.mpf_setting_passwd),
+                                R.string.mpf_setting_passwd_done,
                                 Snackbar.LENGTH_LONG
                             ).show();
                         }
@@ -181,9 +188,66 @@ public class MyProfileFragment extends Fragment {
 
     }
 
-    private void getInfoFromAPI(View v){
+    private void getInfoFromAPI(View view){
 
         //TODO:Borrar esto cuando se implemente la arquitectura mvvm text_home
+
+        TextView lblPersonalID = view.findViewById(R.id.tvPersonalID);
+        TextView lblNombres = view.findViewById(R.id.tvNombresUsuario);
+        TextView lblApellidos = view.findViewById(R.id.tvApellidosUsuario);
+        TextView lblNacionalidad = view.findViewById(R.id.tvNacionalidad);
+        TextView lblTipoUsuario = view.findViewById(R.id.tvTipoUsuario);
+        TextView txtEmail = view.findViewById(R.id.txtEmailUsuario);
+        EditText txtTelefono = view.findViewById(R.id.txtTelefonoUsuario);
+        EditText txtDireccion = view.findViewById(R.id.txtDireccionUsuario);
+
+        FutureTask<Usuario> tarea = new FutureTask<Usuario>(() -> {
+
+            try{
+
+
+                UsuarioAPIService usuapi = FeriaVirtualAPIProvider.provideUsuarioAPI();
+                UsuarioResponse usudata = usuapi.getUserInfo(21);
+
+                if(usudata != null){
+                    return usudata.usuario;
+                } else {
+                    return null;
+                }
+
+            } catch(Exception e){
+
+                Snackbar.make(view,"Ocurrió un error! Revisa el Logcat!",Snackbar.LENGTH_LONG).show();
+                Log.i("MY_PROFILE_FRAGMENT",String.format("Ups, un error... %s",e != null? e.getMessage() : "Desconocido!!"));
+
+            }
+
+            return null;
+        });
+
+        try{
+
+            tarea.run();
+
+            Usuario u = tarea.get();
+
+            lblPersonalID.setText(u.personal_id);
+            lblNombres.setText(u.nombre + " " + u.nombre_segundo);
+            lblApellidos.setText(u.apellido_paterno + " " + u.apellido_materno);
+            lblNacionalidad.setText(u.nacionalidad);
+            lblTipoUsuario.setText(u.rol);
+            txtEmail.setText(u.email);
+            txtTelefono.setText(u.telefono.toString());
+            txtDireccion.setText(u.direccion);
+
+
+
+        }catch(Exception e){
+
+            Snackbar.make(view,"Ocurrió un error! Revisa el Logcat!",Snackbar.LENGTH_LONG).show();
+            Log.i("MY_PROFILE_FRAGMENT",String.format("Ups, un error... %s",e != null? e.getMessage() : "Desconocido!!"));
+
+        }
         /*
         GlobalScope.launch(Dispatchers.Main) {
 
