@@ -1,5 +1,6 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.sales;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,13 +30,23 @@ public class SalesListCustomAdapter extends RecyclerView.Adapter<SalesListCustom
     @Override
     public SaleListViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_sale_item,parent,false);
+        SaleListViewHolder vh = new SaleListViewHolder(view);
+
+        view.setOnClickListener(v -> {
+            Intent i = new Intent(parent.getContext(),SaleDetailActivity.class);
+            i.putExtra("id_venta",vh.id_venta);
+            parent.getContext().startActivity(i);
+        });
+
+
+
         return new SaleListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(SaleListViewHolder holder, int position) {
 
-        holder.lblNombreComprador.setText(listaElementos.get(position));
+        holder.lblNombreEmpresa.setText(listaElementos.get(position));
 
     }
 
@@ -46,7 +57,7 @@ public class SalesListCustomAdapter extends RecyclerView.Adapter<SalesListCustom
 
     public class SaleListViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView lblNombreComprador;
+        public String id_venta;
         public TextView lblNombreEmpresa;
         public TextView lblHoraVenta;
         public TextView lblEstadoVenta;
@@ -55,10 +66,9 @@ public class SalesListCustomAdapter extends RecyclerView.Adapter<SalesListCustom
 
             super(v);
 
-            this.lblNombreComprador = v.findViewById(R.id.liss_imgClienteExterno);
-            this.lblNombreEmpresa = v.findViewById(R.id.liss_lblNombreNegocio);
-            this.lblHoraVenta = v.findViewById(R.id.liss_lblFechaVenta);
-            this.lblEstadoVenta = v.findViewById(R.id.liss_lblEstadoVenta);
+            this.lblNombreEmpresa = v.findViewById(R.id.csi_lblNombreNegocio);
+            this.lblHoraVenta = v.findViewById(R.id.csi_lblFechaVenta);
+            this.lblEstadoVenta = v.findViewById(R.id.csi_lblEstadoVenta);
 
         }
 

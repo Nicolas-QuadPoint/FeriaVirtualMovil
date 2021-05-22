@@ -20,19 +20,19 @@
             android:layout_margin="8dp">
 
             <TextView
-                android:id="@+id/liss_lblNacionalidad"
+                android:id="@+id/csi_lblNacionalidad"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="@string/mpf_setting_country"
-                app:layout_constraintEnd_toStartOf="@+id/liss_lblEstadoVenta"
+                app:layout_constraintEnd_toStartOf="@+id/csi_lblEstadoVenta"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/liss_imgClienteExterno"
-                app:layout_constraintStart_toStartOf="@+id/liss_lblFechaVenta"
-                app:layout_constraintTop_toBottomOf="@+id/liss_lblFechaVenta" />
+                app:layout_constraintStart_toEndOf="@+id/csi_imgClienteExterno"
+                app:layout_constraintStart_toStartOf="@+id/csi_lblFechaVenta"
+                app:layout_constraintTop_toBottomOf="@+id/csi_lblFechaVenta" />
 
             <TextView
-                android:id="@+id/liss_lblNombreNegocio"
+                android:id="@+id/csi_lblNombreNegocio"
                 style="@style/Widget.AppCompat.TextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,30 +43,34 @@
                 android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/liss_imgClienteExterno"
+                app:layout_constraintStart_toEndOf="@+id/csi_imgClienteExterno"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/liss_lblFechaVenta"
+                android:id="@+id/csi_lblFechaVenta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/li_sale_simple_date"
-                app:layout_constraintStart_toStartOf="@+id/liss_lblNombreNegocio"
-                app:layout_constraintTop_toBottomOf="@+id/liss_lblNombreNegocio" />
+                app:layout_constraintStart_toStartOf="@+id/csi_lblNombreNegocio"
+                app:layout_constraintTop_toBottomOf="@+id/csi_lblNombreNegocio" />
 
             <TextView
-                android:id="@+id/liss_lblComentariosVenta"
+                android:id="@+id/csi_lblComentariosVenta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="@string/li_sale_simple_comments"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/liss_lblNacionalidad" />
+                app:layout_constraintTop_toBottomOf="@+id/csi_lblNacionalidad"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/liss_lblEstadoVenta"
+                android:id="@+id/csi_lblEstadoVenta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -75,11 +79,11 @@
                 android:textColor="#009688"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/liss_lblNacionalidad"
-                app:layout_constraintTop_toTopOf="@+id/liss_lblNacionalidad" />
+                app:layout_constraintStart_toEndOf="@+id/csi_lblNacionalidad"
+                app:layout_constraintTop_toTopOf="@+id/csi_lblNacionalidad" />
 
             <ImageButton
-                android:id="@+id/liss_imgClienteExterno"
+                android:id="@+id/csi_imgClienteExterno"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -87,8 +91,8 @@
                 android:background="@drawable/boton_redondo"
                 android:contentDescription="@string/mpf_setting_usertype"
                 android:scaleType="centerCrop"
-                app:layout_constraintBottom_toTopOf="@+id/liss_lblComentariosVenta"
-                app:layout_constraintEnd_toStartOf="@+id/liss_lblNombreNegocio"
+                app:layout_constraintBottom_toTopOf="@+id/csi_lblComentariosVenta"
+                app:layout_constraintEnd_toStartOf="@+id/csi_lblNombreNegocio"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

@@ -13,11 +13,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:text="@string/ppbd_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/ppbd_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView14"
@@ -26,10 +26,11 @@
         android:layout_marginTop="16dp"
         android:contentDescription="@string/ppbd_prod"
         android:labelFor="@id/dppb_spListaProductos"
+        android:text="@string/ppbd_prod"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
-        tools:text="@string/ppbd_prod" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <Spinner
         android:id="@+id/dppb_spListaProductos"
@@ -46,10 +47,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/ppbd_item"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toStartOf="@+id/textView25"
         app:layout_constraintStart_toStartOf="@+id/dppb_spListaProductos"
-        app:layout_constraintTop_toBottomOf="@+id/dppb_spListaProductos"
-        tools:text="@string/ppbd_item" />
+        app:layout_constraintTop_toBottomOf="@+id/dppb_spListaProductos" />
 
     <TextView
         android:id="@+id/textView25"
@@ -57,24 +59,28 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/ppbd_quantity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="@+id/textView23"
         app:layout_constraintEnd_toStartOf="@+id/textView21"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView23"
-        app:layout_constraintTop_toTopOf="@+id/textView23"
-        tools:text="@string/ppbd_quantity" />
+        app:layout_constraintTop_toTopOf="@+id/textView23" />
 
     <TextView
         android:id="@+id/textView21"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:text="@string/ppbd_price"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="@+id/textView25"
         app:layout_constraintEnd_toEndOf="@+id/dppb_spListaProductos"
         app:layout_constraintStart_toEndOf="@+id/textView25"
-        app:layout_constraintTop_toTopOf="@+id/textView23"
-        tools:text="@string/ppbd_price" />
+        app:layout_constraintTop_toTopOf="@+id/textView23" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dppb_listaProductos"
+        android:id="@+id/dppb_rvListaProductos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -92,18 +98,18 @@
         android:layout_marginBottom="16dp"
         android:text="@string/ppbd_push"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
-        app:layout_constraintStart_toStartOf="@+id/dppb_listaProductos"
-        app:layout_constraintTop_toBottomOf="@+id/dppb_listaProductos" />
+        app:layout_constraintEnd_toStartOf="@+id/dppb_btnCancelar"
+        app:layout_constraintStart_toStartOf="@+id/dppb_rvListaProductos"
+        app:layout_constraintTop_toBottomOf="@+id/dppb_rvListaProductos" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/dppb_btnCancelar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/action_cancel"
         app:layout_constraintBottom_toBottomOf="@+id/dppb_btnPujarOfertaProductor"
-        app:layout_constraintEnd_toEndOf="@+id/dppb_listaProductos"
+        app:layout_constraintEnd_toEndOf="@+id/dppb_rvListaProductos"
         app:layout_constraintStart_toEndOf="@+id/dppb_btnPujarOfertaProductor"
         app:layout_constraintTop_toTopOf="@+id/dppb_btnPujarOfertaProductor" />
 

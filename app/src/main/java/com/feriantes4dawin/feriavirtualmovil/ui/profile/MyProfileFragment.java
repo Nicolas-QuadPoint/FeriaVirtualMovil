@@ -112,16 +112,19 @@ public class MyProfileFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
+        /*
         this.myProfileViewModelFactory  = new MyProfileViewModelFactory(
-            new UsuarioRepositoryImpl(
+
+                new UsuarioRepositoryImpl(
                 (FeriaVirtualDatabase.getInstance(context)).usuarioDAO(),
                 new UsuarioDataSourceImpl((FeriaVirtualAPIProvider.provideUsuarioAPI()))
             )
+
         );
 
         this.myProfileViewModel =  new ViewModelProvider(this,myProfileViewModelFactory)
                 .get(MyProfileViewModel.class);
+        */
 
     }
 

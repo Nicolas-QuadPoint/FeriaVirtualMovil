@@ -39,6 +39,7 @@
                     android:text="Pujar"
                     android:textColor="#FFFFFF"
                     app:icon="@drawable/baseline_list_black_48"
+                    app:iconTint="@color/fondo_claro"
                     app:rippleColor="#FFFFFF"
                     app:srcCompat="@drawable/baseline_list_black_48" />
 

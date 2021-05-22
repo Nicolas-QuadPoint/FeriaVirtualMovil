@@ -16,13 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeriaVirtualMovil"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ui.auction.AuctionSaleActivity"
-            android:label="@string/title_activity_auction_sale"
-            android:theme="@style/Theme.FeriaVirtualMovil.NoActionBar"></activity>
-        <activity
-            android:name=".ui.auction.ItemDetailHostActivity"
-            android:label="@string/title_activity_item_detail_host" />
+
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
@@ -31,6 +25,10 @@
             android:name=".ui.sales.SaleDetailActivity"
             android:label="@string/sale_detail_act_title"
             android:parentActivityName=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.auction.AuctionSaleActivity"
+            android:label="@string/sale_detail_act_title"
+            android:parentActivityName=".ui.sales.SaleDetailActivity" />
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/sact_title"
