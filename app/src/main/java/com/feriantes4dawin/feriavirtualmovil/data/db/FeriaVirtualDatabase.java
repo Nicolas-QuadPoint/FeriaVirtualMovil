@@ -15,7 +15,7 @@ public abstract class FeriaVirtualDatabase extends RoomDatabase {
 
     public abstract UsuarioDAO usuarioDAO();
     private static FeriaVirtualDatabase feriaVirtualDatabase = null;
-    private static Object LOCK = new Object();
+    private final static Object LOCK = new Object();
 
 
     /**

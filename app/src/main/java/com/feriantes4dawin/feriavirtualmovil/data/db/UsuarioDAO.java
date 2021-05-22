@@ -14,9 +14,9 @@ public interface UsuarioDAO {
 
     /* Permite establecer un caso en el cual se da cuando existan datos iguales o distintos*/
     @Insert(onConflict= OnConflictStrategy.REPLACE)
-    public void upsert(Usuario u);
+    void upsert(Usuario u);
 
     @Query("select * from usuario where secret_id_usuario =0;")
-    public LiveData<Usuario> find();
+    LiveData<Usuario> find();
 
 }

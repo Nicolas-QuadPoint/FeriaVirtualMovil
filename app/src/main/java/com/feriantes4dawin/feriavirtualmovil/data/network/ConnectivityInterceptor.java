@@ -1,6 +1,6 @@
 package com.feriantes4dawin.feriavirtualmovil.data.network;
 
-import com.feriantes4dawin.feriavirtualmovil.misc.exceptions.NoConnectionException;;
+import com.feriantes4dawin.feriavirtualmovil.misc.exceptions.NoConnectionException;
 
 import java.io.IOException;
 
@@ -39,5 +39,5 @@ import okhttp3.Response;
 public interface ConnectivityInterceptor extends Interceptor {
 
     @Override
-    public Response intercept(Interceptor.Chain chain) throws IOException;
+    Response intercept(Interceptor.Chain chain) throws IOException;
 }

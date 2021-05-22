@@ -3,7 +3,7 @@ package com.feriantes4dawin.feriavirtualmovil.ui.settings;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.preference.PreferenceFragmentCompat;
+
 import com.feriantes4dawin.feriavirtualmovil.R;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -15,7 +15,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.settings_activity);
+        setContentView(R.layout.activity_settings);
 
         if (savedInstanceState == null) {
             this.getSupportFragmentManager()

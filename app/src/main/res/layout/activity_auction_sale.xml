@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeSaleDetail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:isScrollContainer="true"
+    android:orientation="vertical"
+    android:scrollbars="vertical"
+    android:visibility="visible"
+    tools:context=".ui.sales.SaleDetailActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/fondo_claro"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/diseno_degra">
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/aas_btnPujar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="@color/boton_ok"
+                    android:clickable="true"
+                    android:text="Pujar"
+                    android:textColor="#FFFFFF"
+                    app:icon="@drawable/baseline_list_black_48"
+                    app:rippleColor="#FFFFFF"
+                    app:srcCompat="@drawable/baseline_list_black_48" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/aas_infoVentaSimple"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <include
+                        android:id="@+id/include"
+                        layout="@layout/card_sale_item"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="La subasta termina en "
+                        android:textColor="@color/fondo_claro"
+                        app:layout_constraintEnd_toEndOf="@+id/include"
+                        app:layout_constraintStart_toStartOf="@+id/include"
+                        app:layout_constraintTop_toBottomOf="@+id/include" />
+
+                    <TextView
+                        android:id="@+id/aas_fechaFinSubasta"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_horizontal"
+                        android:text="01-01-2020 29:23"
+                        android:textColor="@color/fondo_claro"
+                        android:textSize="30sp"
+                        app:layout_constraintEnd_toEndOf="@+id/textView6"
+                        app:layout_constraintStart_toStartOf="@+id/textView6"
+                        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/aas_tvListaPujas"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@color/fondo_claro"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/asd_pujaDestacada"
+                        app:layout_constraintStart_toStartOf="@+id/asd_pujaDestacada"
+                        app:layout_constraintTop_toBottomOf="@+id/asd_pujaDestacada" />
+
+                    <include
+                        android:id="@+id/asd_pujaDestacada"
+                        layout="@layout/card_push_info_item"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="@+id/textView22"
+                        app:layout_constraintStart_toStartOf="@+id/textView22"
+                        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:text="Puja destacada"
+                        android:textColor="@color/fondo_claro"
+                        app:layout_constraintEnd_toEndOf="@+id/aas_fechaFinSubasta"
+                        app:layout_constraintStart_toStartOf="@+id/aas_fechaFinSubasta"
+                        app:layout_constraintTop_toBottomOf="@+id/aas_fechaFinSubasta" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

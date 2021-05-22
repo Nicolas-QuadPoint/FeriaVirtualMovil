@@ -94,10 +94,14 @@
     <!-- Push Productor bid messages -->
     <string name="ppbd_title">Push a new bid</string>
     <string name="ppbd_prod">Choose a product</string>
+    <string name="ppbd_item">Item</string>
     <string name="ppbd_quantity">How many?</string>
     <string name="ppbd_price">How much?</string>
     <string name="ppbd_push_detail">Bid Details</string>
     <string name="ppbd_push">Push</string>
     <string name="ppbd_update_price">Update push</string>
+
+    <!-- Push Info -->
+    <string name="pii_total_cost">Total cost</string>
 
 </resources>

@@ -5,7 +5,7 @@ import com.feriantes4dawin.feriavirtualmovil.data.network.responses.UsuarioRespo
 
 public interface UsuarioDataSource {
 
-    public LiveData<UsuarioResponse> usuarioDescargado = null;
+    LiveData<UsuarioResponse> usuarioDescargado = null;
 
-    public void fetchDataUsuario(String email,String contrasena);
+    void fetchDataUsuario(String email,String contrasena);
 }

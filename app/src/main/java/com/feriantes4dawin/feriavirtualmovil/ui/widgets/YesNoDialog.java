@@ -9,7 +9,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
-import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 
 import java.lang.NullPointerException;
 
@@ -37,7 +36,7 @@ public class YesNoDialog {
 
         AlertDialog.Builder b = new AlertDialog.Builder(act);
         ViewGroup vg = act.findViewById(android.R.id.content);
-        View v = LayoutInflater.from(act).inflate(R.layout.yes_no_dialog, vg, false);
+        View v = LayoutInflater.from(act).inflate(R.layout.dialog_yes_no, vg, false);
 
         if(v != null){
 

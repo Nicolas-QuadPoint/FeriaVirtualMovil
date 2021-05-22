@@ -2,7 +2,6 @@ package com.feriantes4dawin.feriavirtualmovil.ui.widgets;
 
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
-import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
+
 import java.lang.NullPointerException;
 
 
@@ -38,7 +37,7 @@ public class ChangePasswordDialog {
 
         AlertDialog.Builder b = new AlertDialog.Builder(act);
         ViewGroup vg = act.findViewById(android.R.id.content);
-        this.v = LayoutInflater.from(act).inflate(R.layout.change_password_dialog, vg, false);
+        this.v = LayoutInflater.from(act).inflate(R.layout.dialog_change_password, vg, false);
 
         if(v != null){
 

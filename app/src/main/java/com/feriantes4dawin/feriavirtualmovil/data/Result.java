@@ -15,6 +15,7 @@ public class Result<T> {
             this.data = d;
         }
     }
+
     public class Error<T> extends Result{
         public Exception exception;
         public Error(){}

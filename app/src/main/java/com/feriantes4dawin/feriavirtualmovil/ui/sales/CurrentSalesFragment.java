@@ -21,7 +21,7 @@ public class CurrentSalesFragment extends Fragment {
         this.currentSalesViewModel = new ViewModelProvider(this).get(CurrentSalesViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_current_sales, container, false);
-        RecyclerView miRecicler = (RecyclerView) root.findViewById(R.id.rvCurrentSales);
+        RecyclerView miRecicler = (RecyclerView) root.findViewById(R.id.asd_rcListaProductos);
         SwipeRefreshLayout miSwiper = (SwipeRefreshLayout)root.findViewById(R.id.swipeCurrentSales);
 
         miRecicler.setAdapter(new SalesListCustomAdapter());

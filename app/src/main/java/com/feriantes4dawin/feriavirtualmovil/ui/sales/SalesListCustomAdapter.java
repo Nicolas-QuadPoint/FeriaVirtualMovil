@@ -28,7 +28,7 @@ public class SalesListCustomAdapter extends RecyclerView.Adapter<SalesListCustom
 
     @Override
     public SaleListViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sale_item_card_layout,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_sale_item,parent,false);
         return new SaleListViewHolder(view);
     }
 
