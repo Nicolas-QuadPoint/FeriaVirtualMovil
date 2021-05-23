@@ -1,13 +1,19 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.sales;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+
 import androidx.lifecycle.ViewModelProvider;
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.ui.auction.AuctionSaleActivity;
+import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+
+import org.jetbrains.annotations.NotNull;
 
 public class SaleDetailActivity extends AppCompatActivity {
 
@@ -33,4 +39,18 @@ public class SaleDetailActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        //No domino la navegación entre actividades aún, mejor finalicemos este.
+        finish();
+    }
+
+    @Override
+    public void supportNavigateUpTo(@NonNull @NotNull Intent upIntent) {
+        upIntent.putExtra("fragment",FeriaVirtualConstants.FRAGMENTO_LISTA_PETICIONES_VENTA);
+        super.supportNavigateUpTo(upIntent);
+        Log.i("SALE_DETAIL_ACTIVITY","Deberia ir a " + FeriaVirtualConstants.FRAGMENTO_LISTA_PETICIONES_VENTA);
+    }
+
 }

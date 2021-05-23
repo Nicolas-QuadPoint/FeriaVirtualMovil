@@ -13,4 +13,13 @@ public class FeriaVirtualConstants {
      */
     public static final int CURRENT_LOGGED_USUARIO = 0;
 
+    /**
+     * Strings que representan el orden de cada fragmento, para que, cuando
+     * se quiera retroceder en una actividad hija, entonces en el MainActivity
+     * se navegue inmediatamente al fragmento 'padre'
+     */
+    public static final String FRAGMENTO_LISTA_PETICIONES_VENTA = "FRAGMENTO_LISTA_PETICIONES_VENTA";
+    public static final String FRAGMENTO_MI_PERFIL = "FRAGMENTO_MI_PERFIL";
+    public static final String FRAGMENTO_MIS_PROCESOS = "FRAGMENTO_MIS_PROCESOS";
+    public static final String FRAGMENTO_INICIO = "FRAGMENTO_INICIO";
 }

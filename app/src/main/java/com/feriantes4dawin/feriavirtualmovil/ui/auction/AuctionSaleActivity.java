@@ -2,18 +2,14 @@ package com.feriantes4dawin.feriavirtualmovil.ui.auction;
 
 import android.os.Bundle;
 
-import com.feriantes4dawin.feriavirtualmovil.ui.widgets.PushProductorBidDialog;
+import com.feriantes4dawin.feriavirtualmovil.ui.widgets.PushProductorDialog;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.feriantes4dawin.feriavirtualmovil.R;
 
@@ -28,10 +24,18 @@ public class AuctionSaleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_auction_sale);
 
         ExtendedFloatingActionButton aas_btnPujar = (ExtendedFloatingActionButton) findViewById(R.id.aas_btnPujar);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.aas_rvListaPujas);
+        PushListCustomAdapter rvAdapter = new PushListCustomAdapter();
+        rv.setAdapter(rvAdapter);
+        rv.setLayoutManager(new LinearLayoutManager(this));
 
         aas_btnPujar.setOnClickListener(v -> {
 
-            PushProductorBidDialog dlg = new PushProductorBidDialog(AuctionSaleActivity.this,null,null);
+            PushProductorDialog dlg = new PushProductorDialog(AuctionSaleActivity.this,o -> {
+
+                rvAdapter.pushItem("New pusher");
+
+            },null);
             dlg.generate().show();
 
         });

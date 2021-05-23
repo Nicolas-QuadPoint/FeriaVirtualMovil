@@ -24,7 +24,7 @@ public class CurrentSalesFragment extends Fragment {
         RecyclerView miRecicler = (RecyclerView) root.findViewById(R.id.asd_rcListaProductos);
         SwipeRefreshLayout miSwiper = (SwipeRefreshLayout)root.findViewById(R.id.swipeCurrentSales);
 
-        miRecicler.setAdapter(new SalesListCustomAdapter());
+        miRecicler.setAdapter(new SimpleSaleItemCustomAdapter());
         miRecicler.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         miSwiper.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -32,7 +32,7 @@ public class CurrentSalesFragment extends Fragment {
             @Override
             public void onRefresh() {
 
-                miRecicler.setAdapter(new SalesListCustomAdapter());
+                miRecicler.setAdapter(new SimpleSaleItemCustomAdapter());
                 miRecicler.setLayoutManager( new LinearLayoutManager(requireContext()));
 
                 miSwiper.setRefreshing(false);

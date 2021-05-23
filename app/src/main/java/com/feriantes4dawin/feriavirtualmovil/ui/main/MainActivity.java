@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController,appBarConfiguration);
         NavigationUI.setupWithNavController(navView,navController);
 
-        //Using only nav_logout for quit program
-        //val navLogout = findViewById<MenuItem>(R.id.nav_logout)
     }
 
     @Override
@@ -119,6 +117,26 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    public void onBackPressed() {
+        YesNoDialog yesno = new YesNoDialog(this, getString(R.string.err_mes_question), getString(R.string.err_msg_logout_prompt),
+                new SimpleAction() {
+                    @Override
+                    public void doAction(Object o) {
+                        Intent loginActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
+                        //Con esto nos evitamos la molestia de de que el usuario regrese al menu principal
+                        //loo presionando la tecla atrás
+                        loginActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        //TODO: Give special parameters to activity for clean login cache or so...
+                        startActivity(loginActivityIntent);
+                        //Ultima esperanza!
+                        //finish()
+                    }
+                },
+                null
+        );
+        super.onBackPressed();
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -139,8 +157,11 @@ public class MainActivity extends AppCompatActivity{
 
             ubicacionImagenSeleccionada = data.getData();
 
-            Log.i("[MAIN_ACTIVITY]",String.format("Imágen recuperada: %s",
+            Log.i("MAIN_ACTIVITY",String.format("Imágen recuperada: %s",
                     (ubicacionImagenSeleccionada == null)? "null" : ubicacionImagenSeleccionada.getPath()));
+
+        } else if (data.hasExtra("fragment")){
+            Log.i("MAIN_ACTIVITY","Esto vino de algun fragmento!!!");
         }
 
     }

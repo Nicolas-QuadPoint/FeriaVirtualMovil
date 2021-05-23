@@ -28,6 +28,7 @@
 
     <!-- Actions -->
 
+    <string name="action_accept">Accept</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_save">Save</string>
     <string name="action_undo">Undo</string>
@@ -81,6 +82,10 @@
     <string name="sact_attachment_summary_on">Automatically download attachments for incoming emails</string>
     <string name="sact_attachment_summary_off">Only download attachments when manually requested</string>
 
+    <!-- Auction -->
+    <string name="auact_title">Auction Section</string>
+    <string name="auact_push_list">Push list</string>
+
     <!-- Other -->
     <string name="other_stub">stub</string>
 
@@ -95,11 +100,12 @@
     <string name="ppbd_title">Push a new bid</string>
     <string name="ppbd_prod">Choose a product</string>
     <string name="ppbd_item">Item</string>
-    <string name="ppbd_quantity">How many?</string>
+    <string name="ppbd_quantity">How many? (Units, Kg)</string>
     <string name="ppbd_price">How much?</string>
     <string name="ppbd_push_detail">Bid Details</string>
     <string name="ppbd_push">Push</string>
     <string name="ppbd_update_price">Update push</string>
+    <string name="ppbd_clean_item_help">Swipe to clean push</string>
 
     <!-- Push Info -->
     <string name="pii_total_cost">Total cost</string>

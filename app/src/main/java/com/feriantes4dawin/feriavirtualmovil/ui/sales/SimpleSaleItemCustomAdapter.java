@@ -5,16 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.feriantes4dawin.feriavirtualmovil.R;
 
 import java.util.ArrayList;
 
-public class SalesListCustomAdapter extends RecyclerView.Adapter<SalesListCustomAdapter.SaleListViewHolder> {
+public class SimpleSaleItemCustomAdapter extends RecyclerView.Adapter<SimpleSaleItemCustomAdapter.SimpleSaleItemViewHolder> {
 
     private ArrayList<String> listaElementos;
 
-    public SalesListCustomAdapter(){
+    public SimpleSaleItemCustomAdapter(){
 
         super();
 
@@ -28,9 +30,9 @@ public class SalesListCustomAdapter extends RecyclerView.Adapter<SalesListCustom
     }
 
     @Override
-    public SaleListViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
+    public SimpleSaleItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_sale_item,parent,false);
-        SaleListViewHolder vh = new SaleListViewHolder(view);
+        SimpleSaleItemViewHolder vh = new SimpleSaleItemViewHolder(view);
 
         view.setOnClickListener(v -> {
             Intent i = new Intent(parent.getContext(),SaleDetailActivity.class);
@@ -40,11 +42,11 @@ public class SalesListCustomAdapter extends RecyclerView.Adapter<SalesListCustom
 
 
 
-        return new SaleListViewHolder(view);
+        return vh;
     }
 
     @Override
-    public void onBindViewHolder(SaleListViewHolder holder, int position) {
+    public void onBindViewHolder(SimpleSaleItemViewHolder holder, int position) {
 
         holder.lblNombreEmpresa.setText(listaElementos.get(position));
 
@@ -55,14 +57,14 @@ public class SalesListCustomAdapter extends RecyclerView.Adapter<SalesListCustom
         return listaElementos.size();
     }
 
-    public class SaleListViewHolder extends RecyclerView.ViewHolder {
+    public class SimpleSaleItemViewHolder extends RecyclerView.ViewHolder {
 
         public String id_venta;
         public TextView lblNombreEmpresa;
         public TextView lblHoraVenta;
         public TextView lblEstadoVenta;
 
-        SaleListViewHolder(View v) {
+        SimpleSaleItemViewHolder(View v) {
 
             super(v);
 
