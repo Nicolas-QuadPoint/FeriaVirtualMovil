@@ -1,13 +1,17 @@
 package com.feriantes4dawin.feriavirtualmovil.data.services;
 
-import com.feriantes4dawin.feriavirtualmovil.data.network.responses.UsuarioResponse;
+import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoID;
+import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoUsuario;
+import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
+import com.feriantes4dawin.feriavirtualmovil.data.models.Usuarios;
+
 import retrofit2.http.*;
 
 public interface UsuarioAPIService {
 
     @FormUrlEncoded
     @POST("auth/login")
-    UsuarioResponse login(
+    ResultadoUsuario login(
 
         @Field(value="email")
         String email,
@@ -18,10 +22,19 @@ public interface UsuarioAPIService {
     );
 
     @GET("usuario/{idusuario}")
-    UsuarioResponse getUserInfo(
+    ResultadoUsuario getInfoUsuario(
 
             @Path(value="idusuario")
             Integer personalID
+
+    );
+
+    @POST("usuario/{idusuario}/update")
+    ResultadoID updateUsuario(
+
+            @Path(value="idusuario")
+                    Integer personalID,
+            Usuario valoresNuevos
 
     );
 

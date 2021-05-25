@@ -9,6 +9,6 @@ public class Subasta {
     public TipoSubasta tipo_subasta;
     public EstadoSubasta estado_subasta;
     public Venta venta;
-    public List<Object> ofertas_productores;
-    public List<Object> ofertas_transportistas;
+    public List<ObjetoPujaSubastaProductor> ofertas_productores;
+    public List<ObjetoPujaSubastaTransportista> ofertas_transportistas;
 }

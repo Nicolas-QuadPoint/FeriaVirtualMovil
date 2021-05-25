@@ -17,8 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.feriantes4dawin.feriavirtualmovil.R;
+import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoUsuario;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
-import com.feriantes4dawin.feriavirtualmovil.data.network.responses.UsuarioResponse;
 import com.feriantes4dawin.feriavirtualmovil.data.services.UsuarioAPIService;
 import com.feriantes4dawin.feriavirtualmovil.dependencies.FeriaVirtualAPIProvider;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
@@ -190,7 +190,7 @@ public class MyProfileFragment extends Fragment {
 
 
                 UsuarioAPIService usuapi = FeriaVirtualAPIProvider.provideUsuarioAPI();
-                UsuarioResponse usudata = usuapi.getUserInfo(21);
+                ResultadoUsuario usudata = usuapi.getInfoUsuario(21);
 
                 if(usudata != null){
                     return usudata.usuario;

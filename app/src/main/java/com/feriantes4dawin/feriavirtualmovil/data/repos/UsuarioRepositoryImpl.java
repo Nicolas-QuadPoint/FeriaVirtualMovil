@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer;
 
 import com.feriantes4dawin.feriavirtualmovil.data.db.UsuarioDAO;
 import com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSource;
-import com.feriantes4dawin.feriavirtualmovil.data.network.responses.UsuarioResponse;
+import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoUsuario;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
 
 public class UsuarioRepositoryImpl implements UsuarioRepository {
@@ -20,9 +20,9 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 
         if(uds != null){
 
-            uds.usuarioDescargado.observeForever(new Observer<UsuarioResponse>() {
+            uds.usuarioDescargado.observeForever(new Observer<ResultadoUsuario>() {
                 @Override
-                public void onChanged(UsuarioResponse usuarioResponse) {
+                public void onChanged(ResultadoUsuario resultadoUsuario) {
                     //saveUsuarioToDatabase(nuevoUsuarioResponse.usuario);
                 }
             });
