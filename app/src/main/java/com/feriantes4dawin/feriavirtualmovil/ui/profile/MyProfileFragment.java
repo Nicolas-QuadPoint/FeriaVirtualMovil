@@ -1,7 +1,6 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.profile;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,18 +13,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.feriantes4dawin.feriavirtualmovil.R;
-import com.feriantes4dawin.feriavirtualmovil.data.db.FeriaVirtualDatabase;
-import com.feriantes4dawin.feriavirtualmovil.data.model.Usuario;
-import com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSourceImpl;
+import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
 import com.feriantes4dawin.feriavirtualmovil.data.network.responses.UsuarioResponse;
-import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl;
 import com.feriantes4dawin.feriavirtualmovil.data.services.UsuarioAPIService;
 import com.feriantes4dawin.feriavirtualmovil.dependencies.FeriaVirtualAPIProvider;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
@@ -58,40 +51,32 @@ public class MyProfileFragment extends Fragment {
     public void onViewCreated(View view ,Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button btnCambiarPasswd = (Button) view.findViewById(R.id.btnCambiarContrasena);
-        Button btnGuardarCambios = (Button) view.findViewById(R.id.btnGuardarCambiosPerfil);
-        Button btnCancelarCambios = (Button) view.findViewById(R.id.btnCancelarCambiosPerfil);
-        ImageButton btnImagen = (ImageButton) view.findViewById(R.id.btnFotoPerfilUsuario);
-        SwipeRefreshLayout miSwiper = (SwipeRefreshLayout)view.findViewById(R.id.swipeMyProfile);
+        Button btnCambiarPasswd = (Button) view.findViewById(R.id.fmp_btnCambiarContrasena);
+        Button btnGuardarCambios = (Button) view.findViewById(R.id.fmp_btnGuardar);
+        Button btnCancelarCambios = (Button) view.findViewById(R.id.fmp_btnDeshacer);
+        ImageButton btnImagen = (ImageButton) view.findViewById(R.id.fmp_btnFotoPerfilUsuario);
+        SwipeRefreshLayout miSwiper = (SwipeRefreshLayout)view.findViewById(R.id.fmp_swipeFMP);
 
         //Asignamos eventos a los controles
-        btnCambiarPasswd.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
+        btnCambiarPasswd.setOnClickListener(v -> {
                 btnCambiarContrasenaClick(v);
             }
-        });
+        );
 
-        btnGuardarCambios.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
+        btnGuardarCambios.setOnClickListener(v -> {
                 btnGuardarCambiosPerfilClick(v);
             }
-        });
+        );
 
-        btnCancelarCambios.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
+        btnCancelarCambios.setOnClickListener(v -> {
                 btnCancelarCambiosPerfilClick(v);
             }
-        });
+        );
 
-        btnImagen.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
+        btnImagen.setOnClickListener(v -> {
                 btnFotoPerfilUsuarioClick(v);
             }
-        });
+        );
 
         miSwiper.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -153,19 +138,14 @@ public class MyProfileFragment extends Fragment {
                 );
 
             //Mostramos el dialogo
-             AlertDialog d = cpd.generate();
-
-            //Abrimos el dialogo!
-            d.show();
-
-            //Extraimos la contraseña, y la modificamos!
-            Log.i("[MY_PROFILE_FRAGMENT]",cpd.getPassword());
+             cpd.generate().show();
 
             //Cerramos el dialogo
             //d.cancel()
 
         } catch (Exception ex){
 
+            Log.e("FRAGMENT_MY_PROFILE",ex.toString());
             Toast.makeText(this.getActivity(),R.string.err_msg_generic,Toast.LENGTH_SHORT).show();
 
         }
@@ -195,14 +175,14 @@ public class MyProfileFragment extends Fragment {
 
         //TODO:Borrar esto cuando se implemente la arquitectura mvvm text_home
 
-        TextView lblPersonalID = view.findViewById(R.id.tvPersonalID);
-        TextView lblNombres = view.findViewById(R.id.tvNombresUsuario);
-        TextView lblApellidos = view.findViewById(R.id.tvApellidosUsuario);
-        TextView lblNacionalidad = view.findViewById(R.id.tvNacionalidad);
-        TextView lblTipoUsuario = view.findViewById(R.id.tvTipoUsuario);
-        TextView txtEmail = view.findViewById(R.id.txtEmailUsuario);
-        EditText txtTelefono = view.findViewById(R.id.txtTelefonoUsuario);
-        EditText txtDireccion = view.findViewById(R.id.txtDireccionUsuario);
+        TextView lblPersonalID = view.findViewById(R.id.fmp_lblPersonalID);
+        TextView lblNombres = view.findViewById(R.id.fmp_lblNombresUsuario);
+        TextView lblApellidos = view.findViewById(R.id.fmp_lblApellidosUsuario);
+        TextView lblNacionalidad = view.findViewById(R.id.fmp_lblNacionalidad);
+        TextView lblTipoUsuario = view.findViewById(R.id.fmp_lblTipoUsuario);
+        TextView txtEmail = view.findViewById(R.id.fmp_lblEmailUsuario);
+        EditText txtTelefono = view.findViewById(R.id.fmp_txtTelefonoUsuario);
+        EditText txtDireccion = view.findViewById(R.id.fmp_txtDireccionUsuario);
 
         FutureTask<Usuario> tarea = new FutureTask<Usuario>(() -> {
 
@@ -237,8 +217,8 @@ public class MyProfileFragment extends Fragment {
             lblPersonalID.setText(u.personal_id);
             lblNombres.setText(u.nombre + " " + u.nombre_segundo);
             lblApellidos.setText(u.apellido_paterno + " " + u.apellido_materno);
-            lblNacionalidad.setText(u.nacionalidad);
-            lblTipoUsuario.setText(u.rol);
+            lblNacionalidad.setText(u.nacionalidad.toString());
+            lblTipoUsuario.setText(u.rol.toString());
             txtEmail.setText(u.email);
             txtTelefono.setText(u.telefono.toString());
             txtDireccion.setText(u.direccion);

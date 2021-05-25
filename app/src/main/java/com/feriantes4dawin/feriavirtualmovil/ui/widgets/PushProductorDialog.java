@@ -1,11 +1,13 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.widgets;
 
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +32,7 @@ public final class PushProductorDialog extends SimpleDialog {
         this.v = LayoutInflater.from(act).inflate(R.layout.dialog_push_productor, vg, false);
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.dppb_rvListaProductos);
         PushProductorCustomAdapter rvAdapter = new PushProductorCustomAdapter();
+        dlg.setTitle(R.string.ppbd_push);
 
         /**
          * Sacado de https://www.youtube.com/watch?v=M1XEqqo6Ktg
@@ -59,46 +62,35 @@ public final class PushProductorDialog extends SimpleDialog {
         rv.setLayoutManager(new LinearLayoutManager(act));
 
 
-
-
         return this.v;
     }
 
     @Override
     protected void prepareResponses() {
 
-        Button btnOk = (Button) v.findViewById(R.id.dppb_btnPujarOfertaProductor);
-        Button btnCancelar = (Button) v.findViewById(R.id.dppb_btnCancelar);
+        //Para respuesta afirmativa
+        dlg.setButton(AlertDialog.BUTTON_POSITIVE,act.getString(R.string.action_accept),
 
-        //Para respuesta alternativa
-        btnOk.setOnClickListener( new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view){
-
+            (dialogo,idBoton) -> {
                 if(positiveResponseFunc != null){
                     positiveResponseFunc.doAction(v);
                 }
-
-                dlg.cancel();
+                dialogo.cancel();
             }
 
-        });
+        );
 
         //Para respuesta negativa
-        btnCancelar.setOnClickListener( new View.OnClickListener(){
+        dlg.setButton(AlertDialog.BUTTON_NEGATIVE,act.getString(R.string.action_cancel),
 
-            @Override
-            public void onClick(View view){
-
-                if(negativeResponseFunc != null){
-                    negativeResponseFunc.doAction(v);
+                (dialogo,idBoton) -> {
+                    if(negativeResponseFunc != null){
+                        negativeResponseFunc.doAction(v);
+                    }
+                    dialogo.cancel();
                 }
 
-                dlg.cancel();
-            }
-
-        });
+        );
 
 
     }

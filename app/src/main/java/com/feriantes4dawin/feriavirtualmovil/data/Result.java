@@ -1,7 +1,5 @@
 package com.feriantes4dawin.feriavirtualmovil.data;
 
-import com.feriantes4dawin.feriavirtualmovil.data.model.LoggedInUser;
-
 /**
  * A generic class that holds a value with its loading status.
  * @param <T>

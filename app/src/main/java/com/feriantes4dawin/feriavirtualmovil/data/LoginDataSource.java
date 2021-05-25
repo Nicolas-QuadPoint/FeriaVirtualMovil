@@ -1,8 +1,6 @@
 package com.feriantes4dawin.feriavirtualmovil.data;
 
-import android.util.Log;
-
-import com.feriantes4dawin.feriavirtualmovil.data.model.LoggedInUser;
+import com.feriantes4dawin.feriavirtualmovil.data.models.LoggedInUser;
 import java.io.IOException;
 
 /**

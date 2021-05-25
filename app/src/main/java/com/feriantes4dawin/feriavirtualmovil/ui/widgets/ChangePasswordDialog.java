@@ -2,7 +2,10 @@ package com.feriantes4dawin.feriavirtualmovil.ui.widgets;
 
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
+import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleTextWatcher;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,91 +19,96 @@ import androidx.lifecycle.MutableLiveData;
 import java.lang.NullPointerException;
 
 
-public class ChangePasswordDialog {
+public class ChangePasswordDialog extends SimpleDialog{
 
-    private AppCompatActivity act;
-    private SimpleAction positiveResponseFunc;
-    private SimpleAction negativeResponseFunc;
-    private View v;
     private String passwdString;
 
-    private MutableLiveData<ChangePasswordFormState> _passwdForm;
-    private LiveData<ChangePasswordFormState> passwdFormLiveState;
-
     public ChangePasswordDialog(AppCompatActivity act, SimpleAction positiveResponseFunc, SimpleAction negativeResponseFunc) {
-        this.act = act;
-        this.positiveResponseFunc = positiveResponseFunc;
-        this.negativeResponseFunc = negativeResponseFunc;
+        super(act,positiveResponseFunc,negativeResponseFunc);
     }
 
-    public AlertDialog generate(){
+    public String getPasswdString(){
+        return this.passwdString;
+    }
 
-        AlertDialog.Builder b = new AlertDialog.Builder(act);
+    @Override
+    protected View prepareView() {
+
         ViewGroup vg = act.findViewById(android.R.id.content);
         this.v = LayoutInflater.from(act).inflate(R.layout.dialog_change_password, vg, false);
+        dlg.setTitle(act.getString(R.string.mpf_setting_change_passwd));
 
-        if(v != null){
+        EditText txtPass1 = (EditText) v.findViewById(R.id.dcp_txtPasswd1);
+        EditText txtPass2 = (EditText) v.findViewById(R.id.dcp_txtPasswd2);
 
-            //Insertamos la vista al diálogo
-            b.setView(v);
+        txtPass1.addTextChangedListener(new ChangePasswordTextWatcher(txtPass1,txtPass2));
+        txtPass2.addTextChangedListener(new ChangePasswordTextWatcher(txtPass2,txtPass1));
 
-            AlertDialog dlg = b.create();
-            Button btnOk = (Button) v.findViewById(R.id.btnCambiarPasswd);
-            Button btnCancelar = (Button) v.findViewById(R.id.btnCancelar);
+        return this.v;
+    }
 
-            //Para respuesta alternativa
-            btnOk.setOnClickListener( new View.OnClickListener(){
+    @Override
+    protected void prepareResponses() {
 
-                @Override
-                public void onClick(View view){
+        dlg.setButton(AlertDialog.BUTTON_POSITIVE,act.getString(R.string.action_change),
+            (dialogo,idBoton) ->{
 
-                    if(positiveResponseFunc != null)
-                        positiveResponseFunc.doAction(v);
-
-                    dlg.cancel();
+                if (positiveResponseFunc != null) {
+                    positiveResponseFunc.doAction(v);
                 }
 
-            });
+                dlg.cancel();
 
-            //Para respuesta negativa
-            btnCancelar.setOnClickListener( new View.OnClickListener(){
+            }
+        );
 
-                @Override
-                public void onClick(View view){
+        dlg.setButton(AlertDialog.BUTTON_NEGATIVE,act.getString(R.string.action_cancel),
+            (dialogo,idBoton) ->{
 
-                    if(negativeResponseFunc != null)
-                        negativeResponseFunc.doAction(v);
+                this.passwdString = null;
 
-                    dlg.cancel();
+                if (negativeResponseFunc != null) {
+                    negativeResponseFunc.doAction(v);
                 }
 
-            });
+                dlg.cancel();
 
-            //passwdFormLiveState.observe(act,)
+            }
+        );
 
-            return dlg;
+    }
 
-        } else {
+    public class ChangePasswordTextWatcher extends SimpleTextWatcher {
 
-            throw new NullPointerException("Can't generate the required View object for AlertDialog");
+        private EditText txtPasswd2;
 
+        public ChangePasswordTextWatcher(EditText txtPasswd1,EditText txtPasswd2){
+            super(txtPasswd1);
+            this.txtPasswd2 = txtPasswd2;
         }
 
+        @Override
+        public void afterTextChanged(Editable e) {
+            if(isPasswdValid(e) && isPasswdValid(txtPasswd2.getText()) &&
+            e.toString().equals(txtPasswd2.getText().toString())){
+
+                txtPasswd2.setError(null);
+                txt.setError(null);
+                dlg.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+
+            } else{
+
+                txtPasswd2.setError(act.getString(R.string.err_mes_passwd_does_not_match));
+                dlg.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+
+            }
+        }
+
+        private boolean isPasswdValid(Editable e){
+
+            return (e.length() > 4 || !e.toString().isEmpty());
+
+        }
     }
 
-    public String getPassword() {
-
-        EditText et = (EditText) v.findViewById(R.id.txtPasswd1);
-        this.passwdString = et.getEditableText().toString();
-
-        return passwdString != null? passwdString : "";
-
-    }
-
-    public class ChangePasswordFormState {
-
-        int passwdError1 = 0;
-        int passwdError2 = 0;
-        boolean isPasswdOk = false;
-    }
 }

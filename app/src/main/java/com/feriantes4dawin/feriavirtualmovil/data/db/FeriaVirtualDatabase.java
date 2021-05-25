@@ -4,7 +4,8 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import com.feriantes4dawin.feriavirtualmovil.data.model.Usuario;
+
+import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 
 @Database(

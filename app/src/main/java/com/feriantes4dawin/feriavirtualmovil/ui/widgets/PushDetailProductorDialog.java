@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.feriantes4dawin.feriavirtualmovil.R;
@@ -20,45 +21,38 @@ public final class PushDetailProductorDialog extends SimpleDialog{
     protected View prepareView() {
         ViewGroup vg = act.findViewById(android.R.id.content);
         this.v = LayoutInflater.from(act).inflate(R.layout.dialog_push_detail_productor, vg, false);
-
+        dlg.setTitle(R.string.ppbd_title);
         return this.v;
     }
 
     @Override
     protected void prepareResponses() {
 
-        Button btnOk = (Button) v.findViewById(R.id.dpdp_btnPujar);
-        Button btnCancelar = (Button) v.findViewById(R.id.dpdp_btnCancelar);
-
-        btnOk.setOnClickListener( new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view){
+        //Para respuesta positiva
+        dlg.setButton(AlertDialog.BUTTON_POSITIVE,act.getString(R.string.ppbd_title),
+            (dialogo,idBoton) -> {
 
                 if(positiveResponseFunc != null){
                     positiveResponseFunc.doAction(v);
                 }
 
-                dlg.cancel();
+                dialogo.cancel();
             }
-
-        });
+        );
 
         //Para respuesta negativa
-        btnCancelar.setOnClickListener( new View.OnClickListener(){
+        dlg.setButton(AlertDialog.BUTTON_NEGATIVE,act.getString(R.string.action_cancel),
 
-            @Override
-            public void onClick(View view){
+            (dialogo,idBoton) -> {
 
                 if(negativeResponseFunc != null){
                     negativeResponseFunc.doAction(v);
                 }
 
                 dlg.cancel();
+
             }
-
-        });
-
+        );
 
     }
 

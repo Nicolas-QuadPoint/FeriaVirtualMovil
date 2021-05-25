@@ -21,5 +21,9 @@
             android:icon="@drawable/baseline_manage_accounts_black_48"
             android:title="@string/menu_profile" />
 
+        <item
+            android:id="@+id/nav_help"
+            android:title="@string/menu_help" />
+
     </group>
 </menu>

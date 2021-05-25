@@ -13,6 +13,7 @@
     <string name="menu_sales">Mostrar peticiones de venta</string>
     <string name="menu_process">Mis procesos de venta</string>
     <string name="menu_profile">Mi perfil</string>
+    <string name="menu_help">Manual de usuario</string>
     <string name="menu_logout">Cerrar sesión</string>
 
     <!-- Actividad Login -->
@@ -94,6 +95,7 @@
     <string name="err_msg_generic">Un error inesperado ha ocurrido. Por favor inténtelo nuevamente</string>
     <string name="err_mes_question">Pregunta</string>
     <string name="err_mes_message">Mensaje</string>
+    <string name="err_mes_passwd_does_not_match">Las contraseñas no coinciden</string>
     <string name="err_msg_logout_prompt">¿De verdad quieres cerrar la sesión? Tendrás que autenticarte la próxima vez</string>
 
     <!-- Push Productor bid messages -->
@@ -109,7 +111,7 @@
 
     <!-- Push Info -->
     <string name="pii_total_cost">Coste total</string>
-
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

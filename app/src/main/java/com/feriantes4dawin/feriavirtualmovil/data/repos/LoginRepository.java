@@ -2,7 +2,7 @@ package com.feriantes4dawin.feriavirtualmovil.data.repos;
 
 import com.feriantes4dawin.feriavirtualmovil.data.LoginDataSource;
 import com.feriantes4dawin.feriavirtualmovil.data.Result;
-import com.feriantes4dawin.feriavirtualmovil.data.model.LoggedInUser;
+import com.feriantes4dawin.feriavirtualmovil.data.models.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

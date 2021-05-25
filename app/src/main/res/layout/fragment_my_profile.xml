@@ -2,7 +2,7 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipeMyProfile"
+    android:id="@+id/fmp_swipeFMP"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -23,31 +23,33 @@
             tools:layout_editor_absoluteY="1dp">
 
             <Button
-                android:id="@+id/btnCancelarCambiosPerfil"
+                android:id="@+id/fmp_btnDeshacer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/action_undo"
-                app:layout_constraintEnd_toEndOf="@+id/btnCambiarContrasena"
-                app:layout_constraintStart_toEndOf="@+id/btnGuardarCambiosPerfil"
-                app:layout_constraintTop_toTopOf="@+id/btnGuardarCambiosPerfil" />
+                app:layout_constraintBottom_toBottomOf="@+id/fmp_btnGuardar"
+                app:layout_constraintEnd_toEndOf="@+id/fmp_txtDireccionUsuario"
+                app:layout_constraintStart_toEndOf="@+id/fmp_btnGuardar"
+                app:layout_constraintTop_toTopOf="@+id/fmp_btnGuardar" />
 
             <Button
-                android:id="@+id/btnGuardarCambiosPerfil"
+                android:id="@+id/fmp_btnGuardar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/action_save"
-                app:layout_constraintEnd_toStartOf="@+id/btnCancelarCambiosPerfil"
-                app:layout_constraintStart_toStartOf="@+id/textView19"
-                app:layout_constraintTop_toBottomOf="@+id/btnCambiarContrasena" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fmp_btnDeshacer"
+                app:layout_constraintStart_toStartOf="@+id/fmp_txtDireccionUsuario"
+                app:layout_constraintTop_toBottomOf="@+id/fmp_btnCambiarContrasena" />
 
             <EditText
-                android:id="@+id/txtTelefonoUsuario"
+                android:id="@+id/fmp_txtTelefonoUsuario"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:ems="10"
                 android:inputType="phone"
                 android:maxLength="12"
@@ -62,18 +64,19 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/mpf_setting_direction"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/txtTelefonoUsuario"
-                app:layout_constraintStart_toStartOf="@+id/txtTelefonoUsuario"
-                app:layout_constraintTop_toBottomOf="@+id/txtTelefonoUsuario" />
+                app:layout_constraintEnd_toEndOf="@+id/fmp_txtTelefonoUsuario"
+                app:layout_constraintStart_toStartOf="@+id/fmp_txtTelefonoUsuario"
+                app:layout_constraintTop_toBottomOf="@+id/fmp_txtTelefonoUsuario" />
 
             <TextView
-                android:id="@+id/tvTipoUsuario"
+                android:id="@+id/fmp_lblTipoUsuario"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:gravity="end"
                 android:text="@string/other_stub"
-                app:layout_constraintEnd_toEndOf="@+id/tvNacionalidad"
+                app:layout_constraintBottom_toBottomOf="@+id/textView15"
+                app:layout_constraintEnd_toEndOf="@+id/fmp_lblNacionalidad"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
                 app:layout_constraintTop_toTopOf="@+id/textView15" />
 
@@ -86,19 +89,20 @@
                 android:layout_marginEnd="8dp"
                 android:text="@string/mpf_setting_usertype"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/tvTipoUsuario"
+                app:layout_constraintEnd_toStartOf="@+id/fmp_lblTipoUsuario"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <TextView
-                android:id="@+id/tvNacionalidad"
+                android:id="@+id/fmp_lblNacionalidad"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:gravity="end"
                 android:text="@string/other_stub"
-                app:layout_constraintEnd_toEndOf="@+id/tvApellidosUsuario"
+                app:layout_constraintBottom_toBottomOf="@+id/textView13"
+                app:layout_constraintEnd_toEndOf="@+id/fmp_lblApellidosUsuario"
                 app:layout_constraintStart_toEndOf="@+id/textView13"
                 app:layout_constraintTop_toTopOf="@+id/textView13" />
 
@@ -110,18 +114,19 @@
                 android:layout_marginEnd="8dp"
                 android:text="@string/mpf_setting_country"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/tvNacionalidad"
+                app:layout_constraintEnd_toStartOf="@+id/fmp_lblNacionalidad"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <TextView
-                android:id="@+id/tvPersonalID"
+                android:id="@+id/fmp_lblPersonalID"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="end"
                 android:text="@string/other_stub"
+                app:layout_constraintBottom_toBottomOf="@+id/textView9"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView9"
@@ -132,23 +137,24 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/mpf_setting_pid"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/tvPersonalID"
+                app:layout_constraintEnd_toStartOf="@+id/fmp_lblPersonalID"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnFotoPerfilUsuario" />
+                app:layout_constraintTop_toBottomOf="@+id/fmp_btnFotoPerfilUsuario" />
 
             <TextView
-                android:id="@+id/tvNombresUsuario"
+                android:id="@+id/fmp_lblNombresUsuario"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:gravity="end"
                 android:text="@string/other_stub"
-                app:layout_constraintEnd_toEndOf="@+id/tvPersonalID"
+                app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                app:layout_constraintEnd_toEndOf="@+id/fmp_lblPersonalID"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
                 app:layout_constraintTop_toTopOf="@+id/textView5" />
 
@@ -160,7 +166,7 @@
                 android:layout_marginEnd="8dp"
                 android:text="@string/mpf_setting_name"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/tvNombresUsuario"
+                app:layout_constraintEnd_toStartOf="@+id/fmp_lblNombresUsuario"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -172,26 +178,27 @@
                 android:layout_marginEnd="8dp"
                 android:text="@string/mpf_setting_lname"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/tvApellidosUsuario"
+                app:layout_constraintEnd_toStartOf="@+id/fmp_lblApellidosUsuario"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <TextView
-                android:id="@+id/tvApellidosUsuario"
+                android:id="@+id/fmp_lblApellidosUsuario"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:gravity="end"
                 android:text="@string/other_stub"
-                app:layout_constraintEnd_toEndOf="@+id/tvNombresUsuario"
+                app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                app:layout_constraintEnd_toEndOf="@+id/fmp_lblNombresUsuario"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
 
             <EditText
-                android:id="@+id/txtDireccionUsuario"
+                android:id="@+id/fmp_txtDireccionUsuario"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:ems="10"
                 android:inputType="textMultiLine|text"
                 android:maxLength="255"
@@ -221,7 +228,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="?android:attr/listDivider"
-                app:layout_constraintEnd_toEndOf="@+id/tvTipoUsuario"
+                app:layout_constraintEnd_toEndOf="@+id/fmp_lblTipoUsuario"
                 app:layout_constraintStart_toStartOf="@+id/textView15"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
@@ -232,50 +239,29 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/mpf_setting_phone"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/txtEmailUsuario"
-                app:layout_constraintStart_toStartOf="@+id/txtEmailUsuario"
-                app:layout_constraintTop_toBottomOf="@+id/txtEmailUsuario" />
+                app:layout_constraintEnd_toEndOf="@+id/fmp_lblEmailUsuario"
+                app:layout_constraintStart_toStartOf="@+id/fmp_lblEmailUsuario"
+                app:layout_constraintTop_toBottomOf="@+id/fmp_lblEmailUsuario" />
 
             <Button
-                android:id="@+id/btnCambiarContrasena"
+                android:id="@+id/fmp_btnCambiarContrasena"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
                 android:onClick="btnCambiarContrasenaClick"
                 android:text="@string/mpf_setting_change_passwd"
-                app:layout_constraintEnd_toEndOf="@+id/txtDireccionUsuario"
-                app:layout_constraintStart_toEndOf="@+id/textView18"
-                app:layout_constraintTop_toTopOf="@+id/textView18" />
-
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/mpf_setting_passwd"
-                app:layout_constraintEnd_toStartOf="@+id/btnCambiarContrasena"
-                app:layout_constraintStart_toStartOf="@+id/txtDireccionUsuario"
-                app:layout_constraintTop_toBottomOf="@+id/txtDireccionUsuario" />
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="*****"
-                app:layout_constraintEnd_toStartOf="@+id/btnCambiarContrasena"
-                app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                app:layout_constraintEnd_toEndOf="@+id/fmp_txtDireccionUsuario"
+                app:layout_constraintStart_toStartOf="@+id/fmp_txtDireccionUsuario"
+                app:layout_constraintTop_toBottomOf="@+id/fmp_txtDireccionUsuario" />
 
             <ImageButton
-                android:id="@+id/btnFotoPerfilUsuario"
+                android:id="@+id/fmp_btnFotoPerfilUsuario"
                 style="@android:style/Widget.DeviceDefault.Light.ImageButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="128dp"
+                android:layout_marginStart="100dp"
                 android:layout_marginTop="64dp"
-                android:layout_marginEnd="128dp"
+                android:layout_marginEnd="100dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/boton_redondo"
                 android:contentDescription="@string/other_stub"
@@ -287,10 +273,10 @@
                 app:srcCompat="@drawable/baseline_person_black_48" />
 
             <TextView
-                android:id="@+id/txtEmailUsuario"
+                android:id="@+id/fmp_lblEmailUsuario"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/other_stub"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="@+id/textView11"

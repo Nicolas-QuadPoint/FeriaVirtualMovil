@@ -43,7 +43,7 @@ public class LoginViewModel extends ViewModel {
         if (!isUserNameValid(username)) {
             _loginForm.setValue(new LoginFormState(R.string.invalid_username,null,false));
         } else if (!isPasswordValid(password)) {
-            _loginForm.setValue(new LoginFormState(R.string.invalid_password,null,false));
+            _loginForm.setValue(new LoginFormState(null,R.string.invalid_password,false));
         } else {
             _loginForm.setValue(new LoginFormState(null,null,true));
         }
@@ -51,15 +51,15 @@ public class LoginViewModel extends ViewModel {
 
     // A placeholder username validation check
     private boolean isUserNameValid(String username) {
-        if (username.contains("@")) {
-           return  Patterns.EMAIL_ADDRESS.matcher(username).matches();
-        } else {
-           return username.isEmpty();
-        }
+
+        return Patterns.EMAIL_ADDRESS.matcher(username).matches() && !username.isEmpty();
+
     }
 
     // A placeholder password validation check
     private boolean isPasswordValid(String password){
+
         return password.length() > 8;
+
     }
 }

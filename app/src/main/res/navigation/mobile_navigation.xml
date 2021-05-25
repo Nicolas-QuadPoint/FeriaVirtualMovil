@@ -41,7 +41,15 @@
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_my_profile" >
         <action
-            android:id="@+id/action_nav_profile_to_nav_home"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_nav_profile_to_nav_help"
+            app:destination="@id/nav_help" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_help"
+        android:name="com.feriantes4dawin.feriavirtualmovil.ui.main.HelpSectionFragment"
+        android:label="@string/menu_help"
+        tools:layout="@layout/fragment_help" >
+    </fragment>
+
 </navigation>

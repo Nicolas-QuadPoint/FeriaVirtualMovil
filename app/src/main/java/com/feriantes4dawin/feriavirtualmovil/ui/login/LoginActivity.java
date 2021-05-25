@@ -78,10 +78,14 @@ public class LoginActivity extends AppCompatActivity {
                 login.setEnabled(loginFormState.isDataValid);
 
                 if (loginFormState.usernameError != null) {
-                    username.setError(getString(loginFormState.usernameError));
+                    username.setError(getString(R.string.invalid_username));
+                } else {
+                    username.setError(null);
                 }
                 if (loginFormState.passwordError != null) {
-                    password.setError(getString(loginFormState.passwordError));
+                    password.setError(getString(R.string.invalid_password));
+                } else {
+                    password.setError(null);
                 }
             }
         });

@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import com.feriantes4dawin.feriavirtualmovil.data.db.UsuarioDAO;
-import com.feriantes4dawin.feriavirtualmovil.data.model.Usuario;
 import com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioDataSource;
 import com.feriantes4dawin.feriavirtualmovil.data.network.responses.UsuarioResponse;
+import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
 
 public class UsuarioRepositoryImpl implements UsuarioRepository {
 
@@ -39,14 +39,11 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
-    public LiveData<Usuario> getInfoUsuario(Usuario u){
-
-        return usuarioDAO.find();
-
+    public LiveData<Usuario> getInfoUsuario(Usuario u) {
+        return null;
     }
 
     private void saveUsuarioToDatabase(Usuario u){
-
 
         //Insertamos el usuario recuperado de login o getInfoUsuario
         //a la base de datos!

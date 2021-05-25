@@ -13,6 +13,7 @@
     <string name="menu_sales">Current Sales</string>
     <string name="menu_process">My Processes</string>
     <string name="menu_profile">My Profile</string>
+    <string name="menu_help">User manual</string>
     <string name="menu_logout">Logout</string>
 
     <!-- Login Activity -->
@@ -94,6 +95,7 @@
     <string name="err_msg_generic">An sudden error has occurred. Please try again later</string>
     <string name="err_mes_question">Question</string>
     <string name="err_mes_message">Message</string>
+    <string name="err_mes_passwd_does_not_match">Passwords does not match</string>
     <string name="err_msg_logout_prompt">You really want to logout? You have to login with your credentials when you come back</string>
 
     <!-- Push Productor bid messages -->
@@ -109,5 +111,7 @@
 
     <!-- Push Info -->
     <string name="pii_total_cost">Total cost</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

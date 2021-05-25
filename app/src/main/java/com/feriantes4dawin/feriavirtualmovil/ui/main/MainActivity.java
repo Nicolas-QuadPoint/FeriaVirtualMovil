@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity{
                     null
                 );
 
-                yesno.show();
+                yesno.generate().show();
 
                 return true;
 
