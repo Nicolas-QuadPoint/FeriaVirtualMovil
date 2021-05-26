@@ -1,35 +1,32 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.login;
 
-import android.util.Log;
 import android.util.Patterns;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.data.Result;
-import com.feriantes4dawin.feriavirtualmovil.data.repos.LoginRepository;
-import com.feriantes4dawin.feriavirtualmovil.ui.login.LoginFormState;
-import com.feriantes4dawin.feriavirtualmovil.ui.login.LoginResult;
+import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepository;
 
 public class LoginViewModel extends ViewModel {
 
     public MutableLiveData<LoginFormState> _loginForm;
-    public LoginRepository loginRepository;
+    public UsuarioRepository usuarioRepository;
     public LiveData<LoginFormState> loginFormState;
     public MutableLiveData<LoginResult> _loginResult;
     public LiveData<LoginResult> loginResult;
 
-    public LoginViewModel(LoginRepository loginRepository) {
+    public LoginViewModel(UsuarioRepository usuarioRepository) {
         this._loginForm = new MutableLiveData<LoginFormState>();
         this._loginResult = new MutableLiveData<LoginResult>();
         this.loginResult = _loginResult;
         this.loginFormState = _loginForm;
-        this.loginRepository = loginRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
-        Result result = (Result)loginRepository.login(username, password);
+        Result result = (Result)usuarioRepository.loginUsuario(username, password);
 
         if (result instanceof Result.Success) {
             _loginResult.setValue(new LoginResult(new LoggedInUserView(((Result.Success)result).data.toString()),null));

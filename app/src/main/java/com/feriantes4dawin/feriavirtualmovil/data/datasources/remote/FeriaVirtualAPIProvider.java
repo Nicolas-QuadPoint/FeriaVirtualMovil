@@ -1,18 +1,40 @@
-package com.feriantes4dawin.feriavirtualmovil.dependencies;
+package com.feriantes4dawin.feriavirtualmovil.data.datasources.remote;
 
-import com.feriantes4dawin.feriavirtualmovil.data.services.UsuarioAPIService;
+import com.feriantes4dawin.feriavirtualmovil.data.network.SubastaAPIService;
+import com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioAPIService;
+import com.feriantes4dawin.feriavirtualmovil.data.network.VentaAPIService;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
+
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@Module
 public class FeriaVirtualAPIProvider {
 
-    public static UsuarioAPIService provideUsuarioAPI() {
-
+    @Provides
+    @Singleton
+    public UsuarioAPIService provideUsuarioAPI() {
         return commonAPIBuilder().build().
         create(UsuarioAPIService.class);
+    }
 
+    @Provides
+    @Singleton
+    public VentaAPIService provideVentaAPI(){
+        return commonAPIBuilder().build().
+        create(VentaAPIService.class);
+    }
+
+    @Provides
+    @Singleton
+    public SubastaAPIService provideSubastaAPI(){
+        return commonAPIBuilder().build().
+                create(SubastaAPIService.class);
     }
 
     private static Retrofit.Builder commonAPIBuilder(){

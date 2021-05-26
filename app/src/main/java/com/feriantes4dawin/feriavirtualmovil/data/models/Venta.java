@@ -1,8 +1,13 @@
 package com.feriantes4dawin.feriavirtualmovil.data.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.List;
 
+@Entity
 public class Venta{
+    @PrimaryKey
     public Integer id_venta;
     public String fecha_inicio_venta;
     public String fecha_fin_venta;

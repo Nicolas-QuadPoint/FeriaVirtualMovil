@@ -1,9 +1,11 @@
 package com.feriantes4dawin.feriavirtualmovil.data.models;
 
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 
+@Entity
 public class Usuario {
 
     @PrimaryKey(autoGenerate = false)

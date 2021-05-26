@@ -15,18 +15,26 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualApplication;
+import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualComponent;
 import com.feriantes4dawin.feriavirtualmovil.R;
+import com.feriantes4dawin.feriavirtualmovil.data.Result;
 import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoUsuario;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
-import com.feriantes4dawin.feriavirtualmovil.data.services.UsuarioAPIService;
-import com.feriantes4dawin.feriavirtualmovil.dependencies.FeriaVirtualAPIProvider;
+import com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioAPIService;
+import com.feriantes4dawin.feriavirtualmovil.data.datasources.remote.FeriaVirtualAPIProvider;
+import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepository;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.UtilityFunctions;
 import com.feriantes4dawin.feriavirtualmovil.ui.widgets.ChangePasswordDialog;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.concurrent.FutureTask;
+
+import javax.inject.Inject;
 
 public class MyProfileFragment extends Fragment {
 
@@ -36,6 +44,12 @@ public class MyProfileFragment extends Fragment {
     private MyProfileViewModelFactory myProfileViewModelFactory;
 
     private MyProfileViewModel myProfileViewModel;
+
+    private FeriaVirtualComponent feriaVirtualComponent;
+
+    @Inject
+    public UsuarioRepository usuarioRepository;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -110,6 +124,14 @@ public class MyProfileFragment extends Fragment {
         this.myProfileViewModel =  new ViewModelProvider(this,myProfileViewModelFactory)
                 .get(MyProfileViewModel.class);
         */
+
+        // Creation of the login graph using the application graph
+        //feriaVirtualComponent = ((FeriaVirtualApplication) getActivity().getApplicationContext())
+        //        .appComponent.loginComponent().create();
+
+        // Make Dagger instantiate @Inject fields in LoginActivity
+        feriaVirtualComponent.injectUsuarioRepositoryIntoMyProfileFragmentt(this);
+
 
     }
 
@@ -187,13 +209,12 @@ public class MyProfileFragment extends Fragment {
         FutureTask<Usuario> tarea = new FutureTask<Usuario>(() -> {
 
             try{
+                Usuario u = new Usuario();
+                u.id_usuario = 21;
+                Result<LiveData<Usuario>> usudata = usuarioRepository.getInfoUsuario(u);
 
-
-                UsuarioAPIService usuapi = FeriaVirtualAPIProvider.provideUsuarioAPI();
-                ResultadoUsuario usudata = usuapi.getInfoUsuario(21);
-
-                if(usudata != null){
-                    return usudata.usuario;
+                if(usudata instanceof Result.Success){
+                    return (Usuario) ((Result.Success) usudata).data;
                 } else {
                     return null;
                 }

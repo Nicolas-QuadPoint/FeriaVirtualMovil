@@ -1,9 +1,8 @@
-package com.feriantes4dawin.feriavirtualmovil.data.services;
+package com.feriantes4dawin.feriavirtualmovil.data.network;
 
 import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoID;
 import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoUsuario;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
-import com.feriantes4dawin.feriavirtualmovil.data.models.Usuarios;
 
 import retrofit2.http.*;
 

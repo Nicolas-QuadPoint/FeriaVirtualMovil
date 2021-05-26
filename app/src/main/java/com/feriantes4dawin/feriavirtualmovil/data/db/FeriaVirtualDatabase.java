@@ -4,6 +4,7 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.feriantes4dawin.feriavirtualmovil.data.models.ClienteExterno;
 import com.feriantes4dawin.feriavirtualmovil.data.models.EstadoContrato;
@@ -22,7 +23,13 @@ import com.feriantes4dawin.feriavirtualmovil.data.models.TipoSubasta;
 import com.feriantes4dawin.feriavirtualmovil.data.models.TipoVenta;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Transportista;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
+import com.feriantes4dawin.feriavirtualmovil.data.models.Venta;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
+
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 
 @Database(
     entities = {
@@ -42,16 +49,23 @@ import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
         TipoVenta.class,
         TipoSubasta.class,
         Transportista.class,
-        Usuario.class
+        Usuario.class,
+        Venta.class
     },
-    version = 1
+    version = 1,
+    exportSchema = false
 )
+@TypeConverters({
+        ObjetoConverter.class
+})
 public abstract class FeriaVirtualDatabase extends RoomDatabase {
 
     private static FeriaVirtualDatabase feriaVirtualDatabase = null;
     private final static Object LOCK = new Object();
 
     public abstract UsuarioDAO getUsuarioDAO();
+    public abstract SubastaDAO getSubastaDAO();
+    public abstract VentaDAO getVentaDAO();
 
     /**
      * Crea la instancia de la base de datos.
@@ -68,6 +82,7 @@ public abstract class FeriaVirtualDatabase extends RoomDatabase {
                 feriaVirtualDatabase= Room.databaseBuilder(
                         context.getApplicationContext(),
                         FeriaVirtualDatabase.class, FeriaVirtualConstants.NOMBRE_BASE_DATOS)
+                        .allowMainThreadQueries()
                     .build();
 
             }

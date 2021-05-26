@@ -1,4 +1,4 @@
-package com.feriantes4dawin.feriavirtualmovil.data.network;
+package com.feriantes4dawin.feriavirtualmovil.data.network.interceptor;
 
 import com.feriantes4dawin.feriavirtualmovil.misc.exceptions.NoConnectionException;
 

@@ -1,24 +1,28 @@
-package com.feriantes4dawin.feriavirtualmovil.data.network;
+package com.feriantes4dawin.feriavirtualmovil.data.network.interceptor;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.feriantes4dawin.feriavirtualmovil.misc.exceptions.NoConnectionException;
-
 import java.io.IOException;
 
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-
+@Module
 public class ConnectivityInterceptorImpl implements ConnectivityInterceptor{
 
     private Context c;
-    public ConnectivityInterceptorImpl(Context c){
 
+    @Singleton
+    @Provides
+    public ConnectivityInterceptorImpl getInstance(Context c){
         this.c = c;
-
+        return this;
     }
 
     @Override

@@ -10,12 +10,8 @@ import com.feriantes4dawin.feriavirtualmovil.R;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.kodein.di.DI;
-import org.kodein.di.DIAware;
-import org.kodein.di.DIContext;
-import org.kodein.di.DITrigger;
 
-public class MyProcessesFragment extends Fragment implements DIAware {
+public class MyProcessesFragment extends Fragment{
 
     private MyProcessesViewModel myProcessesViewModel;
 
@@ -31,21 +27,4 @@ public class MyProcessesFragment extends Fragment implements DIAware {
         return root;
     }
 
-    @NotNull
-    @Override
-    public DI getDi() {
-        return null;
-    }
-
-    @NotNull
-    @Override
-    public DIContext<?> getDiContext() {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public DITrigger getDiTrigger() {
-        return null;
-    }
 }

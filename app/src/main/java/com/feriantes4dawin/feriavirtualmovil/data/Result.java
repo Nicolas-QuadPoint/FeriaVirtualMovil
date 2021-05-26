@@ -25,10 +25,10 @@ public class Result<T> {
     @Override
     public String toString(){
         if(this instanceof  Success){
-            return "Success[data=$data]";
+            return String.format("Success[data=%s]",((Success<?>)this).data.toString());
         }
         else if(this instanceof Error){
-            return "Error[exception=$exception]";
+            return String.format("Error[exception=%s]",((Error<?>) this).exception);
         }
         else{
             return "Unkwown type";
