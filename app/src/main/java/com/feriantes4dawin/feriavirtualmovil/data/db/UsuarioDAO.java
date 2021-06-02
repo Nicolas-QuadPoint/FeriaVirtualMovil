@@ -16,6 +16,6 @@ public interface UsuarioDAO {
     void upsert(Usuario u);
 
     @Query("select * from usuario where secret_id_usuario=0")
-    LiveData<Usuario> find();
+    Usuario find();
 
 }

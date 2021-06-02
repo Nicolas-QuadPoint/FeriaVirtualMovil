@@ -11,8 +11,9 @@ public class VentaLocalDataSource {
     public VentaDAO ventaDAO;
 
     @Inject
-    public VentaLocalDataSource(Context c){
-        this.ventaDAO = new FeriaVirtualDBProvider().provideDB(c).getVentaDAO();
+    public VentaLocalDataSource(VentaDAO ventaDAO){
+        //this.ventaDAO = new FeriaVirtualDBProvider(c).provideDB().getVentaDAO();
+        this.ventaDAO = ventaDAO;
     }
 
 }

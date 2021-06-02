@@ -32,6 +32,9 @@ public abstract class SimpleDialog{
         ViewGroup vg = act.findViewById(android.R.id.content);
         this.dlg = b.create();
         dlg.setTitle(R.string.other_stub);
+        //Con esto evitamos que cuando se presione el botón de retroceso,
+        //el dialogo no desaparece!
+        dlg.setCancelable(false);
         dlg.setView(prepareView());
 
         if(this.v != null){

@@ -27,8 +27,8 @@ public class ObjetoConverter {
     //Conversores para listas de objetos (salida)
 
     @TypeConverter
-    public List<ProductosVenta> JSONAListaProductosVenta(String json){
-        return new Gson().fromJson(json, new ArrayList<ProductosVenta>().getClass());
+    public List<ProductoVenta> JSONAListaProductosVenta(String json){
+        return new Gson().fromJson(json, new ArrayList<ProductoVenta>().getClass());
     }
 
     @TypeConverter
@@ -46,6 +46,11 @@ public class ObjetoConverter {
     @TypeConverter
     public ClienteExterno JSONAClienteExterno(String json){
         return new Gson().fromJson(json, ClienteExterno.class);
+    }
+
+    @TypeConverter
+    public ContratoUsuario JSONAContratoUsuario(String json){
+        return new Gson().fromJson(json, ContratoUsuario.class);
     }
 
     @TypeConverter
@@ -85,8 +90,8 @@ public class ObjetoConverter {
     }
 
     @TypeConverter
-    public ProductosVenta JSONAProductosVenta(String json){
-        return new Gson().fromJson(json, ProductosVenta.class);
+    public ProductoVenta JSONAProductosVenta(String json){
+        return new Gson().fromJson(json, ProductoVenta.class);
     }
 
 

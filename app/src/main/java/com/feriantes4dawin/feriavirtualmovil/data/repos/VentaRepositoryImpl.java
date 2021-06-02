@@ -1,17 +1,16 @@
 package com.feriantes4dawin.feriavirtualmovil.data.repos;
 
-import androidx.lifecycle.LiveData;
-
-import com.feriantes4dawin.feriavirtualmovil.data.Result;
 import com.feriantes4dawin.feriavirtualmovil.data.db.VentaDAO;
+import com.feriantes4dawin.feriavirtualmovil.data.models.Venta;
+import com.feriantes4dawin.feriavirtualmovil.data.models.VentasSimples;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
-import com.feriantes4dawin.feriavirtualmovil.data.models.Ventas;
 import com.feriantes4dawin.feriavirtualmovil.data.network.VentaAPIService;
 
 import javax.inject.Inject;
 
 import dagger.Module;
-import dagger.Provides;
+import retrofit2.Call;
+import retrofit2.http.Path;
 
 @Module
 public class VentaRepositoryImpl implements VentaRepository {
@@ -25,16 +24,33 @@ public class VentaRepositoryImpl implements VentaRepository {
         this.ventaAPI = ventaAPI;
     }
 
+    /*
     @Override
     @Provides
     public VentaRepository getInstance(){
         return this;
     }
+     */
 
     @Override
-    public Result<LiveData<Ventas>> getVentasDisponibles(Usuario usuario) {
-        return null;
+    public Call<VentasSimples> getVentasDisponibles(Usuario usuario) {
+
+        Call<VentasSimples> ruc = ventaAPI.getVentasSimplesDisponibles();
+        return ruc;
     }
 
+    @Override
+    public Call<VentasSimples> getVentasSimplesDisponibles(Usuario usuario) {
 
+        Call<VentasSimples> ruc = ventaAPI.getVentasSimplesDisponibles();
+        return ruc;
+
+    }
+
+    @Override
+    public Call<Venta> getInfoVenta(Integer venta_id){
+
+        Call<Venta> ruc = ventaAPI.getInfoVenta(venta_id);
+        return ruc;
+    }
 }

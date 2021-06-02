@@ -36,11 +36,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:inputType="textMultiLine"
+            android:maxLines="2"
             android:text="@string/li_sale_simple_author"
             android:textAlignment="textStart"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/csi_imgClienteExterno"
             app:layout_constraintTop_toTopOf="parent" />
 

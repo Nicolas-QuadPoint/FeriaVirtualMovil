@@ -1,27 +1,25 @@
 package com.feriantes4dawin.feriavirtualmovil.data.network;
 
+import com.feriantes4dawin.feriavirtualmovil.data.models.LoginObject;
+import com.feriantes4dawin.feriavirtualmovil.data.models.ObjetoModificacionContrasena;
 import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoID;
 import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoUsuario;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
 
+import retrofit2.Call;
 import retrofit2.http.*;
 
 public interface UsuarioAPIService {
 
-    @FormUrlEncoded
     @POST("auth/login")
-    ResultadoUsuario login(
-
-        @Field(value="email")
-        String email,
-
-        @Field(value="contrasena")
-        String contrasena
+    Call<ResultadoUsuario> login(
+        @Body
+        LoginObject lo
 
     );
 
     @GET("usuario/{idusuario}")
-    ResultadoUsuario getInfoUsuario(
+    Call<ResultadoUsuario> getInfoUsuario(
 
             @Path(value="idusuario")
             Integer personalID
@@ -29,11 +27,22 @@ public interface UsuarioAPIService {
     );
 
     @POST("usuario/{idusuario}/update")
-    ResultadoID updateUsuario(
+    Call<ResultadoID> updateUsuario(
 
             @Path(value="idusuario")
                     Integer personalID,
+            @Body
             Usuario valoresNuevos
+
+    );
+
+    @POST("usuario/{idusuario}/changepassword")
+    Call<ResultadoID> changePasswordUsuario(
+
+            @Path(value="idusuario")
+                    Integer personalID,
+            @Body
+            ObjetoModificacionContrasena omc
 
     );
 

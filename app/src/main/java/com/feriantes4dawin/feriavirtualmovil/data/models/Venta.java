@@ -17,5 +17,5 @@ public class Venta{
     public Usuario usuario_autor;
     public EstadoVenta estado_venta;
     public TipoVenta tipo_venta;
-    public List<ProductosVenta> productos_venta;
+    public List<ProductoVenta> productos_venta;
 }

@@ -1,5 +1,5 @@
 package com.feriantes4dawin.feriavirtualmovil.data.models;
 
 public class ResultadoID {
-    public Integer id;
+    public Integer id_resultado;
 }

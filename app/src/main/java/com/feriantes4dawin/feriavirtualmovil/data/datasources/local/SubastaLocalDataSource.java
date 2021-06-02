@@ -11,10 +11,10 @@ public class SubastaLocalDataSource {
     public SubastaDAO subastaDAO;
 
     @Inject
-    public SubastaLocalDataSource(Context c){
+    public SubastaLocalDataSource(SubastaDAO subastaDAO){
 
-        this.subastaDAO = new FeriaVirtualDBProvider().provideDB(c).getSubastaDAO();
-
+        //this.subastaDAO = new FeriaVirtualDBProvider(c).provideDB().getSubastaDAO();
+        this.subastaDAO = subastaDAO;
     }
 
 }

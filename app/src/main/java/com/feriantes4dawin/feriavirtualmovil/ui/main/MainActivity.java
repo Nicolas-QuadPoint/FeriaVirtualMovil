@@ -1,31 +1,41 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualApplication;
+import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualComponent;
 import com.feriantes4dawin.feriavirtualmovil.R;
+import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
+import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepository;
+import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl;
 import com.feriantes4dawin.feriavirtualmovil.ui.login.LoginActivity;
 import com.feriantes4dawin.feriavirtualmovil.ui.settings.SettingsActivity;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 import com.feriantes4dawin.feriavirtualmovil.ui.widgets.YesNoDialog;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+
+import javax.inject.Inject;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -35,6 +45,14 @@ public class MainActivity extends AppCompatActivity{
     private AppBarConfiguration appBarConfiguration;
 
     private MainViewModel mainViewmodel;
+    private MainViewModelFactory mainViewModelFactory;
+    public FeriaVirtualComponent feriaVirtualComponent;
+
+    @Inject
+    public UsuarioRepositoryImpl usuarioRepository;
+
+    @Inject
+    public Gson convertidorJSON;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,8 +62,6 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        this.mainViewmodel = new ViewModelProvider(this).get(MainViewModel.class);
 
         DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
@@ -58,6 +74,37 @@ public class MainActivity extends AppCompatActivity{
 
         NavigationUI.setupActionBarWithNavController(this, navController,appBarConfiguration);
         NavigationUI.setupWithNavController(navView,navController);
+
+        // Creation of the login graph using the application graph
+        feriaVirtualComponent = ((FeriaVirtualApplication) this.getApplicationContext())
+                .getFeriaVirtualComponent();
+
+        // Make Dagger instantiate @Inject fields in LoginActivity
+        feriaVirtualComponent.injectUsuarioRepositoryIntoMainActivity(this);
+
+        //Creamos nuestro factory!
+        this.mainViewModelFactory = new MainViewModelFactory(
+                usuarioRepository,
+                convertidorJSON,
+                (FeriaVirtualApplication)getApplicationContext()
+        );
+
+        //Creamos nuestro viewmodel
+        this.mainViewmodel = new ViewModelProvider(this, mainViewModelFactory).
+                get(MainViewModel.class);
+
+
+        //Observamos cambios del viewmodel, para actualizar campos!
+        mainViewmodel.getDatosUsuario().observe(this, new Observer<Usuario>(){
+
+            @Override
+            public void onChanged(Usuario usuario) {
+
+                actualizarDatosMenuLateral(usuario);
+
+            }
+
+        });
 
     }
 
@@ -89,14 +136,9 @@ public class MainActivity extends AppCompatActivity{
                         new SimpleAction() {
                             @Override
                             public void doAction(Object o) {
-                                Intent loginActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                                //Con esto nos evitamos la molestia de de que el usuario regrese al menu principal
-                                //loo presionando la tecla atrás
-                                loginActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                //TODO: Give special parameters to activity for clean login cache or so...
-                                startActivity(loginActivityIntent);
-                                //Ultima esperanza!
-                                //finish()
+
+                                cerrarSesion();
+
                             }
                         },
                     null
@@ -123,14 +165,7 @@ public class MainActivity extends AppCompatActivity{
                 new SimpleAction() {
                     @Override
                     public void doAction(Object o) {
-                        Intent loginActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                        //Con esto nos evitamos la molestia de de que el usuario regrese al menu principal
-                        //loo presionando la tecla atrás
-                        loginActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        //TODO: Give special parameters to activity for clean login cache or so...
-                        startActivity(loginActivityIntent);
-                        //Ultima esperanza!
-                        //finish()
+                        cerrarSesion();
                     }
                 },
                 null
@@ -169,6 +204,46 @@ public class MainActivity extends AppCompatActivity{
     public void navLogoutClick(View v){
 
         Log.i("[MAIN_ACTIVITY]","Logout request!");
+
+    }
+
+    public void actualizarDatosMenuLateral(Usuario usuario){
+
+        TextView lblNombreUsuario;
+        TextView lblEmailUsuario;
+        TextView lblRolUsuario;
+
+        if(usuario != null){
+
+            lblNombreUsuario = findViewById(R.id.nhm_lblNombreUsuario);
+            lblEmailUsuario = findViewById(R.id.nhm_lblEmailUsuario);
+            lblRolUsuario = findViewById(R.id.nhm_lblRolUsuario);
+
+            lblNombreUsuario.setText( usuario.getNombreCompleto() );
+            lblEmailUsuario.setText( usuario.email );
+            lblRolUsuario.setText( usuario.rol.descripcion );
+
+        }
+    }
+
+    public void cerrarSesion(){
+
+
+        SharedPreferences sp = getSharedPreferences(
+                FeriaVirtualConstants.FERIAVIRTUAL_MOVIL_SHARED_PREFERENCES,
+                Context.MODE_PRIVATE);
+        Intent loginActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
+        //Con esto nos evitamos la molestia de de que el usuario regrese al menu principa
+        //loo presionando la tecla atrás
+        loginActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //Limpiando los datos de las shared preferences!
+        sp.edit()
+                .putString(FeriaVirtualConstants.SP_FERIAVIRTUAL_WEBAPI_AUTH_TOKEN,"")
+                .putInt(FeriaVirtualConstants.SP_USUARIO_ID,0)
+                .commit();
+
+        startActivity(loginActivityIntent);
+
 
     }
 }

@@ -1,10 +1,18 @@
 package com.feriantes4dawin.feriavirtualmovil.data.datasources.remote;
 
+import android.content.Context;
+
+import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualApplication;
 import com.feriantes4dawin.feriavirtualmovil.data.network.SubastaAPIService;
 import com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioAPIService;
 import com.feriantes4dawin.feriavirtualmovil.data.network.VentaAPIService;
+import com.feriantes4dawin.feriavirtualmovil.data.network.interceptor.AuthenticationInterceptor;
+import com.feriantes4dawin.feriavirtualmovil.data.network.interceptor.AuthenticationInterceptorImpl;
+import com.feriantes4dawin.feriavirtualmovil.data.network.interceptor.ConnectivityInterceptor;
+import com.feriantes4dawin.feriavirtualmovil.data.network.interceptor.ConnectivityInterceptorImpl;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -15,6 +23,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class FeriaVirtualAPIProvider {
+
+    private FeriaVirtualApplication fva;
+    private Retrofit.Builder apiServiceCreator;
+
+    @Inject
+    public FeriaVirtualAPIProvider(FeriaVirtualApplication fva){
+        this.fva = fva;
+    }
 
     @Provides
     @Singleton
@@ -37,26 +53,44 @@ public class FeriaVirtualAPIProvider {
                 create(SubastaAPIService.class);
     }
 
-    private static Retrofit.Builder commonAPIBuilder(){
+    private Retrofit.Builder commonAPIBuilder(){
 
-        OkHttpClient httpClient = new OkHttpClient.Builder().build();
+        if(this.apiServiceCreator == null){
 
-        //Crea un builder para transformar los datos a enviar a la api
-        return new Retrofit.Builder().
+            OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
+            OkHttpClient httpClient;
+            AuthenticationInterceptor ai = new AuthenticationInterceptorImpl(this.fva);
+            ConnectivityInterceptor ci = new ConnectivityInterceptorImpl(this.fva);
 
-            //Se establece el objeto que gestionara las peticiones http para retrofit
-        client(httpClient).
+            if(!httpClientBuilder.interceptors().contains(ai)){
+                httpClientBuilder.interceptors().add(ai);
+            }
 
-            //Esto indica la url base que la api tiene.
-        baseUrl(FeriaVirtualConstants.URL_BASE_API_WEB_FERIAVIRTUAL).
+            if(!httpClientBuilder.interceptors().contains(ci)){
+                httpClientBuilder.interceptors().add(ci);
+            }
 
-            //Esto activa el mecanismo de coroutines de Kotlin, usando un adapter que
-            //gestiona dichos procesos
-        //addCallAdapterFactory(CoroutineCallAdapterFactory()).
+            httpClient = httpClientBuilder.build();
 
-            //Y e aquí lo más importante: El objeto que se encargará de convertir
-            //cada objeto de dato en JSON para nuestra api
-        addConverterFactory(GsonConverterFactory.create());
+            //Crea un builder para transformar los datos a enviar a la api
+            this.apiServiceCreator = new Retrofit.Builder().
+
+                    //Se establece el objeto que gestionara las peticiones http para retrofit
+                            client(httpClient).
+
+                    //Esto indica la url base que la api tiene.
+                            baseUrl(FeriaVirtualConstants.URL_BASE_API_WEB_FERIAVIRTUAL).
+
+                    //Esto activa el mecanismo de coroutines de Kotlin, usando un adapter que
+                    //gestiona dichos procesos
+                    //addCallAdapterFactory(CoroutineCallAdapterFactory()).
+
+                    //Y e aquí lo más importante: El objeto que se encargará de convertir
+                    //cada objeto de dato en JSON para nuestra api
+                            addConverterFactory(GsonConverterFactory.create());
+        }
+
+        return apiServiceCreator;
     }
 
 }

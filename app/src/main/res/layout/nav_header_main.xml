@@ -16,11 +16,15 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/boton_redondo"
         android:contentDescription="@string/nav_header_desc"
+        android:cropToPadding="false"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/baseline_person_black_48" />
 
     <TextView
+        android:id="@+id/nhm_lblNombreUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
@@ -28,8 +32,14 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nhm_lblEmailUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nav_header_subtitle" />
+
+    <TextView
+        android:id="@+id/nhm_lblRolUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mpf_setting_usertype" />
 </LinearLayout>

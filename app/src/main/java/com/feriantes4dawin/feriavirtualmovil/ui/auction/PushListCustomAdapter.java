@@ -1,5 +1,6 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.auction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class PushListCustomAdapter extends RecyclerView.Adapter<PushListCustomAd
 
         this.listaElementos = new ArrayList<>();
         for(int i = 0; i < 10; i++){
-            listaElementos.add(String.format( "%s %d","usuario",i  ));
+            listaElementos.add(String.format( "%s %d","Productor ",i  ));
         }
 
 
@@ -41,10 +42,23 @@ public class PushListCustomAdapter extends RecyclerView.Adapter<PushListCustomAd
     @Override
     public void onBindViewHolder(@NonNull @NotNull PushListViewHolder holder, int position) {
 
-        holder.lblCosteTotalPuja.setText( Integer.toString( Math.round( (float)Math.random() * 100) ) );
-        holder.lblFechaPuja.setText( new Date().toString() );
-        holder.lblNombreUsuario.setText( listaElementos.get(position) );
-        holder.id_puja = Integer.toString( Math.round( ( (float)Math.random() * 100 ) + 1 ) );
+        try{
+
+            holder.lblCosteTotalPuja.setText( Integer.toString(  Math.round( (1.0f + (float)Math.random()) * 100000  ) ) );
+            holder.lblFechaPuja.setText( new Date().toString() );
+            holder.lblNombreUsuario.setText( listaElementos.get(position) );
+            holder.id_puja = Integer.toString( Math.round( ( (float)Math.random() * 100 ) + 1 ) );
+
+        } catch(Exception ex){
+
+            Log.e("PUSH_LIST_CA","No se pudo cargar la vista de puja!: %s" + ex.toString());
+
+            holder.lblCosteTotalPuja.setText( R.string.err_mes_not_avalaible );
+            holder.lblFechaPuja.setText( R.string.err_mes_not_avalaible );
+            holder.lblNombreUsuario.setText( R.string.err_mes_not_avalaible );
+            holder.id_puja = Integer.toString( 0 );
+
+        }
 
     }
 

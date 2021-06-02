@@ -24,7 +24,7 @@
         app:srcCompat="@drawable/baseline_list_black_48" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/swipeSaleDetail"
+    android:id="@+id/aas_swipeSaleDetail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"

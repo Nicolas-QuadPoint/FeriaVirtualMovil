@@ -13,13 +13,14 @@ import dagger.Provides;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
-@Module
 public class ConnectivityInterceptorImpl implements ConnectivityInterceptor{
 
     private Context c;
 
-    @Singleton
-    @Provides
+    public ConnectivityInterceptorImpl(Context c){
+        this.c = c;
+    }
+
     public ConnectivityInterceptorImpl getInstance(Context c){
         this.c = c;
         return this;

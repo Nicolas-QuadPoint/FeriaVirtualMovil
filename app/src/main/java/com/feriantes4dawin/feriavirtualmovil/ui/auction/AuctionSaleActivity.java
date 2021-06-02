@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.feriantes4dawin.feriavirtualmovil.R;
 
@@ -25,7 +26,9 @@ public class AuctionSaleActivity extends AppCompatActivity {
 
         ExtendedFloatingActionButton aas_btnPujar = (ExtendedFloatingActionButton) findViewById(R.id.aas_btnPujar);
         RecyclerView rv = (RecyclerView) findViewById(R.id.aas_rvListaPujas);
+        SwipeRefreshLayout miSwiper = findViewById(R.id.aas_swipeSaleDetail);
         PushListCustomAdapter rvAdapter = new PushListCustomAdapter();
+
         rv.setAdapter(rvAdapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
@@ -38,6 +41,19 @@ public class AuctionSaleActivity extends AppCompatActivity {
             },null);
             dlg.generate().show();
 
+        });
+
+        miSwiper.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                PushListCustomAdapter nrvAdapter = new PushListCustomAdapter();
+
+                rv.setAdapter(nrvAdapter);
+                rv.setLayoutManager(new LinearLayoutManager(AuctionSaleActivity.this));
+
+                miSwiper.setRefreshing(false);
+            }
         });
     }
 

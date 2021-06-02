@@ -1,6 +1,7 @@
 package com.feriantes4dawin.feriavirtualmovil.data.models;
 
-public class ProductosVenta{
-    public Producto producto;
-    public Integer cantidad;
+import java.util.List;
+
+public class ProductosVenta {
+    public List<ProductoVenta> productosVenta;
 }

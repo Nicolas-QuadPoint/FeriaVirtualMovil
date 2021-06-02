@@ -11,9 +11,10 @@ public class UsuarioLocalDataSource {
     public UsuarioDAO usuarioDAO;
 
     @Inject
-    public UsuarioLocalDataSource(Context c){
+    public UsuarioLocalDataSource(UsuarioDAO usuarioDAO){
 
-        this.usuarioDAO = new FeriaVirtualDBProvider().provideDB(c).getUsuarioDAO();
+        //this.usuarioDAO = new FeriaVirtualDBProvider(c).provideDB().getUsuarioDAO();
+        this.usuarioDAO = usuarioDAO;
 
     }
 }

@@ -1,31 +1,27 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.sales;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.feriantes4dawin.feriavirtualmovil.R;
-
-import java.util.ArrayList;
+import com.feriantes4dawin.feriavirtualmovil.data.models.VentaSimple;
+import com.feriantes4dawin.feriavirtualmovil.data.models.VentasSimples;
+import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 
 public class SimpleSaleItemCustomAdapter extends RecyclerView.Adapter<SimpleSaleItemCustomAdapter.SimpleSaleItemViewHolder> {
 
-    private ArrayList<String> listaElementos;
+    private VentasSimples ventasSimples;
 
-    public SimpleSaleItemCustomAdapter(){
+    public SimpleSaleItemCustomAdapter(VentasSimples ventasSimples){
 
         super();
-
-        this.listaElementos = new ArrayList<String>();
-        this.listaElementos.add("Empresa 1");
-        this.listaElementos.add("Empresa 2");
-        this.listaElementos.add("Empresa 3");
-        this.listaElementos.add("Empresa 4");
-        this.listaElementos.add("Empresa 5");
+        this.ventasSimples = ventasSimples;
 
     }
 
@@ -35,8 +31,14 @@ public class SimpleSaleItemCustomAdapter extends RecyclerView.Adapter<SimpleSale
         SimpleSaleItemViewHolder vh = new SimpleSaleItemViewHolder(view);
 
         view.setOnClickListener(v -> {
+            SharedPreferences sp = parent.getContext().getSharedPreferences(
+                    FeriaVirtualConstants.FERIAVIRTUAL_MOVIL_SHARED_PREFERENCES,
+                    Context.MODE_PRIVATE);
+
             Intent i = new Intent(parent.getContext(),SaleDetailActivity.class);
-            i.putExtra("id_venta",vh.id_venta);
+
+            sp.edit().putInt(FeriaVirtualConstants.SP_VENTA_ID,vh.id_venta).commit();
+
             parent.getContext().startActivity(i);
         });
 
@@ -48,29 +50,45 @@ public class SimpleSaleItemCustomAdapter extends RecyclerView.Adapter<SimpleSale
     @Override
     public void onBindViewHolder(SimpleSaleItemViewHolder holder, int position) {
 
-        holder.lblNombreEmpresa.setText(listaElementos.get(position));
+        try {
+
+            VentaSimple vs = ventasSimples.ventas.get(position);
+
+            holder.id_venta = vs.id_venta;
+            holder.lblNombreEmpresa.setText(vs.usuario_autor.nombre);
+            holder.lblFechaInicioVenta.setText(vs.fecha_inicio_venta);
+            holder.lblComentariosVenta.setText(vs.comentarios_venta);
+
+        } catch(Exception ex) {
+
+            holder.id_venta = 0;
+            holder.lblNombreEmpresa.setText(R.string.err_mes_not_avalaible);
+            holder.lblFechaInicioVenta.setText(R.string.err_mes_not_avalaible);
+            holder.lblComentariosVenta.setText(R.string.err_mes_not_avalaible);
+
+        }
 
     }
 
     @Override
     public int getItemCount(){
-        return listaElementos.size();
+        return ventasSimples.ventas.size();
     }
 
     public class SimpleSaleItemViewHolder extends RecyclerView.ViewHolder {
 
-        public String id_venta;
+        public Integer id_venta;
         public TextView lblNombreEmpresa;
-        public TextView lblHoraVenta;
-        public TextView lblEstadoVenta;
+        public TextView lblFechaInicioVenta;
+        public TextView lblComentariosVenta;
 
-        SimpleSaleItemViewHolder(View v) {
+        public SimpleSaleItemViewHolder(View v) {
 
             super(v);
 
             this.lblNombreEmpresa = v.findViewById(R.id.csi_lblNombreNegocio);
-            this.lblHoraVenta = v.findViewById(R.id.csi_lblFechaVenta);
-            this.lblEstadoVenta = v.findViewById(R.id.csi_lblEstadoVenta);
+            this.lblFechaInicioVenta = v.findViewById(R.id.csi_lblFechaVenta);
+            this.lblComentariosVenta = v.findViewById(R.id.csi_lblComentariosVenta);
 
         }
 

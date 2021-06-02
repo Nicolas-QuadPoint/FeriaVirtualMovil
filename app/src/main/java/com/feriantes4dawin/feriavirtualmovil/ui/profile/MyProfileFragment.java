@@ -1,6 +1,7 @@
 package com.feriantes4dawin.feriavirtualmovil.ui.profile;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,29 +11,29 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualApplication;
 import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualComponent;
 import com.feriantes4dawin.feriavirtualmovil.R;
-import com.feriantes4dawin.feriavirtualmovil.data.Result;
-import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoUsuario;
+import com.feriantes4dawin.feriavirtualmovil.data.models.ObjetoModificacionContrasena;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
-import com.feriantes4dawin.feriavirtualmovil.data.network.UsuarioAPIService;
-import com.feriantes4dawin.feriavirtualmovil.data.datasources.remote.FeriaVirtualAPIProvider;
-import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepository;
+import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl;
+import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.UtilityFunctions;
 import com.feriantes4dawin.feriavirtualmovil.ui.widgets.ChangePasswordDialog;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.concurrent.FutureTask;
+import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
@@ -48,7 +49,10 @@ public class MyProfileFragment extends Fragment {
     private FeriaVirtualComponent feriaVirtualComponent;
 
     @Inject
-    public UsuarioRepository usuarioRepository;
+    public UsuarioRepositoryImpl usuarioRepository;
+
+    @Inject
+    public Gson convertidorJSON;
 
 
     @Override
@@ -96,48 +100,112 @@ public class MyProfileFragment extends Fragment {
             @Override
             public void onRefresh() {
 
-                getInfoFromAPI(view);
-                miSwiper.setRefreshing(false);
+                View pantallaCarga = getActivity().findViewById(R.id.dcp_llloading);
+                pantallaCarga.setVisibility(View.VISIBLE);
+
+                myProfileViewModel.getDatosUsuario();
 
             }
         });
-
-
-        //TODO:Borrar esto cuando se implemente la arquitectura mvvm text_home
-        getInfoFromAPI(view);
 
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        /*
-        this.myProfileViewModelFactory  = new MyProfileViewModelFactory(
-
-                new UsuarioRepositoryImpl(
-                (FeriaVirtualDatabase.getInstance(context)).usuarioDAO(),
-                new UsuarioDataSourceImpl((FeriaVirtualAPIProvider.provideUsuarioAPI()))
-            )
-
-        );
-
-        this.myProfileViewModel =  new ViewModelProvider(this,myProfileViewModelFactory)
-                .get(MyProfileViewModel.class);
-        */
 
         // Creation of the login graph using the application graph
-        //feriaVirtualComponent = ((FeriaVirtualApplication) getActivity().getApplicationContext())
-        //        .appComponent.loginComponent().create();
+        feriaVirtualComponent = ((FeriaVirtualApplication) getActivity().getApplicationContext())
+                .getFeriaVirtualComponent();
 
         // Make Dagger instantiate @Inject fields in LoginActivity
-        feriaVirtualComponent.injectUsuarioRepositoryIntoMyProfileFragmentt(this);
+        feriaVirtualComponent.injectUsuarioRepositoryIntoMyProfileFragment(this);
 
+        //Creamos nuestro viewmodel
+        this.myProfileViewModelFactory = new MyProfileViewModelFactory(
+                usuarioRepository,
+                convertidorJSON,
+                (FeriaVirtualApplication) requireActivity().getApplicationContext()
+        );
 
+        this.myProfileViewModel = new ViewModelProvider(this,myProfileViewModelFactory).
+                get(MyProfileViewModel.class);
+
+        //Observamos el livedata del objeto y veamos que pasa!
+        myProfileViewModel.getDatosUsuario().observe(this,
+            new Observer<Usuario>() {
+                @Override
+                public void onChanged(Usuario usuario) {
+
+                    actualizarDatosVista(usuario);
+
+                }
+            }
+        );
     }
 
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter,int nextAnim) {
-        return super.onCreateAnimation(transit, enter, nextAnim);
+
+    private void actualizarDatosVista(Usuario usuario){
+
+        FragmentActivity fa = getActivity();
+
+        View pantallaCarga = fa.findViewById(R.id.dcp_llloading);
+        SwipeRefreshLayout miSwiper = fa.findViewById(R.id.fmp_swipeFMP);
+
+        if(usuario != null) {
+
+
+            TextView lblPersonalID = fa.findViewById(R.id.fmp_lblPersonalID);
+            TextView lblNombres = fa.findViewById(R.id.fmp_lblNombresUsuario);
+            TextView lblApellidos = fa.findViewById(R.id.fmp_lblApellidosUsuario);
+            TextView lblNacionalidad = fa.findViewById(R.id.fmp_lblNacionalidad);
+            TextView lblTipoUsuario = fa.findViewById(R.id.fmp_lblTipoUsuario);
+            TextView txtEmail = fa.findViewById(R.id.fmp_lblEmailUsuario);
+            EditText txtTelefono = fa.findViewById(R.id.fmp_txtTelefonoUsuario);
+            EditText txtDireccion = fa.findViewById(R.id.fmp_txtDireccionUsuario);
+
+            lblPersonalID.setText(  usuario.personal_id  );
+
+            lblNombres.setText(
+                String.format("%s%s",
+                    usuario.nombre,
+                    usuario.nombre_segundo != null?
+                        ", " + usuario.nombre_segundo :
+                        ""
+                )
+            );
+
+            lblApellidos.setText(
+                    String.format("%s%s",
+                            usuario.apellido_paterno,
+                            usuario.apellido_materno != null?
+                                ", " + usuario.apellido_materno :
+                                ""
+                    )
+            );
+
+            lblNacionalidad.setText( usuario.nacionalidad.nombre );
+
+            lblTipoUsuario.setText( usuario.rol.descripcion );
+
+            txtEmail.setText( usuario.email );
+
+            txtDireccion.setText( usuario.direccion );
+
+            txtTelefono.setText( String.valueOf(usuario.telefono) );
+
+
+        } else {
+
+            Snackbar.make(miSwiper,R.string.err_msg_error_getting_user_info,Snackbar.LENGTH_LONG).show();
+
+        }
+
+        pantallaCarga.setVisibility(View.GONE);
+
+        if(miSwiper.isRefreshing()){
+            miSwiper.setRefreshing(false);
+        }
     }
 
     public void btnCambiarContrasenaClick(View v){
@@ -149,11 +217,59 @@ public class MyProfileFragment extends Fragment {
                     new SimpleAction() {
                         @Override
                         public void doAction(Object o) {
-                            Snackbar.make(
-                                requireView(),
-                                R.string.mpf_setting_passwd_done,
-                                Snackbar.LENGTH_LONG
-                            ).show();
+
+                            try {
+
+                                View contenedorDialogo = (View)o;
+                                String usuarioString;
+                                Usuario u;
+
+                                LinearLayout pantallaCargaDialogo = contenedorDialogo.findViewById(R.id.dcp_llloading);
+                                EditText txtPasswd = contenedorDialogo.findViewById(R.id.dcp_txtPasswd2);
+                                ObjetoModificacionContrasena emc = new ObjetoModificacionContrasena();
+                                SharedPreferences sp = getActivity().getSharedPreferences(
+                                        FeriaVirtualConstants.FERIAVIRTUAL_MOVIL_SHARED_PREFERENCES,
+                                        Context.MODE_PRIVATE
+                                );
+
+                                usuarioString = sp.getString(FeriaVirtualConstants.SP_USUARIO_OBJ_STR,"");
+                                u = convertidorJSON.fromJson(usuarioString,Usuario.class);
+
+                                emc.id_usuario = u.id_usuario;
+                                emc.contrasena_actual = "none";
+                                emc.nueva_contrasena = txtPasswd.getText().toString();
+
+                                myProfileViewModel.cambiarContrasena(emc,new SimpleAction(){
+
+                                            @Override
+                                            public void doAction(Object o) {
+
+                                                Boolean resultado = (Boolean)o;
+
+                                                pantallaCargaDialogo.setVisibility(View.GONE);
+
+                                                Snackbar.make(
+                                                        getActivity().findViewById(android.R.id.content),
+                                                        resultado? R.string.mpf_setting_passwd_done : R.string.err_msg_generic,
+                                                        Snackbar.LENGTH_LONG
+                                                ).show();
+
+                                            }
+                                        }
+                                );
+
+
+                            } catch(Exception ex){
+
+                                Snackbar.make(
+                                        getActivity().findViewById(android.R.id.content),
+                                        R.string.err_msg_generic,
+                                        Snackbar.LENGTH_LONG
+                                ).show();
+
+                            }
+
+
                         }
                     },
                     null
@@ -193,99 +309,4 @@ public class MyProfileFragment extends Fragment {
 
     }
 
-    private void getInfoFromAPI(View view){
-
-        //TODO:Borrar esto cuando se implemente la arquitectura mvvm text_home
-
-        TextView lblPersonalID = view.findViewById(R.id.fmp_lblPersonalID);
-        TextView lblNombres = view.findViewById(R.id.fmp_lblNombresUsuario);
-        TextView lblApellidos = view.findViewById(R.id.fmp_lblApellidosUsuario);
-        TextView lblNacionalidad = view.findViewById(R.id.fmp_lblNacionalidad);
-        TextView lblTipoUsuario = view.findViewById(R.id.fmp_lblTipoUsuario);
-        TextView txtEmail = view.findViewById(R.id.fmp_lblEmailUsuario);
-        EditText txtTelefono = view.findViewById(R.id.fmp_txtTelefonoUsuario);
-        EditText txtDireccion = view.findViewById(R.id.fmp_txtDireccionUsuario);
-
-        FutureTask<Usuario> tarea = new FutureTask<Usuario>(() -> {
-
-            try{
-                Usuario u = new Usuario();
-                u.id_usuario = 21;
-                Result<LiveData<Usuario>> usudata = usuarioRepository.getInfoUsuario(u);
-
-                if(usudata instanceof Result.Success){
-                    return (Usuario) ((Result.Success) usudata).data;
-                } else {
-                    return null;
-                }
-
-            } catch(Exception e){
-
-                Snackbar.make(view,"Ocurrió un error! Revisa el Logcat!",Snackbar.LENGTH_LONG).show();
-                Log.i("MY_PROFILE_FRAGMENT",String.format("Ups, un error... %s",e != null? e.getMessage() : "Desconocido!!"));
-
-            }
-
-            return null;
-        });
-
-        try{
-
-            tarea.run();
-
-            Usuario u = tarea.get();
-
-            lblPersonalID.setText(u.personal_id);
-            lblNombres.setText(u.nombre + " " + u.nombre_segundo);
-            lblApellidos.setText(u.apellido_paterno + " " + u.apellido_materno);
-            lblNacionalidad.setText(u.nacionalidad.toString());
-            lblTipoUsuario.setText(u.rol.toString());
-            txtEmail.setText(u.email);
-            txtTelefono.setText(u.telefono.toString());
-            txtDireccion.setText(u.direccion);
-
-
-
-        }catch(Exception e){
-
-            Snackbar.make(view,"Ocurrió un error! Revisa el Logcat!",Snackbar.LENGTH_LONG).show();
-            Log.i("MY_PROFILE_FRAGMENT",String.format("Ups, un error... %s",e != null? e.getMessage() : "Desconocido!!"));
-
-        }
-        /*
-        GlobalScope.launch(Dispatchers.Main) {
-
-            try{
-
-                val lblPersonalID = view.findViewById<TextView>(R.id.tvPersonalID)
-                val lblNombres = view.findViewById<TextView>(R.id.tvNombresUsuario)
-                val lblApellidos = view.findViewById<TextView>(R.id.tvApellidosUsuario)
-                val lblNacionalidad = view.findViewById<TextView>(R.id.tvNacionalidad)
-                val lblTipoUsuario = view.findViewById<TextView>(R.id.tvTipoUsuario)
-                val txtEmail = view.findViewById<TextView>(R.id.txtEmailUsuario)
-                val txtTelefono = view.findViewById<TextView>(R.id.txtTelefonoUsuario)
-                val txtDireccion = view.findViewById<TextView>(R.id.txtDireccionUsuario)
-                val usuapi = FeriaVirtualAPIProvider.provideUsuarioAPI()
-                val usudata = usuapi.getUserInfo(3).await()
-
-                lblPersonalID.text = usudata.usuario.personal_id
-                lblNombres.text = usudata.usuario.nombre + " " + usudata.usuario.nombre_segundo
-                lblApellidos.text = usudata.usuario.apellido_paterno + " " + usudata.usuario.apellido_materno
-                lblNacionalidad.text = usudata.usuario.nacionalidad
-                lblTipoUsuario.text = usudata.usuario.rol
-                txtEmail.text = usudata.usuario.email
-                txtTelefono.text = usudata.usuario.telefono.toString()
-                txtDireccion.text = usudata.usuario.direccion
-
-
-            } catch(e:Exception){
-
-                Snackbar.make(view,"Ocurrió un error! Revisa el Logcat!",Snackbar.LENGTH_LONG).show()
-                Log.i("MY_PROFILE_FRAGMENT","Error: ${ if(e?.message != null) e.message else  "Desconocido"    }")
-
-            }
-
-        }
-        */
-    }
 }

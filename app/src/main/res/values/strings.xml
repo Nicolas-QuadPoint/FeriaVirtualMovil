@@ -22,8 +22,8 @@
     <string name="prompt_password">Password</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >8 characters, and contain al least a number and a symbol</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="invalid_password">Password must be >5 characters, and contain al least a number and a symbol</string>
+    <string name="login_failed">Login failed. Either email or password are not correct, please try again</string>
     <string name="close_app">Quit</string>
     <string name="launch_user_registry_web">Haven\'t an account? Register here!</string>
 
@@ -54,6 +54,7 @@
     <string name="mpf_setting_change_passwd">Change Password</string>
     <string name="mpf_setting_passwd_cur">Type current password</string>
     <string name="mpf_setting_passwd_new">New password</string>
+    <string name="mpf_setting_passwd_new_r">Confirm new password</string>
     <string name="mpf_setting_passwd_done">Password changed</string>
 
     <!-- Sale Detail Activity -->
@@ -95,8 +96,10 @@
     <string name="err_msg_generic">An sudden error has occurred. Please try again later</string>
     <string name="err_mes_question">Question</string>
     <string name="err_mes_message">Message</string>
+    <string name="err_mes_not_avalaible">Not avalaible</string>
     <string name="err_mes_passwd_does_not_match">Passwords does not match</string>
     <string name="err_msg_logout_prompt">You really want to logout? You have to login with your credentials when you come back</string>
+    <string name="err_msg_error_getting_user_info">Couldn\'t retrieve your user data. Try again later </string>
 
     <!-- Push Productor bid messages -->
     <string name="ppbd_title">Push a new bid</string>

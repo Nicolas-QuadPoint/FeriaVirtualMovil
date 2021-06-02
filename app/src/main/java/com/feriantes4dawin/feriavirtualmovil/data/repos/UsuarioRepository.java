@@ -1,24 +1,22 @@
 package com.feriantes4dawin.feriavirtualmovil.data.repos;
 
-import androidx.lifecycle.LiveData;
-
-import com.feriantes4dawin.feriavirtualmovil.data.Result;
+import com.feriantes4dawin.feriavirtualmovil.data.models.LoginObject;
+import com.feriantes4dawin.feriavirtualmovil.data.models.ObjetoModificacionContrasena;
+import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoID;
+import com.feriantes4dawin.feriavirtualmovil.data.models.ResultadoUsuario;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
 
-import javax.inject.Singleton;
-
-import dagger.Component;
-import dagger.Module;
-import dagger.Provides;
-
+import retrofit2.Call;
 
 public interface UsuarioRepository {
 
-    UsuarioRepository getInstance();
+    //UsuarioRepository getInstance();
 
-    Result<LiveData<Usuario>> loginUsuario(String email, String contrasena);
+    Call<ResultadoUsuario> loginUsuario(LoginObject loginObject);
 
-    Result<LiveData<Usuario>> getInfoUsuario(Usuario u);
+    Call<ResultadoUsuario> getInfoUsuario(Usuario usuario);
 
-    boolean updateUsuario(int ntelefono,String ndireccion,String npasswd);
+    Call<ResultadoID> updateUsuario(Usuario usuario);
+
+    Call<ResultadoID> changePasswordUsuario(ObjetoModificacionContrasena omc);
 }

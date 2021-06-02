@@ -43,7 +43,9 @@ public class PushProductorCustomAdapter extends RecyclerView.Adapter<PushProduct
         //Agrego el evento al tocar el elemento
         view.setOnClickListener( v -> {
 
-            PushDetailProductorDialog dlg = new PushDetailProductorDialog((AppCompatActivity) parent.getContext(), o -> {
+            PushDetailProductorDialog dlg = new PushDetailProductorDialog(
+                    (AppCompatActivity) parent.getContext(),
+                    vh.lblNombreProducto.getText().toString(), o -> {
 
                 View vista = (View)o;
 

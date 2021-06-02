@@ -23,10 +23,12 @@ public class SubastaRepositoryImpl implements SubastaRepository {
 
     }
 
+    /*
     @Override
     @Provides
     public SubastaRepository getInstance(){
         return this;
     }
+    */
 
 }

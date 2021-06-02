@@ -1,7 +1,13 @@
 package com.feriantes4dawin.feriavirtualmovil.data.network;
 
+import com.feriantes4dawin.feriavirtualmovil.data.models.Venta;
+import com.feriantes4dawin.feriavirtualmovil.data.models.VentaSimple;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Ventas;
+import com.feriantes4dawin.feriavirtualmovil.data.models.VentasSimples;
 
+import java.util.List;
+
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -9,11 +15,12 @@ import retrofit2.http.Path;
 
 public interface VentaAPIService {
 
-    @GET("ventas/usuario/{idusuario}")
-    Ventas getVentasDisponibles(
-        //Funcion que indica que valor json se supone que se recuperara
-        @Path(value="idusuario") int idusuario
+    @GET("ventas?formato=simple")
+    Call<VentasSimples> getVentasSimplesDisponibles();
 
-    );
+    @GET("ventas?formato=detallado")
+    Call<Ventas> getVentasDisponibles();
 
+    @GET("ventas/{venta_id}")
+    Call<Venta> getInfoVenta(@Path(value="venta_id") Integer venta_id);
 }
