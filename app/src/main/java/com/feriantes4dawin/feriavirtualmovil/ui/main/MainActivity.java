@@ -25,7 +25,6 @@ import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualApplication;
 import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualComponent;
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
-import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepository;
 import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl;
 import com.feriantes4dawin.feriavirtualmovil.ui.login.LoginActivity;
 import com.feriantes4dawin.feriavirtualmovil.ui.settings.SettingsActivity;
@@ -37,20 +36,48 @@ import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
-
+/**
+ * MainActivity 
+ * 
+ * La actividad principal de la aplicación, donde los fragmentos 
+ * o secciones podrán acoplarse, permitiendo también la navegación 
+ * entre ellas a través de la barra de menú lateral. 
+ * 
+ * También posee una barra superior donde están las opciones para 
+ * cerrar sesión o configurar la aplicación. 
+ */
 public class MainActivity extends AppCompatActivity{
 
-    //override val di by closestDI()
-
+    /* Objeto que permite establecer datos en la barra de navegación */
     private AppBarConfiguration appBarConfiguration;
 
+    /**
+     * Intermediario de datos entre esta actividad y la 
+     * fuente de datos. 
+     */
     private MainViewModel mainViewmodel;
+
+    /**
+     * Creador de instancias de MainViewModel. 
+     */
     private MainViewModelFactory mainViewModelFactory;
+
+    /**
+     * Referencia al objeto sostenedor de dependencias. 
+     */
     public FeriaVirtualComponent feriaVirtualComponent;
 
+    /**
+     * Dependencia que representa el origen de datos 
+     * para usuarios. 
+     */
     @Inject
     public UsuarioRepositoryImpl usuarioRepository;
 
+    /**
+     * Dependencia que representa el objeto para convertir 
+     * datos JSON y visceversa. 
+     */
     @Inject
     public Gson convertidorJSON;
 
@@ -75,12 +102,12 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController,appBarConfiguration);
         NavigationUI.setupWithNavController(navView,navController);
 
-        // Creation of the login graph using the application graph
+        // Se obtiene la referencia al objeto sostenedor de dependencias. 
         feriaVirtualComponent = ((FeriaVirtualApplication) this.getApplicationContext())
                 .getFeriaVirtualComponent();
 
-        // Make Dagger instantiate @Inject fields in LoginActivity
-        feriaVirtualComponent.injectUsuarioRepositoryIntoMainActivity(this);
+        // Con eso inyectamos nuestras dependencias para usarlas.
+        feriaVirtualComponent.injectIntoMainActivity(this);
 
         //Creamos nuestro factory!
         this.mainViewModelFactory = new MainViewModelFactory(
@@ -131,7 +158,10 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             }
             case R.id.action_logout:{
-
+                
+                /**
+                 * Generamos el diálogo para preguntar si se quiere cerrar la sesión o no.
+                 */
                 YesNoDialog yesno = new YesNoDialog(this, getString(R.string.err_mes_question), getString(R.string.err_msg_logout_prompt),
                         new SimpleAction() {
                             @Override
@@ -161,6 +191,12 @@ public class MainActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
+        
+        /**
+         * Esto actualmente no se ejecuta, por razones que no tengo entendidas.
+         * TODO: Hacer que esto funcione, y el diálogo aparezca al presionar el 
+         * botón de retroceso!
+         */
         YesNoDialog yesno = new YesNoDialog(this, getString(R.string.err_mes_question), getString(R.string.err_msg_logout_prompt),
                 new SimpleAction() {
                     @Override
@@ -226,6 +262,10 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    /**
+     * Método que hace los arreglos para cerrar la sesión y hacer que el usuario 
+     * nuevamente tenga que ingresar sus credenciales para acceder. 
+     */
     public void cerrarSesion(){
 
 
@@ -233,13 +273,19 @@ public class MainActivity extends AppCompatActivity{
                 FeriaVirtualConstants.FERIAVIRTUAL_MOVIL_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         Intent loginActivityIntent = new Intent(getApplicationContext(), LoginActivity.class);
-        //Con esto nos evitamos la molestia de de que el usuario regrese al menu principa
-        //loo presionando la tecla atrás
+        
+        /**
+         * Con esto nos evitamos la molestia de de que el usuario regrese al menu principal 
+         * presionando la tecla de retroceso. 
+         */
         loginActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
         //Limpiando los datos de las shared preferences!
         sp.edit()
                 .putString(FeriaVirtualConstants.SP_FERIAVIRTUAL_WEBAPI_AUTH_TOKEN,"")
+                .putString(FeriaVirtualConstants.SP_USUARIO_OBJ_STR,"")
                 .putInt(FeriaVirtualConstants.SP_USUARIO_ID,0)
+                .putInt(FeriaVirtualConstants.SP_VENTA_ID,"")
                 .commit();
 
         startActivity(loginActivityIntent);

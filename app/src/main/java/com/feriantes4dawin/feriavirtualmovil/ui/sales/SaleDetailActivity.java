@@ -20,9 +20,6 @@ import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualApplication;
 import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualComponent;
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Venta;
-import com.feriantes4dawin.feriavirtualmovil.data.models.Ventas;
-import com.feriantes4dawin.feriavirtualmovil.data.models.VentasSimples;
-import com.feriantes4dawin.feriavirtualmovil.data.repos.VentaRepository;
 import com.feriantes4dawin.feriavirtualmovil.data.repos.VentaRepositoryImpl;
 import com.feriantes4dawin.feriavirtualmovil.ui.auction.AuctionSaleActivity;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
@@ -33,15 +30,37 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
+/**
+ * SaleDetailActivity 
+ * 
+ * Flujo de actividad que contiene el detalle de una venta, 
+ * permitiendo (si está disponible) participar de dicha venta a 
+ * través de subastas. 
+ */
 public class SaleDetailActivity extends AppCompatActivity {
 
+    /**
+     * Objeto que nos entrega el puente de datos. 
+     */
     private SaleDetailViewModel saleDetailViewModel;
     private SaleDetailViewModelFactory saleDetailViewModelFactory;
 
+    /**
+     * Objeto que nos entrega las dependencias con la anotación 
+     * Inject sobre ellas. 
+     */
     private FeriaVirtualComponent feriaVirtualComponent;
 
+    /**
+     * ID de la venta entregada a esta actividad al momento de 
+     * su creación. 
+     */
     private Integer id_venta;
 
+    /**
+     * Dependencia que nos ofrece la fuente de datos que 
+     * usará saleDetailViewModel. 
+     */
     @Inject
     public VentaRepositoryImpl ventaRepository;
 
@@ -58,12 +77,12 @@ public class SaleDetailActivity extends AppCompatActivity {
                 FeriaVirtualConstants.FERIAVIRTUAL_MOVIL_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
 
-        // Creation of the login graph using the application graph
+        //Se obtiene la instacia de FeriaVirtualComponent de la aplicación.
         feriaVirtualComponent = ((FeriaVirtualApplication)getApplicationContext())
                 .getFeriaVirtualComponent();
 
-        // Make Dagger instantiate @Inject fields in LoginActivity
-        feriaVirtualComponent.injectVentaRepositoryIntoSaleDetailActivity(this);
+        //Con esto se inyectan las dependencias de esta clase!
+        feriaVirtualComponent.injectIntoSaleDetailActivity(this);
 
         //Instanciamos el factory!
         this.saleDetailViewModelFactory = new SaleDetailViewModelFactory(
@@ -71,7 +90,7 @@ public class SaleDetailActivity extends AppCompatActivity {
                 (FeriaVirtualApplication) getApplicationContext()
         );
 
-        //Creamos nuestro viewmodel
+        //Creamos nuestro viewmodel, utilizando nuestra factory
         this.saleDetailViewModel = new ViewModelProvider(this,saleDetailViewModelFactory).
                 get(SaleDetailViewModel.class);
 
@@ -97,6 +116,10 @@ public class SaleDetailActivity extends AppCompatActivity {
             }
         });
 
+        /** 
+         * Con esto se redirige el flujo a la actividad AuctionSaleActivity, que sería
+         * la sección de subastas.
+         */
         asd_btnParticiparSubasta.setOnClickListener( v -> {
 
             Intent i = new Intent(SaleDetailActivity.this, AuctionSaleActivity.class);
@@ -120,6 +143,13 @@ public class SaleDetailActivity extends AppCompatActivity {
         Log.i("SALE_DETAIL_ACTIVITY","Deberia ir a " + FeriaVirtualConstants.FRAGMENTO_LISTA_PETICIONES_VENTA);
     }
 
+    /**
+     * Método llamado desde el puente de datos para actualizar los 
+     * datos obtenidos desde la fuente, exitoso o no. 
+     * 
+     * @param venta Objeto Venta del cual extraer los datos. Un 
+     * objeto null indica que no hay datos disponibles. 
+     */
     private void rellenarDatosVenta(Venta venta){
 
         SwipeRefreshLayout miSwiper = (SwipeRefreshLayout)findViewById(R.id.asd_swipeSaleDetail);

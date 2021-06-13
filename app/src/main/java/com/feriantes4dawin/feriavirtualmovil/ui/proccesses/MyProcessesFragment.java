@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -24,13 +23,38 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
+/**
+ * MyProccessesFragment 
+ * 
+ * Fragmento que representa la sección 'Mis procesos de venta', 
+ * que lista, valga la redundancia, los procesos de venta que 
+ * el usuario autenticado haya participado, con el fin de obtener 
+ * información.
+ * 
+ */
 public class MyProcessesFragment extends Fragment{
 
+    /**
+     * Creador de instancias MyProcessesViewModel
+     */
     private MyProcessesViewModelFactory myProcessesViewModelFactory;
+    
+    /**
+     * Instancia de MyProcessesViewModel para obtener y 
+     * enviar datos hacia la fuente. 
+     */
     private MyProcessesViewModel myProcessesViewModel;
 
+    /**
+     * Objeto necesario para obtener las dependencias de 
+     * esta clase. 
+     */
     private FeriaVirtualComponent feriaVirtualComponent;
 
+    /**
+     * Dependencia correspondiente a la fuente de datos para 
+     * ventas. 
+     */
     @Inject
     public VentaRepositoryImpl ventaRepository;
 
@@ -57,12 +81,12 @@ public class MyProcessesFragment extends Fragment{
 
         super.onAttach(context);
 
-        // Creation of the login graph using the application graph
+        // Se obtiene la referencia al contenedor de dependencias. 
         feriaVirtualComponent = ((FeriaVirtualApplication) getActivity().getApplicationContext())
                 .getFeriaVirtualComponent();
 
-        // Make Dagger instantiate @Inject fields in LoginActivity
-        feriaVirtualComponent.injectVentaRepositoryIntoMyProcessesFragment(this);
+        // Con esto inyectamos nuestras dependencias de clase. 
+        feriaVirtualComponent.injectIntoMyProcessesFragment(this);
 
         //Creamos nuestro viewmodel
         this.myProcessesViewModelFactory = new MyProcessesViewModelFactory(
@@ -88,6 +112,13 @@ public class MyProcessesFragment extends Fragment{
 
     }
 
+    /**
+     * Actualiza los datos de la lista de procesos de venta, 
+     * tomando como fuente el objeto entregado por el puente de 
+     * datos. 
+     * @param ventasSimples Objeto VentasSimples con los datos de 
+     * ventas pasadas, o null si no hay datos disponibles. 
+     */
     public void actualizarDatosVista(VentasSimples ventasSimples){
 
         SwipeRefreshLayout miSwiper = requireView().findViewById(R.id.fmproc_swipeMyProcesses);
@@ -102,12 +133,14 @@ public class MyProcessesFragment extends Fragment{
 
         } else {
 
+            //NO hay datos disponibles. Mejor mostramos el placeholder y escondemos 
+            //la lista.
             listaElementos.setVisibility(View.GONE);
             llPlaceholderEmptyList.setVisibility(View.VISIBLE);
 
         }
 
-
+        //Quitamos el refresco si sigue activo 
         if(miSwiper.isRefreshing()){
             miSwiper.setRefreshing(false);
         }

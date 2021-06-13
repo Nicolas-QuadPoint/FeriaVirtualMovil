@@ -24,12 +24,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * MyProfileViewModel 
+ * 
+ * Clase que actúa como intermediario para ofrecer y enviar 
+ * datos entre el fragmento MyProfileFragment y la fuente de datos. 
+ */
 public class MyProfileViewModel extends ViewModel {
 
+    /**
+     * Origen de datos para Usuarios. 
+     */
     private UsuarioRepository usuarioRepository;
+
+    /**
+     * Convertidor JSON, para lidiar con estos tipos de datos. 
+     */
     private Gson convertidorJSON;
+
+    /**
+     * Instancia de Application, usado para algunas cosas. 
+     */
     private FeriaVirtualApplication fva;
 
+    /**
+     * Puente de datos para MyProfileFragment. 
+     */
     private MutableLiveData<Usuario> datosMutablesUsuario;
     private LiveData<Usuario> datosUsuario;
 
@@ -43,6 +63,13 @@ public class MyProfileViewModel extends ViewModel {
 
     }
 
+    /**
+     * Consulta al origen de datos para obtener información del usuario 
+     * actualmente autenticado. La información de dicho usuario (Como el ID), 
+     * requerido para esta acción, es obtenido de las preferencias compartidas. 
+     * 
+     * @return Un objeto LiveData para vigilar. 
+     */
     public LiveData<Usuario> getDatosUsuario() {
 
         /**
@@ -50,12 +77,17 @@ public class MyProfileViewModel extends ViewModel {
          * dato a obtener, se podrá actualizar los datos de usuario
          * en la vista del fragmento o no.
          */
-        //if(datosMutablesUsuario.getValue() == null){
         cargarDatosUsuario();
-        //}
+        
         return datosUsuario;
     }
 
+    /**
+     * Rutina asíncrona para recuperar datos de usuario. 
+     * Actualiza el puente de datos para que la capa de vista, 
+     * MyProfileFragment, pueda cargar dicha información a sus 
+     * componentes. 
+     */
     private void cargarDatosUsuario() {
 
         try {
@@ -107,10 +139,31 @@ public class MyProfileViewModel extends ViewModel {
 
     }
 
+    /**
+     * Rutina asíncrona que envía la nueva información de 
+     * usuario en el puente de datos a la fuente de datos 
+     * determinada. 
+     * 
+     * TODO: Agregar la lógica que permite lo anterior!
+     * 
+     * @param u El Objeto usuario a actualizar en la fuente. 
+     */
     public void guardarCambiosUsuario(Usuario u){
 
     }
 
+    /**
+     * Rutina asíncrona cuya tarea es cambiar la contraseña 
+     * del usuario actualmente autenticado, además de proporcionar 
+     * un método callback para que el se pueda actuar en dependencia 
+     * del resultado de la petición. 
+     * 
+     * @param omc Objeto ObjetoModificacionContrasena con la información 
+     * de la contraseña de usuario. 
+     * @param simpleAction Objeto SimpleAction con el procedimiento a 
+     * ejecutar tras finalizada la petición. Si es null, este método 
+     * finaliza y ninguna llamada es realizada. 
+     */
     public void cambiarContrasena(ObjetoModificacionContrasena omc, SimpleAction simpleAction) {
 
         Call<ResultadoID> ruc = usuarioRepository.changePasswordUsuario(omc);
@@ -131,7 +184,7 @@ public class MyProfileViewModel extends ViewModel {
                     if(response.isSuccessful()){
                         resultadofinal = new Boolean(response.body().id_resultado == 1);
                     } else {
-                        resultadofinal = new Boolean(false);
+                        resultadofinal = new Boolean.valueOf(false);
                     }
 
                     simpleAction.doAction(resultadofinal);

@@ -14,10 +14,26 @@ import com.feriantes4dawin.feriavirtualmovil.data.models.ProductoVenta;
 
 import java.util.List;
 
+/**
+ * ListItemDetailProductCustomAdapter 
+ * 
+ * Es un adapter que representa los datos de la lista de productos 
+ * para pujar en una subasta. 
+ */
 public class ListItemDetailProductCustomAdapter extends RecyclerView.Adapter<ListItemDetailProductCustomAdapter.ListItemDetailProductViewHolder> {
 
+    /**
+     * Fuente de datos para rellenar este adapter.
+     */
     private List<ProductoVenta> productosVenta;
 
+    /**
+     * Crea un objeto ListItemDetailProductCustomAdapter 
+     * para un RecyclerView. 
+     * 
+     * @param productosVenta Objeto que sirve como origen 
+     * de datos para este adapter. 
+     */
     public ListItemDetailProductCustomAdapter(List<ProductoVenta> productosVenta){
 
         super();
@@ -63,6 +79,13 @@ public class ListItemDetailProductCustomAdapter extends RecyclerView.Adapter<Lis
         return productosVenta.size();
     }
 
+    /**
+     * ListItemDetailProductViewHolder 
+     * 
+     * Vista que contiene los controles donde mostrar los 
+     * datos obtenidos de la fuente, y que representan un 
+     * elemento individual de la lista. 
+     */
     public class ListItemDetailProductViewHolder extends RecyclerView.ViewHolder {
 
         public Integer id_producto;

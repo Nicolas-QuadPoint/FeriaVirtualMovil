@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -37,20 +36,46 @@ import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
+/**
+ * MyProfileFragment 
+ * 
+ * Fragmento que corresponde a la sección 'perfil' del 
+ * usuario, donde sus datos personales son visibles, y 
+ * permite la posibilidad de cambiar algunas de ellas, 
+ * como dirección, número de teléfono y contraseña. 
+ * 
+ */
 public class MyProfileFragment extends Fragment {
 
-    //override val di by closestDI()
 
-    //private val myProfileViewModelFactory by instance<MyProfileViewModelFactory>()
-    private MyProfileViewModelFactory myProfileViewModelFactory;
-
+    /**
+     * Intermediario de datos entre la fuente y esta clase. 
+     */
     private MyProfileViewModel myProfileViewModel;
 
+    /**
+     * Creador de instancias MyProfileViewModel. 
+     */
+    private MyProfileViewModelFactory myProfileViewModelFactory;
+
+
+    /**
+     * Instancia que mantiene las dependencias que 
+     * esta clase necesita. 
+     */
     private FeriaVirtualComponent feriaVirtualComponent;
 
+    /**
+     * Dependencia correspondiente al origen de datos 
+     * para usuarios. 
+     */
     @Inject
     public UsuarioRepositoryImpl usuarioRepository;
 
+    /**
+     * Dependencia correspondiente al objeto convertidor 
+     * JSON. 
+     */
     @Inject
     public Gson convertidorJSON;
 
@@ -112,14 +137,15 @@ public class MyProfileFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+        
         super.onAttach(context);
 
-        // Creation of the login graph using the application graph
+        // Se obtiene la instancia de mantenedor de dependencias 
         feriaVirtualComponent = ((FeriaVirtualApplication) getActivity().getApplicationContext())
                 .getFeriaVirtualComponent();
 
-        // Make Dagger instantiate @Inject fields in LoginActivity
-        feriaVirtualComponent.injectUsuarioRepositoryIntoMyProfileFragment(this);
+        // Inyectamos nuestras dependencias en esta clase 
+        feriaVirtualComponent.injectIntoMyProfileFragment(this);
 
         //Creamos nuestro viewmodel
         this.myProfileViewModelFactory = new MyProfileViewModelFactory(
@@ -127,7 +153,7 @@ public class MyProfileFragment extends Fragment {
                 convertidorJSON,
                 (FeriaVirtualApplication) requireActivity().getApplicationContext()
         );
-
+        
         this.myProfileViewModel = new ViewModelProvider(this,myProfileViewModelFactory).
                 get(MyProfileViewModel.class);
 
@@ -144,7 +170,15 @@ public class MyProfileFragment extends Fragment {
         );
     }
 
-
+    /**
+     * Método que es llamado cuando hay información de usuario en el 
+     * puente de datos. Dependiendo de su valor, se actualizan los 
+     * datos en los controles de vista, o se lanza un error. 
+     * 
+     * @param usuario Objeto del cual hay datos nuevos, o null, 
+     * indicando que hubo un error al intentar obtener dichos 
+     * datos. 
+     */
     private void actualizarDatosVista(Usuario usuario){
 
         FragmentActivity fa = getActivity();
@@ -201,13 +235,21 @@ public class MyProfileFragment extends Fragment {
 
         }
 
+        //Quitamos la pantalla de carga ya que todo terminó
         pantallaCarga.setVisibility(View.GONE);
 
+        //Y lo mismo para el refresco. 
         if(miSwiper.isRefreshing()){
             miSwiper.setRefreshing(false);
         }
     }
 
+    /**
+     * Método callback para actuar cuando el botón 
+     * 'cambiar mi contraseña' es presionado. 
+     * 
+     * @param v El objeto que representa el botón. 
+     */
     public void btnCambiarContrasenaClick(View v){
 
         try {
@@ -277,9 +319,6 @@ public class MyProfileFragment extends Fragment {
 
             //Mostramos el dialogo
              cpd.generate().show();
-
-            //Cerramos el dialogo
-            //d.cancel()
 
         } catch (Exception ex){
 

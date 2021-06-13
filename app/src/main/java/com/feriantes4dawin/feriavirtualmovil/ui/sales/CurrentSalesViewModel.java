@@ -18,11 +18,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * CurrentSalesViewModel 
+ * 
+ * Clase que maneja los datos para el fragmento 
+ * CurrentSalesFragment. 
+ */
 public class CurrentSalesViewModel extends ViewModel {
 
+    /**
+     * Origen de datos para ventas. 
+     */
     private VentaRepository ventaRepository;
+
+    /**
+     * Instancia de Application para algunas funciones. 
+     */
     private FeriaVirtualApplication fva;
 
+    /**
+     * Puente de datos para usarse en 
+     * CurrentSalesFragment. 
+     */
     private LiveData<VentasSimples> datosVenta;
     private MutableLiveData<VentasSimples> datosMutablesVenta;
 
@@ -34,15 +51,30 @@ public class CurrentSalesViewModel extends ViewModel {
         this.datosVenta = datosMutablesVenta;
     }
 
+    /**
+     * Realiza la petición para obtener datos de venta, y 
+     * mientras la operación esté en curso, se puede vigilar 
+     * el estado del objeto LiveData retornado en espera 
+     * de cambios. 
+     * 
+     * @return Un objeto LiveData para vigilarlo. 
+     */
     public LiveData<VentasSimples> getDatosVenta(){
 
+        //Operación asíncrona. No esperar a que termine.
         cargarListaVentas();
 
         return datosVenta;
 
     }
 
-
+    /**
+     * Rutina asíncrona que recupera los datos de venta de 
+     * la fuente, y dependiendo de su éxito, el puente de 
+     * datos recibirá un valor nulo, o una lista de objetos 
+     * Venta para que el fragmento CurrentSalesFragment pueda 
+     * procesar. 
+     */
     private void cargarListaVentas(){
 
         Usuario u;
@@ -57,7 +89,7 @@ public class CurrentSalesViewModel extends ViewModel {
                 @Override
                 public void onResponse(Call<VentasSimples> call, Response<VentasSimples> response) {
 
-                    Log.e("CUR_SALES_VIEW_MODEL",String.format("Código de respuesta http: %d",response.code()));
+                    Log.i("CUR_SALES_VIEW_MODEL",String.format("Código de respuesta http: %d",response.code()));
 
                     if(response.isSuccessful() && response.body().ventas != null && response.body().ventas.size() > 0){
 

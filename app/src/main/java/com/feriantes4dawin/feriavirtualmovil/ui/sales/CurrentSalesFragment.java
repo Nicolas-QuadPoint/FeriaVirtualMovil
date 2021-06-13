@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,14 +25,37 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
+/**
+ * CurrentSalesFragment 
+ * 
+ * Fragmento que representa la sección de 'procesos de venta', 
+ * que muestra, valga la redundancia, la lista de ventas a las 
+ * cuales el usuario (Productor o Transportista) podrán ver 
+ * información detallada de la misma, y la posiblidad de participar 
+ * en alguna de ellas. 
+ * 
+ */
 public class CurrentSalesFragment extends Fragment {
 
+    /**
+     * ViewModel para este fragmento, que actúa como interfaz para 
+     * la capa de datos. 
+     */
     private CurrentSalesViewModel currentSalesViewModel;
 
+    /**
+     * Creador de instancias de CurrentSalesViewModel. 
+     */
     private CurrentSalesViewModelFactory currentSalesViewModelFactory;
 
+    /**
+     * Instancia usada para obtener las dependencias. 
+     */
     private FeriaVirtualComponent feriaVirtualComponent;
 
+    /**
+     * Dependencia utilizada para CurrentSalesViewModel. 
+     */
     @Inject
     public VentaRepositoryImpl ventaRepository;
 
@@ -66,12 +88,12 @@ public class CurrentSalesFragment extends Fragment {
 
         super.onAttach(context);
 
-        // Creation of the login graph using the application graph
+        // Se obtiene el gestor de dependencias por medio de la aplicación!
         feriaVirtualComponent = ((FeriaVirtualApplication) getActivity().getApplicationContext())
                 .getFeriaVirtualComponent();
 
-        // Make Dagger instantiate @Inject fields in LoginActivity
-        feriaVirtualComponent.injectVentaRepositoryIntoCurrentSalesFragment(this);
+        // Con esto las dependencias adquieren un valor.
+        feriaVirtualComponent.injectIntoCurrentSalesFragment(this);
 
         //Instanciamos el factory!
         this.currentSalesViewModelFactory = new CurrentSalesViewModelFactory(ventaRepository,
@@ -87,7 +109,7 @@ public class CurrentSalesFragment extends Fragment {
                 new Observer<VentasSimples>() {
                     @Override
                     public void onChanged(VentasSimples ventasSimples) {
-                        Log.i("CUR_SALES_FRAGMENT","Paso por aquí!");
+                        
                         rellenarListaVentas(ventasSimples);
 
                     }
@@ -96,6 +118,13 @@ public class CurrentSalesFragment extends Fragment {
 
     }
 
+    /**
+     * Método que se encarga de actualizar los componentes de vista con 
+     * los datos entregados por parte del objeto CurrentSalesViewModel. 
+     * 
+     * @param ventasSimples Objeto VentasSimples obtenido del puente de 
+     * datos. Un valor null indica que no hay datos disponibles. 
+     */
     private void rellenarListaVentas(VentasSimples ventasSimples){
 
         View vistaMaestra = requireView();
@@ -117,6 +146,7 @@ public class CurrentSalesFragment extends Fragment {
 
         } else {
 
+            //NO hay datos. Vamos a cambiar la vista de lista por el placeholder. 
             llPlaceholderEmptyList.setVisibility(View.VISIBLE);
             rvListaVentasSimples.setVisibility(View.GONE);
 

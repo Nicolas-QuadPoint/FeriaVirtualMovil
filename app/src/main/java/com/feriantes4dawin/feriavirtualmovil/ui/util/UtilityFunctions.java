@@ -4,6 +4,12 @@ import android.content.Intent;
 import android.provider.MediaStore;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * UtilityFunctions
+ * 
+ * Clase que contiene métodos estáticos que cumplen distintas 
+ * funciones. 
+ */
 public class UtilityFunctions {
 
     //Funciones estaticas
@@ -16,7 +22,8 @@ public class UtilityFunctions {
      * el método onActivityResult para obtener la información de la imágen.
      * La aplicación debe tener concedido el permiso para leer archivos. Vease esto en
      * el archivo de manifiesto
-     *
+     * 
+     * @throws NullPointerException Si act es nulo.
      * @param act Un objeto AppCompatActivity, no nulo.
      */
     public static void getImageFromGallery(AppCompatActivity act){

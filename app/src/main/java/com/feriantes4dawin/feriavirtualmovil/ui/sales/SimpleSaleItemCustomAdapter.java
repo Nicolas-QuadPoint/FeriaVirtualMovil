@@ -14,10 +14,35 @@ import com.feriantes4dawin.feriavirtualmovil.data.models.VentaSimple;
 import com.feriantes4dawin.feriavirtualmovil.data.models.VentasSimples;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 
+/**
+ * SimpleSaleItemCustomAdapter 
+ * 
+ * Adaptador para RecyclerView que gestiona la estructura, valores y 
+ * eventos relacionados a la Lista de Ventas proporcionado por 
+ * CurrentSalesFragment. 
+ * 
+ * Al tocar un elemento de la lista, será rederigido a SaleDetailActivity 
+ * con los datos en detalle de la venta. 
+ * 
+ * Este es el flujo determinado para poder participar en subastas de 
+ * Productor o de Transportista según sea el caso.
+ */
 public class SimpleSaleItemCustomAdapter extends RecyclerView.Adapter<SimpleSaleItemCustomAdapter.SimpleSaleItemViewHolder> {
 
+    /**
+     * Objeto que contiene una lista de objetos Venta, 
+     * utilizados como fuente de datos para este adaptador.
+     * 
+     * @see {@link com.feriantes4dawin.feriavirtualmovil.data.models.VentasSimples}
+     */
     private VentasSimples ventasSimples;
 
+    /**
+     * Constructor que crea un objeto SimpleSaleItemCustomAdapter. 
+     * 
+     * @param ventasSimples Objeto VentasSimples usado como origen de 
+     * datos.
+     */
     public SimpleSaleItemCustomAdapter(VentasSimples ventasSimples){
 
         super();
@@ -30,7 +55,14 @@ public class SimpleSaleItemCustomAdapter extends RecyclerView.Adapter<SimpleSale
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_sale_item,parent,false);
         SimpleSaleItemViewHolder vh = new SimpleSaleItemViewHolder(view);
 
+        /**
+         * Aquí se gestiona el evento de selección para un elemento de lista. 
+         * El contexto aquí es simplemente redirigir el flujo del fragmento y 
+         * trasladar el trabajo a SaleDetailActivity para continuar con el proceso 
+         * de participación a subasta. 
+         */
         view.setOnClickListener(v -> {
+
             SharedPreferences sp = parent.getContext().getSharedPreferences(
                     FeriaVirtualConstants.FERIAVIRTUAL_MOVIL_SHARED_PREFERENCES,
                     Context.MODE_PRIVATE);
@@ -75,6 +107,13 @@ public class SimpleSaleItemCustomAdapter extends RecyclerView.Adapter<SimpleSale
         return ventasSimples.ventas.size();
     }
 
+    /**
+     * SimpleSaleItemViewHolder 
+     * 
+     * Vista que contiene los elementos a los cuales darles valores 
+     * recuperados de la fuente de datos. 
+     * 
+     */
     public class SimpleSaleItemViewHolder extends RecyclerView.ViewHolder {
 
         public Integer id_venta;

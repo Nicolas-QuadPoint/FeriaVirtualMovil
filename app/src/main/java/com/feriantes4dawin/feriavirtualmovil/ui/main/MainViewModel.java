@@ -19,12 +19,33 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * MainViewModel 
+ * 
+ * Clase que actúa como intermediario para ofrecer y enviar 
+ * datos entre la actividad MainActivity y la fuente de datos. 
+ */
 public class MainViewModel extends ViewModel {
     
+    /**
+     * Objeto de fuente de datos de usuarios. 
+     */
     private UsuarioRepository usuarioRepository;
+
+    /**
+     * Objeto convertidor de datos JSON. 
+     */
     private Gson convertidorJSON;
+
+    /**
+     * Referencia a objeto Application, usado para algunas 
+     * cosas. 
+     */
     private FeriaVirtualApplication feriaVirtualApplication;
     
+    /**
+     * Puente de datos entre esta clase y MainActivity. 
+     */
     private LiveData<Usuario> datosUsuario;
     private MutableLiveData<Usuario> datosMutablesUsuario;
     
@@ -40,14 +61,27 @@ public class MainViewModel extends ViewModel {
 
     }
 
+    /**
+     * Realiza la consulta de datos de usuario a la fuente, 
+     * de forma asíncrona. 
+     * 
+     * @return Un objeto LiveData para vigilar en caso de que hayan 
+     * datos disponibles. 
+     */
     public LiveData<Usuario> getDatosUsuario(){
 
+        //Rutina asíncrona!
         cargarDatosUsuario();
 
         return datosUsuario;
     }
 
-
+    /**
+     * Rutina asíncrona que se encarga de recuperar los datos 
+     * del usuario, actualizando el puente de datos para así 
+     * llenar la vista de MainActivity con 
+     * nueva información. 
+     */
     private void cargarDatosUsuario(){
 
         try{
@@ -97,6 +131,8 @@ public class MainViewModel extends ViewModel {
             });
 
         } catch(Exception ex){
+
+            Log.e("MAIN_VIEW_MODEL",String.format("No se pudo obtener datos de usuario!: %s",ex.toString()));
 
         }
 

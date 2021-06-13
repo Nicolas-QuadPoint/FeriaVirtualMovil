@@ -19,8 +19,20 @@ import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleTextWatcher;
 
 import dagger.Component;
 
+/**
+ * PushDetailProductorDialog 
+ * 
+ * Implementación de SimpleDialog cuya función es mostrar un 
+ * pequeño formulario para realizar una puja sobre un producto en 
+ * particular, en una subasta de productores. 
+ * 
+ */
 public final class PushDetailProductorDialog extends SimpleDialog{
 
+    /**
+     * Nombre del producto a realizar la puja, que es usado más 
+     * tarde para establecer el título del diálogo. 
+     */
     private String productName;
 
     public PushDetailProductorDialog(AppCompatActivity act,String productName, SimpleAction positiveResponseFunc, SimpleAction negativeResponseFunc) {
@@ -58,7 +70,17 @@ public final class PushDetailProductorDialog extends SimpleDialog{
     public AlertDialog generate() {
 
         AlertDialog ad = super.generate();
-
+        
+        /**
+         * Como no se pueden establecer ciertas propiedades de los botones del 
+         * diálogo, puesto que son creados al llamar a show(), agregamos un 
+         * evento que nos permita cambiar el estado del botón en el momento que 
+         * el diálogo se muestre. 
+         * 
+         * Con esto se consigue que el usuario no pueda enviar datos vacíos del 
+         * formulario, y también consigue mejorar la lógica de negocio asociado 
+         * al mismo.
+         */
         ad.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -102,10 +124,32 @@ public final class PushDetailProductorDialog extends SimpleDialog{
 
     }
 
+    /**
+     * ComparadorTextWatcher 
+     * 
+     * Clase interna, implementación de SimpleTextWatcher, que 
+     * comprueba que los campos de precio por cantidad y cantidad 
+     * sean valores válidos. 
+     * 
+     * Con esto se pueden ahorrar algunas líneas de código que hacen 
+     * mas o menos lo mismo.
+     */
     public class ComparadorTextWatcher extends SimpleTextWatcher {
 
+        /**
+         * Objeto EditText cuyo contenido pueda compararse con el objeto 
+         * txt propio de SimpleTextWatcher. 
+         */
         private EditText txt2;
 
+        /**
+         * Constructor que crea un objeto ComparadorTextWatcher. La idea 
+         * de tener dos objetos EditText, es la posibilidad de comparar 
+         * fácilmente sus contenidos y realizar una lógica en base a esto. 
+         * 
+         * @param txt Objeto EditText que representa el campo objetivo. 
+         * @param txt2 Objeto EditText que representa el campo a comparar. 
+         */
         public ComparadorTextWatcher(EditText txt, EditText txt2){
             super(txt);
             this.txt2 = txt2;
@@ -113,8 +157,13 @@ public final class PushDetailProductorDialog extends SimpleDialog{
 
         @Override
         public void afterTextChanged(Editable e) {
+            
+            /**
+             * Si ninguno de los dos está vacío, o cuyo valor no sea 0, entonces 
+             * son válidos.
+             */
             if ( (e.toString().isEmpty() || e.toString().equals("0")) ||
-                    ( (txt2.getText().toString().isEmpty() || txt2.getText().toString().equals("0")) )) {
+            ( (txt2.getText().toString().isEmpty() || txt2.getText().toString().equals("0")) )) {
 
                 txt.setError("Completa los campos faltantes");
                 dlg.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);

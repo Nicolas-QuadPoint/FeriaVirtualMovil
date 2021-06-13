@@ -3,15 +3,19 @@ package com.feriantes4dawin.feriavirtualmovil.ui.widgets;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 
-import java.lang.NullPointerException;
-
+/**
+ * YesNoDialog
+ * 
+ * Es una implementación de SimpleDialog, cuya función es 
+ * otorgar un diálogo de pregunta, con dos opciones: Sí y No. 
+ * 
+ */
 public class YesNoDialog extends SimpleDialog{
 
     private boolean result;
@@ -27,6 +31,13 @@ public class YesNoDialog extends SimpleDialog{
         this.result = false;
     }
 
+    /**
+     * Permite consultar el estado de la respuesta 
+     * que el usuario indica durante o después de responder.
+     * 
+     * @return true si el usuario responde 'Sí' o false si responde 
+     * que 'No'. Por defecto, el valor es false.
+     */
     public boolean getResult(){
 
         return this.result;
@@ -36,7 +47,7 @@ public class YesNoDialog extends SimpleDialog{
     protected View prepareView() {
 
         ViewGroup vg = act.findViewById(android.R.id.content);
-        this.v = LayoutInflater.from(act).inflate(R.layout.dialog_yes_no, vg, false);
+        this.v = LayoutInflater.from(act).inflate(R.layout.dialog_message, vg, false);
         TextView txtMessage = (TextView) v.findViewById(R.id.dyn_lblMensaje);
 
         dlg.setTitle(title);

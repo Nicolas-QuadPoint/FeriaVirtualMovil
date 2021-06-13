@@ -19,6 +19,15 @@ import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleAction;
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * PushProductorDialog
+ * 
+ * Implementación de SimpleDialog que representa 
+ * un diálogo de puja de productor. 
+ * Este diálogo muestra el detalle de la puja que el 
+ * usuario va a mostrar, con una lista con los productos 
+ * a seleccionar, descartables y editables. 
+ */
 public final class PushProductorDialog extends SimpleDialog {
 
     public PushProductorDialog(AppCompatActivity act, SimpleAction positiveResponseFunc, SimpleAction negativeResponseFunc) {

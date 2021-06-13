@@ -22,7 +22,11 @@
     <string name="prompt_password">Password</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters, and contain al least a number and a symbol</string>
+    <string name="invalid_user_role">
+        Only Productor and Transportista roles are allowed to use this app.
+        Your role is %s. Please use web app for complete experience.
+    </string>
+    <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">Login failed. Either email or password are not correct, please try again</string>
     <string name="close_app">Quit</string>
     <string name="launch_user_registry_web">Haven\'t an account? Register here!</string>
@@ -96,6 +100,8 @@
     <string name="err_msg_generic">An sudden error has occurred. Please try again later</string>
     <string name="err_mes_question">Question</string>
     <string name="err_mes_message">Message</string>
+    <string name="err_mes_error">Error</string>
+    <string name="err_mes_not_allowed">Not allowed</string>
     <string name="err_mes_not_avalaible">Not avalaible</string>
     <string name="err_mes_passwd_does_not_match">Passwords does not match</string>
     <string name="err_msg_logout_prompt">You really want to logout? You have to login with your credentials when you come back</string>

@@ -9,10 +9,26 @@ import com.feriantes4dawin.feriavirtualmovil.ui.sales.CurrentSalesViewModel;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.ViewmodelFactory;
 import com.google.gson.Gson;
 
+/**
+ * MainViewModelFactory 
+ * 
+ * Clase creadora de instancias para objetos MainViewModel. 
+ */
 public class MainViewModelFactory implements ViewModelProvider.Factory {
 
+    /**
+     * Fuente de datos de usuarios. 
+     */
     private UsuarioRepository usuarioRepository;
+
+    /**
+     * Objeto convertidor de datos en JSON. 
+     */
     private Gson convertidorJSON;
+
+    /**
+     * Instancia de Application, necesaria para algunas cosas. 
+     */
     private FeriaVirtualApplication feriaVirtualApplication;
 
 
@@ -33,7 +49,7 @@ public class MainViewModelFactory implements ViewModelProvider.Factory {
 
         }
 
-        throw new IllegalArgumentException("No es un objeto CurrentSalesViewModel");
+        throw new IllegalArgumentException("No es un objeto MainViewModel");
     }
 
 }

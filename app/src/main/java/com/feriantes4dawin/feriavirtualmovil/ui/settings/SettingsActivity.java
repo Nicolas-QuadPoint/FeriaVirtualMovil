@@ -9,8 +9,18 @@ import androidx.lifecycle.ViewModelProvider;
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 
+/**
+ * SettingsActivity 
+ * 
+ * Actividad que representa una simple sección de configuración 
+ * para la aplicación.
+ */
 public class SettingsActivity extends AppCompatActivity {
 
+    /**
+     * Objeto SettingsViewModel para poder enviar datos 
+     * a la base de datos. 
+     */
     private SettingsViewModel viewmodel;
 
     @Override
@@ -35,7 +45,13 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // your code.
+
+        /**
+         * Con esto se evita que, al acceder a esta actividad 
+         * desde un fragmento determinado, se regrese al HomeFragment, 
+         * y mejora la 'experiencia de usuario'.
+         * TODO:Aprender el flujo de fragmentos de mejor forma!
+         */
         finish();
     }
 

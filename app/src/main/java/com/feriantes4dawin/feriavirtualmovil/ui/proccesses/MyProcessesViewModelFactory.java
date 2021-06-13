@@ -13,6 +13,16 @@ import com.feriantes4dawin.feriavirtualmovil.ui.profile.MyProfileViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
+
+/**
+ * MyProcessesViewModelFactory 
+ * 
+ * Un generador de objetos MyProcessesViewModel para poder instanciarla 
+ * con objetos necesarios, como fuentes de datos, entre otras cosas.
+ * 
+ * @see https://stackoverflow.com/questions/54419236/why-a-viewmodel-factory-is-needed-in-android#54420034
+ * 
+ */
 public class MyProcessesViewModelFactory implements ViewModelProvider.Factory {
 
     private FeriaVirtualApplication feriaVirtualApplication;

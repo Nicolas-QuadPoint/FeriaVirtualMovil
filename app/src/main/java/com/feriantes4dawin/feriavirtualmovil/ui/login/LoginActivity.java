@@ -23,26 +23,51 @@ import com.feriantes4dawin.feriavirtualmovil.FeriaVirtualComponent;
 import com.feriantes4dawin.feriavirtualmovil.R;
 import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl;
 import com.feriantes4dawin.feriavirtualmovil.ui.main.MainActivity;
+import com.feriantes4dawin.feriavirtualmovil.ui.util.EnumMessageType;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.SimpleTextWatcher;
+import com.feriantes4dawin.feriavirtualmovil.ui.widgets.MessageDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
+/**
+ * LoginActivity 
+ * 
+ * Actividad que representa el formulario de autenticación, 
+ * siendo esta la primera en aparecer al iniciar la aplicación. 
+ * 
+ */
 public class LoginActivity extends AppCompatActivity {
 
-    //private lateinit var loginViewModel: LoginViewModel
-
+    /**
+     * Referencia al objeto contenedor de dependencias. 
+     */
     private FeriaVirtualComponent feriaVirtualComponent;
 
+    /**
+     * Dependencia que representa a la fuente de datos 
+     * de usuarios. 
+     */
     @Inject
     public UsuarioRepositoryImpl usuarioRepository;
 
+    /**
+     * Dependencia que representa el objeto que convierte 
+     * datos en JSON o visceversa. 
+     */
     @Inject
     public Gson convertidorJSON;
 
+    /**
+     * Objeto intermediario que nos proporciona los datos. 
+     */
     private LoginViewModel loginViewModel;
+
+    /**
+     * Objeto creador de instancias LoginViewModel. 
+     */
     private LoginViewModelFactory loginViewModelFactory;
 
     @Override
@@ -55,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         feriaVirtualComponent =  ((FeriaVirtualApplication) getApplicationContext())
                 .getFeriaVirtualComponent();
 
-        feriaVirtualComponent.injectUsuarioRepositoryIntoLoginActivity(this);
+        feriaVirtualComponent.injectIntoLoginActivity(this);
 
         //Creamos nuestro factory!
         loginViewModelFactory = new LoginViewModelFactory(
@@ -69,9 +94,14 @@ public class LoginActivity extends AppCompatActivity {
 
         //Obtengo las preferencias compartidas (por si acaso!)
         SharedPreferences sp = getSharedPreferences(
-                FeriaVirtualConstants.FERIAVIRTUAL_MOVIL_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE);
+            FeriaVirtualConstants.FERIAVIRTUAL_MOVIL_SHARED_PREFERENCES,
+            Context.MODE_PRIVATE);
 
+        /**
+         * Se hace un chequeo previo para ver si hay datos de sesión guardadas 
+         * previamente, y de esta forma, evitar la autenticación. 
+         * TODO: ¿Debería obligar al usuario a iniciar sesión cada vez?
+         */
         if(revisarSiHaySesion(sp)){
 
             manejarSesion();
@@ -83,7 +113,6 @@ public class LoginActivity extends AppCompatActivity {
             Button login = findViewById(R.id.login);
             LinearLayout loading = findViewById(R.id.dcp_llloading);
             Button  quit = findViewById(R.id.btnQuit);
-
             TextView linkRegistro = findViewById(R.id.tvLinkRegistro);
             Spanned textolink;
 
@@ -109,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
             }*/
 
             loginViewModel.loginFormState.observe(this, new Observer<LoginFormState>() {
+
                 @Override
                 public void onChanged(LoginFormState loginFormState) {
 
@@ -130,56 +160,62 @@ public class LoginActivity extends AppCompatActivity {
                         password.setError(null);
                     }
                 }
+
             });
 
             loginViewModel.loginResult.observe(this, new Observer<LoginResult>() {
+
                 @Override
                 public void onChanged(LoginResult loginResult) {
+
+                    loading.setVisibility(View.GONE);
 
                     if(loginResult == null){
                         return;
                     }
-
-                    loading.setVisibility(View.GONE);
-
-                    if (loginResult.error != null) {
-                        showLoginFailed(loginResult.error);
+                    else if (loginResult.error != null) {
+                        showLoginFailed(loginResult);
                     }
-                    if (loginResult.success != null) {
-
+                    else if (loginResult.success != null) {
                         updateUiWithUser(loginResult.success);
                         manejarSesion();
 
                     }
 
                 }
+
             });
 
             username.addTextChangedListener(
-                    new SimpleTextWatcher(null) {
-                        @Override
-                        public void afterTextChanged(Editable s) {
-                            loginViewModel.loginDataChanged(
-                                    username.getText().toString(),
-                                    password.getText().toString()
-                            );
-                        }
+
+                new SimpleTextWatcher(null) {
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        loginViewModel.loginDataChanged(
+                                username.getText().toString(),
+                                password.getText().toString()
+                        );
                     }
+                }
+
             );
 
             password.addTextChangedListener(
-                    new SimpleTextWatcher(null) {
-                        @Override
-                        public void afterTextChanged(Editable s) {
-                            loginViewModel.loginDataChanged(
-                                    username.getText().toString(),
-                                    password.getText().toString()
-                            );
-                        }
+
+                new SimpleTextWatcher(null) {
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        loginViewModel.loginDataChanged(
+                                username.getText().toString(),
+                                password.getText().toString()
+                        );
                     }
+                }
+
             );
 
             password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     if(actionId == EditorInfo.IME_ACTION_DONE){
@@ -190,6 +226,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     return false;
                 }
+
             });
 
             login.setOnClickListener(new View.OnClickListener() {
@@ -211,9 +248,18 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Método llamado cuando la autenticación es positiva, y 
+     * se deriva al MainActivity. 
+     * 
+     * @param model Objeto con los detalles del usuario recién 
+     * autenticado. 
+     */
     private void updateUiWithUser(LoggedInUserView model) {
+        
         String welcome = getString(R.string.welcome);
         String displayName = model.displayName;
+        
         // TODO : initiate successful logged in experience
         Toast.makeText(
             getApplicationContext(),
@@ -222,12 +268,49 @@ public class LoginActivity extends AppCompatActivity {
         ).show();
     }
 
-    private void showLoginFailed(int errorString) {
+    /**
+     * Método que es llamado cuando el chequeo de validación de 
+     * creadenciales falla por algún motivo.
+     * 
+     * @param loginResult Objeto LoginResult con los detalles del 
+     * error. 
+     */
+    private void showLoginFailed(LoginResult loginResult) {
+
         View v = findViewById(R.id.actlog_svPrincipal);
-        Snackbar.make(v, getString(errorString), Snackbar.LENGTH_SHORT).show();
+        if(loginResult.error == R.string.invalid_user_role) {
+
+            MessageDialog md = new MessageDialog(
+                    this,
+                    EnumMessageType.ERROR_MESSAGE,
+                    getString(R.string.err_mes_not_allowed),
+                    loginResult.errorMessage,
+                    null,
+                    null
+            );
+
+            md.generate().show();
+
+        } else {
+
+            Snackbar.make( v, getString(loginResult.error), Snackbar.LENGTH_SHORT).show();
+
+        }
+
     }
 
 
+    /**
+     * Chequeo rápido en los datos en cache para verificar la 
+     * existencia (no integridad) de las credenciales de acceso 
+     * o datos del usuario en si.
+     * 
+     * TODO: Realizar un chequeo de seguridad de los mismos.
+     * 
+     * @param sp Objeto SharedPreferences entregado por la 
+     * aplicación. 
+     * @return true si los datos existen, o false si no.
+     */
     public boolean revisarSiHaySesion(SharedPreferences sp){
 
         return (!sp.getString(FeriaVirtualConstants.SP_FERIAVIRTUAL_WEBAPI_AUTH_TOKEN,"").equals(""))
@@ -235,7 +318,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Método que solamente inicia la actividad MainActivity. 
+     * Cabe destacar que esto solo debe llamarse cuando la 
+     * autenticación es válida.
+     */
     public void manejarSesion(){
 
         //Cambiamos a la actividad principal
