@@ -22,10 +22,7 @@
     <string name="prompt_password">Contraseña</string>
     <string name="welcome">"Bienvenido"</string>
     <string name="invalid_username">El email del usuario no es válido</string>
-    <string name="invalid_user_role">
-        Solo los usuarios con rol Productor y Transportista son permitidos para usar esta aplicación.
-        Tu rol es %s. Por favor utiliza la app web en su lugar, para una mejor experiencia.
-    </string>
+    <string name="invalid_user_role">"Solo los usuarios con rol Productor y Transportista son permitidos para usar esta aplicación. Tu rol es %s. Por favor utiliza la app web en su lugar, para una mejor experiencia.     "</string>
     <string name="invalid_password">La contraseña debe tener más de 5 carácteres</string>
     <string name="login_failed">Ha fallado el inicio de sesión. El email o la contraseña son incorrectas, prueba otra vez</string>
     <string name="close_app">Salir</string>
@@ -115,12 +112,18 @@
     <string name="ppbd_price">¿A qué precio?</string>
     <string name="ppbd_push_detail">Detalles de la oferta</string>
     <string name="ppbd_push">Pujar</string>
-    <string name="ppbd_update_price">Actualizar puja</string>
+    <string name="ppbd_update">Actualizar puja</string>
     <string name="ppbd_clean_item_help">Desliza el elemento a los lados para descartar</string>
 
     <!-- Push Info -->
     <string name="pii_total_cost">Coste total</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="push_update">Actualizar puja</string>
+    <string name="push_info">Información de Puja</string>
+    <string name="action_update">Actualizar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_confirm">Confirmar</string>
+    <string name="confirm_delete_push">¿Estás seguro de remover la puja de esta subasta? Si te arrepientes, puedes volver a intentarlo más tarde.</string>
 
 
 </resources>

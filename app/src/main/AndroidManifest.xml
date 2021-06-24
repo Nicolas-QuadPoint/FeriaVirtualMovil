@@ -12,27 +12,41 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:logo="@drawable/logo_feriavirtual_compacto"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FeriaVirtualMovil"
-        android:usesCleartextTraffic="true"
-        android:logo="@drawable/logo_feriavirtual_compacto">
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.FeriaVirtualMovil.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.FeriaVirtualMovil.NoActionBar" />
         <activity
             android:name=".ui.sales.SaleDetailActivity"
             android:label="@string/sale_detail_act_title"
             android:parentActivityName=".ui.main.MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.auction.AuctionSaleActivity"
             android:label="@string/auact_title"
             android:parentActivityName=".ui.sales.SaleDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.auction.PushProductorActivity"
+            android:label="@string/ppbd_push"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.auction.AuctionSaleActivity"/>
+
+        <activity
+            android:name=".ui.auction.PushTransportistaActivity"
+            android:label="@string/ppbd_push"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.auction.AuctionSaleActivity"/>
+
+
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/sact_title"
@@ -43,13 +57,14 @@
             android:autoRemoveFromRecents="true"
             android:label="@string/app_name"
             android:noHistory="true"
-            android:theme="@style/Theme.FeriaVirtualMovil.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.FeriaVirtualMovil.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

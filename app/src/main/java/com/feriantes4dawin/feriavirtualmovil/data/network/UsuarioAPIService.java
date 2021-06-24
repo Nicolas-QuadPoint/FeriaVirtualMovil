@@ -18,29 +18,29 @@ public interface UsuarioAPIService {
 
     );
 
-    @GET("usuario/{idusuario}")
+    @GET("usuarios/{idusuario}")
     Call<ResultadoUsuario> getInfoUsuario(
 
             @Path(value="idusuario")
-            Integer personalID
+            Long personalID
 
     );
 
-    @POST("usuario/{idusuario}/update")
+    @PUT("usuarios/{idusuario}")
     Call<ResultadoID> updateUsuario(
 
             @Path(value="idusuario")
-                    Integer personalID,
+            Long personalID,
             @Body
             Usuario valoresNuevos
 
     );
 
-    @POST("usuario/{idusuario}/changepassword")
+    @POST("usuarios/{idusuario}/changepassword")
     Call<ResultadoID> changePasswordUsuario(
 
             @Path(value="idusuario")
-                    Integer personalID,
+            Long personalID,
             @Body
             ObjetoModificacionContrasena omc
 

@@ -64,10 +64,35 @@ public class Rol{
         this.descripcion = descripcion;
     }
 
+    /**
+     * Método que solamente compara el contenido del objeto
+     * con respecto al objeto pasado como argumento.
+     * @param rol Instancia de objeto Rol.
+     * @return <code>true</code> si los valores del objeto
+     * coinciden con el original, de lo contrario, <code>false</code>
+     */
+    public boolean equalsValues(Rol rol){
+
+        /**
+         * Ni idea del porqué al comparar los strings aquí no me coinciden.
+         * TODO: Hacer que las cadenas coincidan de alguna forma, o de plano
+         * dejar de hacer eso
+         */
+        if(rol != null && rol.id_rol != null && rol.descripcion != null){
+
+            return (this.id_rol.compareTo(rol.id_rol) == 0);
+
+        }
+
+        return false;
+    }
+
     @Override
     public boolean equals(Object o) {
+
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Rol rol = (Rol) o;
         return Objects.equals(id_rol, rol.id_rol) &&
                 Objects.equals(descripcion, rol.descripcion);

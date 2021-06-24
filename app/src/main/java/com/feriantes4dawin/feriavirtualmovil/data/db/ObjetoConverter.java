@@ -32,13 +32,13 @@ public class ObjetoConverter {
     }
 
     @TypeConverter
-    public List<ObjetoPujaSubastaProductor> JSONAListaObjetosPujaSubastaProductor(String json){
-        return new Gson().fromJson(json, new ArrayList<ObjetoPujaSubastaProductor>().getClass());
+    public List<DetallePujaSubastaProductor> JSONAListaObjetosPujaSubastaProductor(String json){
+        return new Gson().fromJson(json, new ArrayList<DetallePujaSubastaProductor>().getClass());
     }
 
     @TypeConverter
-    public List<ObjetoPujaSubastaTransportista> JSONAListaObjetosPujaSubastaTransportista(String json){
-        return new Gson().fromJson(json, new ArrayList<ObjetoPujaSubastaTransportista>().getClass());
+    public List<DetallePujaSubastaTransportista> JSONAListaObjetosPujaSubastaTransportista(String json){
+        return new Gson().fromJson(json, new ArrayList<DetallePujaSubastaTransportista>().getClass());
     }
 
     //Conversores para cada tipo (salida)

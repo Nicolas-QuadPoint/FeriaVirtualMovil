@@ -9,6 +9,8 @@ import com.feriantes4dawin.feriavirtualmovil.data.repos.UsuarioRepositoryImpl;
 import com.feriantes4dawin.feriavirtualmovil.data.repos.VentaRepository;
 import com.feriantes4dawin.feriavirtualmovil.data.repos.VentaRepositoryImpl;
 import com.feriantes4dawin.feriavirtualmovil.ui.auction.AuctionSaleActivity;
+import com.feriantes4dawin.feriavirtualmovil.ui.auction.PushProductorActivity;
+import com.feriantes4dawin.feriavirtualmovil.ui.auction.PushTransportistaActivity;
 import com.feriantes4dawin.feriavirtualmovil.ui.home.HomeFragment;
 import com.feriantes4dawin.feriavirtualmovil.ui.login.LoginActivity;
 import com.feriantes4dawin.feriavirtualmovil.ui.main.MainActivity;
@@ -205,6 +207,50 @@ public interface FeriaVirtualComponent {
      * @param auctionSaleActivity Una instancia de AuctionSaleActivity 
      */
     void injectIntoAuctionSaleActivity(AuctionSaleActivity auctionSaleActivity);
+
+    /**
+     * Se llama en la clase PushProductorActivity para inyectar
+     * sus dependencias.
+     * Se usa tal que así:
+     * <pre>{@code
+     *
+     * ...
+     * injectIntoAuctionSaleActivity(this);
+     * ...
+     *
+     * }</pre>
+     * Con eso, las dependencias marcadas con la anotación
+     * Inject serań inicializadas y estarán listas para usarse.
+     *
+     * Llama este método desde uno de los métodos callback de
+     * la actividad, como en onCreate.
+     *
+     * @see {@link javax.inject.Inject}
+     * @param pushProductorActivity Una instancia de AuctionSaleActivity
+     */
+    void injectIntoPushProductorActivity(PushProductorActivity pushProductorActivity);
+
+    /**
+     * Se llama en la clase PushTransportistaActivity para inyectar
+     * sus dependencias.
+     * Se usa tal que así:
+     * <pre>{@code
+     *
+     * ...
+     * injectIntoAuctionSaleActivity(this);
+     * ...
+     *
+     * }</pre>
+     * Con eso, las dependencias marcadas con la anotación
+     * Inject serań inicializadas y estarán listas para usarse.
+     *
+     * Llama este método desde uno de los métodos callback de
+     * la actividad, como en onCreate.
+     *
+     * @see {@link javax.inject.Inject}
+     * @param pushTransportistaActivity Una instancia de AuctionSaleActivity
+     */
+    void injectIntoPushTransportistaActivity(PushTransportistaActivity pushTransportistaActivity);
 
     /**
      * Se llama en la clase HomeFragment para inyectar 

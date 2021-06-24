@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -281,18 +282,17 @@ public class LoginActivity extends AppCompatActivity {
         if(loginResult.error == R.string.invalid_user_role) {
 
             MessageDialog md = new MessageDialog(
-                    this,
-                    EnumMessageType.ERROR_MESSAGE,
-                    getString(R.string.err_mes_not_allowed),
-                    loginResult.errorMessage,
-                    null,
-                    null
+                 this,
+                EnumMessageType.ERROR_MESSAGE,
+                getString(R.string.err_mes_not_allowed),
+                loginResult.errorMessage,
+                null
             );
 
             md.generate().show();
 
         } else {
-
+            Log.e("LOGIN_ACTIVITY",String.format("codigo de error: %d - %s",loginResult.error,getString(loginResult.error)));
             Snackbar.make( v, getString(loginResult.error), Snackbar.LENGTH_SHORT).show();
 
         }

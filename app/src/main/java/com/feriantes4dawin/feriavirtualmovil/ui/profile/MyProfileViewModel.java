@@ -102,6 +102,10 @@ public class MyProfileViewModel extends ViewModel {
 
             usuarioString = sp.getString(FeriaVirtualConstants.SP_USUARIO_OBJ_STR, "");
             u = convertidorJSON.fromJson(usuarioString,Usuario.class);
+            if(u != null){
+                Log.i("MY_PROFILE_FRAG",u.toString());
+            }
+
             ruc = this.usuarioRepository.getInfoUsuario(u);
 
             if(ruc != null){
@@ -113,7 +117,11 @@ public class MyProfileViewModel extends ViewModel {
                         //MyProfileFragment están obesrvando el objeto 'LiveData' asociado a
                         //datosMutablesUsuario, entonces el evento onChange se activará, y podremos
                         //mostrar datos al usuario
-                        datosMutablesUsuario.setValue(response.body().usuario);
+                        if(response.body() != null){
+                            datosMutablesUsuario.setValue(response.body().usuario);
+                        } else {
+                            datosMutablesUsuario.setValue(null);
+                        }
 
                     }
 
@@ -184,7 +192,7 @@ public class MyProfileViewModel extends ViewModel {
                     if(response.isSuccessful()){
                         resultadofinal = new Boolean(response.body().id_resultado == 1);
                     } else {
-                        resultadofinal = new Boolean.valueOf(false);
+                        resultadofinal = new Boolean(false);
                     }
 
                     simpleAction.doAction(resultadofinal);

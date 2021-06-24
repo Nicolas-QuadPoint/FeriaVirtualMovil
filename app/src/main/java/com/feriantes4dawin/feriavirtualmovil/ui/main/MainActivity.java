@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity{
                 .putString(FeriaVirtualConstants.SP_FERIAVIRTUAL_WEBAPI_AUTH_TOKEN,"")
                 .putString(FeriaVirtualConstants.SP_USUARIO_OBJ_STR,"")
                 .putInt(FeriaVirtualConstants.SP_USUARIO_ID,0)
-                .putInt(FeriaVirtualConstants.SP_VENTA_ID,"")
+                .putInt(FeriaVirtualConstants.SP_VENTA_ID,0)
                 .commit();
 
         startActivity(loginActivityIntent);

@@ -30,8 +30,19 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class PushProductorDialog extends SimpleDialog {
 
+    private boolean modoEdicion;
+    private int idMensajeTitulo;
+
     public PushProductorDialog(AppCompatActivity act, SimpleAction positiveResponseFunc, SimpleAction negativeResponseFunc) {
         super(act,positiveResponseFunc,negativeResponseFunc);
+        this.idMensajeTitulo = R.string.ppbd_push;
+        this.modoEdicion = false;
+    }
+
+    public PushProductorDialog(AppCompatActivity act,boolean modoEdicion, SimpleAction positiveResponseFunc, SimpleAction negativeResponseFunc) {
+        super(act,positiveResponseFunc,negativeResponseFunc);
+        this.modoEdicion = modoEdicion;
+        this.idMensajeTitulo = R.string.push_update;
     }
 
     @Override
@@ -41,7 +52,7 @@ public final class PushProductorDialog extends SimpleDialog {
         this.v = LayoutInflater.from(act).inflate(R.layout.dialog_push_productor, vg, false);
         RecyclerView rv = (RecyclerView) v.findViewById(R.id.dppb_rvListaProductos);
         PushProductorCustomAdapter rvAdapter = new PushProductorCustomAdapter();
-        dlg.setTitle(R.string.ppbd_push);
+        dlg.setTitle(idMensajeTitulo);
 
         /**
          * Sacado de https://www.youtube.com/watch?v=M1XEqqo6Ktg
@@ -77,30 +88,70 @@ public final class PushProductorDialog extends SimpleDialog {
     @Override
     protected void prepareResponses() {
 
-        //Para respuesta afirmativa
-        dlg.setButton(AlertDialog.BUTTON_POSITIVE,act.getString(R.string.action_accept),
+        if(modoEdicion){
 
-            (dialogo,idBoton) -> {
-                if(positiveResponseFunc != null){
-                    positiveResponseFunc.doAction(v);
-                }
-                dialogo.cancel();
-            }
+            //Para respuesta afirmativa (actualizar)
+            dlg.setButton(AlertDialog.BUTTON_POSITIVE,act.getString(R.string.action_accept),
 
-        );
-
-        //Para respuesta negativa
-        dlg.setButton(AlertDialog.BUTTON_NEGATIVE,act.getString(R.string.action_cancel),
-
-                (dialogo,idBoton) -> {
-                    if(negativeResponseFunc != null){
-                        negativeResponseFunc.doAction(v);
+                    (dialogo,idBoton) -> {
+                        if(positiveResponseFunc != null){
+                            positiveResponseFunc.doAction(v);
+                        }
                     }
-                    dialogo.cancel();
-                }
 
-        );
+            );
 
+            //Para respuesta negativa
+            dlg.setButton(AlertDialog.BUTTON_NEGATIVE,act.getString(R.string.action_delete),
+
+                    (dialogo,idBoton) -> {
+                        if(negativeResponseFunc != null){
+                            negativeResponseFunc.doAction(v);
+                        }
+                    }
+
+            );
+
+            //Para cancelar
+            dlg.setButton(AlertDialog.BUTTON_NEUTRAL,act.getString(R.string.action_cancel),
+
+                    (dialogo,idBoton) -> {
+
+                        dialogo.cancel();
+
+                    }
+
+            );
+
+
+        } else {
+
+
+            //Para respuesta afirmativa (actualizar)
+            dlg.setButton(AlertDialog.BUTTON_POSITIVE,act.getString(R.string.action_accept),
+
+                    (dialogo,idBoton) -> {
+                        if(positiveResponseFunc != null){
+                            positiveResponseFunc.doAction(v);
+                        }
+                    }
+
+            );
+
+            //Para respuesta negativa
+            dlg.setButton(AlertDialog.BUTTON_NEGATIVE,act.getString(R.string.action_cancel),
+
+                    (dialogo,idBoton) -> {
+                        if(negativeResponseFunc != null){
+                            negativeResponseFunc.doAction(v);
+                        }
+                    }
+
+            );
+
+
+
+        }
 
     }
 

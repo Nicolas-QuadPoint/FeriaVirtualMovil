@@ -79,7 +79,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 
         } catch(Exception ex){
 
-            Log.e("USUARIO_REPOSITORY","Error en loginUsuario!: " + ex.toString());
+            Log.e("USUARIO_REPOSITORY","Error en getInfoUsuario!: " + ex.toString());
             return null;
 
         }

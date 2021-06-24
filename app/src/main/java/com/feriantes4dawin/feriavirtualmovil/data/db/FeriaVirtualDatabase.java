@@ -7,14 +7,14 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.feriantes4dawin.feriavirtualmovil.data.models.ClienteExterno;
+import com.feriantes4dawin.feriavirtualmovil.data.models.DetallePujaSubastaProductor;
 import com.feriantes4dawin.feriavirtualmovil.data.models.EstadoContrato;
 import com.feriantes4dawin.feriavirtualmovil.data.models.EstadoSubasta;
 import com.feriantes4dawin.feriavirtualmovil.data.models.EstadoUsuario;
 import com.feriantes4dawin.feriavirtualmovil.data.models.EstadoVenta;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Minorista;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Nacionalidad;
-import com.feriantes4dawin.feriavirtualmovil.data.models.ObjetoPujaSubastaProductor;
-import com.feriantes4dawin.feriavirtualmovil.data.models.ObjetoPujaSubastaTransportista;
+import com.feriantes4dawin.feriavirtualmovil.data.models.DetallePujaSubastaTransportista;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Producto;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Rol;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Subasta;
@@ -26,11 +26,6 @@ import com.feriantes4dawin.feriavirtualmovil.data.models.Usuario;
 import com.feriantes4dawin.feriavirtualmovil.data.models.Venta;
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 
-import javax.inject.Singleton;
-
-import dagger.Module;
-import dagger.Provides;
-
 @Database(
     entities = {
         ClienteExterno.class,
@@ -40,8 +35,8 @@ import dagger.Provides;
         EstadoContrato.class,
         Nacionalidad.class,
         Minorista.class,
-        ObjetoPujaSubastaProductor.class,
-        ObjetoPujaSubastaTransportista.class,
+        DetallePujaSubastaProductor.class,
+        DetallePujaSubastaTransportista.class,
         Producto.class,
         Rol.class,
         Subasta.class,

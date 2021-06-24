@@ -98,7 +98,7 @@ public class LoginViewModel extends ViewModel {
                 @Override
                 public void onResponse(Call<ResultadoUsuario> call, Response<ResultadoUsuario> response) {
 
-                    if(response != null && response.isSuccessful() && response.body() != null){
+                    if(response.isSuccessful() && response.body() != null){
 
                         ResultadoUsuario rul = response.body();
 
@@ -107,8 +107,9 @@ public class LoginViewModel extends ViewModel {
                          * así que si un rol de usuario es distinto a estos, entonces invalidamos todos
                          * los roles ajenos a estos
                          */
-                        if(Rol.ADMINISTRADOR.equals(rul.usuario.rol) || Rol.TRANSPORTISTA.equals(rul.usuario.rol)
-                        || Rol.PRODUCTOR.equals(rul.usuario.rol)){
+                        if(Rol.ADMINISTRADOR.equalsValues(rul.usuario.rol) ||
+                           Rol.TRANSPORTISTA.equalsValues(rul.usuario.rol) ||
+                           Rol.PRODUCTOR.equalsValues(rul.usuario.rol)) {
 
                             String usuarioString = convertidorJSON.toJson(rul.usuario);
 

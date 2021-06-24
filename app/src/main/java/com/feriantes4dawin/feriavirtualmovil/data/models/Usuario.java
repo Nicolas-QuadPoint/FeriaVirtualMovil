@@ -16,7 +16,7 @@ public class Usuario {
     public Integer secret_id_usuario = FeriaVirtualConstants.CURRENT_LOGGED_USUARIO;
 
     @Expose
-    public Integer id_usuario;
+    public Long id_usuario;
     @Expose
     public String personal_id;
     @Expose
@@ -30,7 +30,7 @@ public class Usuario {
     @Expose
     public String fecha_nacimiento;
     @Expose
-    public Integer telefono;
+    public Long telefono;
     @Expose
     public String direccion;
     @Expose

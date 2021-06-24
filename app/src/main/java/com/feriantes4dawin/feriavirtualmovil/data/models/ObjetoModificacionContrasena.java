@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 
 public class ObjetoModificacionContrasena {
 
-    public Integer id_usuario;
+    public Long id_usuario;
     public String contrasena_actual;
     public String nueva_contrasena;
 

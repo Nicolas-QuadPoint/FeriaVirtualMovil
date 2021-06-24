@@ -2,6 +2,7 @@ package com.feriantes4dawin.feriavirtualmovil.data.network.interceptor;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.feriantes4dawin.feriavirtualmovil.ui.util.FeriaVirtualConstants;
 
@@ -36,7 +37,7 @@ public class AuthenticationInterceptorImpl implements AuthenticationInterceptor{
                 FeriaVirtualConstants.FERIAVIRTUAL_MOVIL_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
         String token = sp.getString(FeriaVirtualConstants.SP_FERIAVIRTUAL_WEBAPI_AUTH_TOKEN,"none");
-
+        Log.i("AUTH_INTERCEPTOR","Token sesion: "+token);
         nuevaPeticion = req.newBuilder()
                 .addHeader(FeriaVirtualConstants.SP_FERIAVIRTUAL_WEBAPI_AUTH_TOKEN,token)
                 .build();

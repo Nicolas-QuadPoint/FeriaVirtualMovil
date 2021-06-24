@@ -82,7 +82,7 @@ public class CurrentSalesViewModel extends ViewModel {
         try{
 
             u = new Usuario();
-            u.id_usuario = 0;
+            u.id_usuario = 0l;
             ruc = ventaRepository.getVentasSimplesDisponibles(u);
 
             ruc.enqueue(new Callback<VentasSimples>() {
